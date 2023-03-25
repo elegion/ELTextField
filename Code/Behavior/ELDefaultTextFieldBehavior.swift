@@ -78,6 +78,10 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         }
     }
 
+    public func textInputDidBeginEditing(_ textInput: ELTextInput) {
+        containerDelegate?.startEditing(in: self)
+    }
+    
     open func textInputdDidEndEditing(_: ELTextInput) {
         updateState(.default)
         onAction?(.endEditing)

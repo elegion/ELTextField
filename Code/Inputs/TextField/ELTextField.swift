@@ -14,7 +14,6 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     public weak var textInputDelegate: ELTextInputDelegate?
-    var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)?
 
     private var rightItemAction: (() -> Void)?
 
@@ -85,11 +84,10 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     func textFieldDidBeginEditing(_: UITextField) {
-        behaviorAction?(.startEditing)
+        textInputDelegate?.textInputDidBeginEditing(self)
     }
 
     func textFieldDidEndEditing(_: UITextField) {
-        behaviorAction?(.endEditing)
         textInputDelegate?.textInputdDidEndEditing(self)
     }
 

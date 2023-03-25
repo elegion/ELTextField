@@ -6,15 +6,9 @@
 import Foundation
 import UIKit
 
-public enum ELTextFieldBehaviorAction {
-    case startEditing
-    case endEditing
-}
-
 /// Протокол, который позволяет конфигурировать представление TextInput
 public protocol ELTextInputConfigurable: AnyObject {
     var textInputDelegate: ELTextInputDelegate? { get set }
-    var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)? { get set }
 
     func configureLayer(_ configuration: ELTextInputLayerConfiguration)
     func configureTraits(_ traits: ELTextFieldInputTraits)

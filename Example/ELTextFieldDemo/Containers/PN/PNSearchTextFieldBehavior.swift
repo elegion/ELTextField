@@ -174,22 +174,6 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         //            }
         updatePlaceholder(appearance: currentAppearance)
         updateSelectedParameterAppearance(text: behavior?.viewModel.text)
-        setBehaviorHandler {
-            [weak self, weak behavior] action in
-
-            let newAppearance: LabelAppearance
-            switch action {
-            case .startEditing:
-                newAppearance = .small
-            case .endEditing:
-                self?.updateSelectedParameterAppearance(text: behavior?.viewModel.text)
-                newAppearance = .large
-            }
-            UIView.animate(withDuration: CATransaction.animationDuration()) {
-                self?.currentAppearance = newAppearance
-                self?.updatePlaceholder(appearance: newAppearance)
-            }
-        }
     }
 
     private func updatePlaceholder(appearance: LabelAppearance) {
@@ -241,5 +225,20 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         super.layoutSubviews()
 
         updatePlaceholder(appearance: currentAppearance)
+    }
+    
+    override func startEditing(in behavior: ELTextFieldBehavior) {
+        UIView.animate(withDuration: CATransaction.animationDuration()) {
+            self.currentAppearance = .small
+            self.updatePlaceholder(appearance: .small)
+        }
+    }
+    
+    override func endEditing(in behavior: ELTextFieldBehavior) {
+        updateSelectedParameterAppearance(text: behavior.viewModel.text)
+        UIView.animate(withDuration: CATransaction.animationDuration()) {
+            self.currentAppearance = .large
+            self.updatePlaceholder(appearance: .large)
+        }
     }
 }

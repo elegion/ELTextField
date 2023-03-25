@@ -26,13 +26,10 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
     }
 
     public weak var textInputDelegate: ELTextInputDelegate?
-    var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)?
 
     var placeholderHidden: Bool {
         get { placeholderLabel.isHidden }
-        set {
-            placeholderLabel.isHidden = newValue
-        }
+        set { placeholderLabel.isHidden = newValue }
     }
 
     override init(frame: CGRect, textContainer: NSTextContainer?) {

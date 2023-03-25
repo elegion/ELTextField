@@ -63,10 +63,6 @@ open class ELTextFieldGenericContainer<
         textInput.textInputDelegate = behavior
     }
 
-    public func setBehaviorHandler(_ handler: ((ELTextFieldBehaviorAction) -> Void)?) {
-        textInput.behaviorAction = handler
-    }
-
     @discardableResult
     override open func becomeFirstResponder() -> Bool {
         super.becomeFirstResponder()

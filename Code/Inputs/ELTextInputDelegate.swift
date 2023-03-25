@@ -10,6 +10,7 @@ import UIKit
 public protocol ELTextInputDelegate: AnyObject {
     func textInputShouldClear(_ textInput: ELTextInput) -> Bool
     func textInputShouldBeginEditing(_ textInput: ELTextInput) -> Bool
+    func textInputDidBeginEditing(_ textInput: ELTextInput)
     func textInputdDidEndEditing(_ textInput: ELTextInput)
     func textInput(
         _ textInput: ELTextInput & UITextInput,
