@@ -27,8 +27,8 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
                 placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
                 rightItem: ELRightItem? = nil,
                 mask: ELTextFieldInputMask = ELDefaultTextMask(),
-                traits: ELTextFieldInputTraits = DefaultTextFieldInputTraits(),
-                validator: ELTextFieldValidator = DefaultTextFieldValidator()) {
+                traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
+                validator: ELTextFieldValidator = ELDefaultTextFieldValidator()) {
         self.mask = mask
         self.traits = traits
         self.validator = validator

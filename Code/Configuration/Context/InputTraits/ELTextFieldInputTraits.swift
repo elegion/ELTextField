@@ -16,7 +16,7 @@ public protocol ELTextFieldInputTraits {
     var autocapitalizationType: UITextAutocapitalizationType { get set }
 }
 
-public struct DefaultTextFieldInputTraits: ELTextFieldInputTraits {
+public struct ELDefaultTextFieldInputTraits: ELTextFieldInputTraits {
     public var isSecureTextEntry: Bool = false
     public var keyboardType: UIKeyboardType = .default
     public var contentType: UITextContentType?
