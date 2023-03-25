@@ -15,6 +15,8 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
 
     public weak var outputDelegate: ELTextInputDelegate?
     var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)?
+    
+    private var rightItemAction: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -75,7 +77,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     func textFieldShouldBeginEditing(_: UITextField) -> Bool {
-        return outputDelegate?.textInputShouldBeginEditing(self) ?? true
+        outputDelegate?.textInputShouldBeginEditing(self) ?? true
     }
 
     func textFieldDidBeginEditing(_: UITextField) {
@@ -88,8 +90,8 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     func textField(_: UITextField,
-                   shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-    {
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
         outputDelegate?.textInput(self,
                                   shouldChangeCharactersIn: range,
                                   replacementString: string) ?? true
@@ -100,39 +102,16 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
     
     @objc private func didTapOnDelete() {
-        
+        didTapOnDeleteAction()
     }
-}
-
-extension ELTextField: ELTextInput {
-    var enteredText: String? {
-        get { text }
-        set {
-            if attributedTextMapper != nil {
-                attributedText = attributedTextMapper?(newValue)
-            } else {
-                text = newValue
-            }
-        }
-    }
-
-    var input: UIView? {
-        get { inputView }
-        set { inputView = newValue }
-    }
-
-    var accesory: UIView? {
-        get { inputAccessoryView }
-        set { inputAccessoryView = newValue }
-    }
-
-    var rightImageView: UIView? {
-        get { rightView }
-        set { rightView = newValue }
+    
+    @objc private func didTapOnRightAction() {
+        rightItemAction?()
     }
 }
 
 extension ELTextField: ELTextInputConfigurable {
+    
     func configureLayer(_ configuration: ELTextInputLayerConfiguration) {
         layer.borderColor = configuration.borderColor?.cgColor
         layer.borderWidth = configuration.borderWidth ?? .zero
@@ -158,7 +137,7 @@ extension ELTextField: ELTextInputConfigurable {
         } else {
             placeholder = viewModel.placeholder
         }
-        setRightImageView(with: viewModel.rightItem)
+        setRightItem(with: viewModel.rightItem)
 
         updateState(viewModel.state)
     }
@@ -173,12 +152,12 @@ extension ELTextField: ELTextInputConfigurable {
         textFieldShouldClear(self)
     }
 
-    private func setRightImageView(with item: ELRightItem?) {
-        guard let item = item else {
+    private func setRightItem(with rightItem: ELRightItem?) {
+        guard let rightItem else {
             rightViewMode = .never
             return
         }
-        switch item {
+        switch rightItem {
         case let .image(image, mode):
             let imageView = UIImageView(image: image)
             imageView.contentMode = .scaleAspectFit
@@ -207,8 +186,9 @@ extension ELTextField: ELTextInputConfigurable {
                 switch behavior {
                 case .delete:
                     button.addTarget(self, action: #selector(didTapOnDelete), for: .touchUpInside)
-                case .custom:
-                    #warning("Не обработано")
+                case let .custom(action):
+                    rightItemAction = action
+                    button.addTarget(self, action: #selector(didTapOnRightAction), for: .touchUpInside)
                     break
                 }
             }
@@ -221,6 +201,6 @@ extension ELTextField: ELTextInputConfigurable {
         default:
             break
         }
-        clearButtonMode = item.isSystemClear ? .whileEditing : .never
+        clearButtonMode = rightItem.isSystemClear ? .whileEditing : .never
     }
 }
