@@ -18,6 +18,7 @@
 		55EA5C4429CF401B00464D65 /* Swissors in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C4329CF401B00464D65 /* Swissors */; };
 		55EA5C4929CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C4829CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift */; };
 		55EA5C4D29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C4C29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift */; };
+		55EA5C5129CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C5029CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		55EA5C3629CF3DCF00464D65 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		55EA5C4829CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNFloatingPlaceholderTextFieldConfiguration.swift; sourceTree = "<group>"; };
 		55EA5C4C29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNFloatingPlaceholderTextFieldContainer.swift; sourceTree = "<group>"; };
+		55EA5C5029CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSearchTextFieldBehavior.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			children = (
 				55EA5C4C29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift */,
 				55EA5C4829CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift */,
+				55EA5C5029CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift */,
 			);
 			path = PN;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EA5C5129CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift in Sources */,
 				55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */,
 				55EA5C4D29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift in Sources */,
 				55EA5C4929CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift in Sources */,

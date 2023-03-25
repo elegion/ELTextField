@@ -18,7 +18,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     }
 
     public var onAction: ((BehaviorAction) -> Void)?
-
+    weak public var containerDelegate: OutputHandlerProtocol?
     var textInput: (ELTextInput & ELTextInputConfigurable)?
 
     public init(
@@ -70,6 +70,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         switch viewModel.state {
         case .disabled:
             onAction?(.tapOnDisabled)
+            containerDelegate?.becameDisabled(in: self)
             return false
         default:
             updateState(.editing)
@@ -80,6 +81,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     open func textInputdDidEndEditing(_: ELTextInput) {
         updateState(.default)
         onAction?(.endEditing)
+        containerDelegate?.endEditing(in: self)
     }
 
     /// При вводе текста свайпом происходит рекурсивный вызов методов:
@@ -133,10 +135,12 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput?.enteredText = newValue
         viewModel.text = newValue.isNilOrEmpty == true ? nil : newValue
         onAction?(.changed(newValue: viewModel.text ?? ""))
+        containerDelegate?.container(self, changedText: viewModel.text ?? "")
     }
 
     public func textInputShouldReturn(_ textInput: ELTextInput) -> Bool {
         onAction?(.return)
+        containerDelegate?.return(in: self)
         textInput.resignFirstResponder()
         return true
     }

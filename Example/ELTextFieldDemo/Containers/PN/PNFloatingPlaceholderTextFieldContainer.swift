@@ -36,17 +36,7 @@ final class PNFloatingPlaceholderTextFieldContainer: ELTextFieldGenericContainer
 
     override public func setBehavior(_ behavior: ELTextFieldBehavior?) {
         super.setBehavior(behavior)
-
-        behavior?.onAction = {
-            [weak self] action in
-            
-            switch action {
-            case let .changed(text):
-                self?.updateFloatingLabelAppearance(isVisible: !text.isEmpty)
-            default:
-                break
-            }
-        }
+        
         updateFloatingLabelAppearance(isVisible: !(behavior?.viewModel.text?.isEmpty ?? true))
         floatingLabel.attributedText = behavior?
             .viewModel
@@ -62,10 +52,7 @@ final class PNFloatingPlaceholderTextFieldContainer: ELTextFieldGenericContainer
         }
     }
     
-    override func container(
-        _ container: ELTextFieldGenericContainer<PNFloatingPlaceholderTextFieldConfiguration>,
-        changedText text: String
-    ) {
+    override func container(_ behavior: ELTextFieldBehavior, changedText text: String) {
         updateFloatingLabelAppearance(isVisible: !text.isEmpty)
     }
 }

@@ -6,14 +6,13 @@
 import Foundation
 import UIKit
 
-public protocol OutputHandlerProtocol {
-    associatedtype C: ELTextFieldConfigurationProtocol
+public protocol OutputHandlerProtocol: AnyObject {
     
-    func startEditing(in container: ELTextFieldGenericContainer<C>)
-    func endEditing(in container: ELTextFieldGenericContainer<C>)
-    func container(_ container: ELTextFieldGenericContainer<C>, changedText text: String)
-    func `return`(in container: ELTextFieldGenericContainer<C>)
-    func becameDisabled(in container: ELTextFieldGenericContainer<C>)
+    func startEditing(in behavior: ELTextFieldBehavior)
+    func endEditing(in behavior: ELTextFieldBehavior)
+    func container(_ behavior: ELTextFieldBehavior, changedText text: String)
+    func `return`(in behavior: ELTextFieldBehavior)
+    func becameDisabled(in behavior: ELTextFieldBehavior)
 }
 
 open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationProtocol>: UIView, OutputHandlerProtocol {
@@ -53,6 +52,7 @@ open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationPr
 
     open func setBehavior(_ behavior: ELTextFieldBehavior?) {
         behavior?.configure(textInput: textInput)
+        behavior?.containerDelegate = self
         textInput.textInputDelegate = behavior
     }
 
@@ -67,13 +67,14 @@ open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationPr
         return textInput.becomeFirstResponder()
     }
     
-    open func startEditing(in container: ELTextFieldGenericContainer<Configuration>) { }
     
-    open func container(_ container: ELTextFieldGenericContainer<Configuration>, changedText text: String) { }
+    open func startEditing(in behavior: ELTextFieldBehavior) { }
     
-    open func endEditing(in container: ELTextFieldGenericContainer<Configuration>) { }
+    open func endEditing(in behavior: ELTextFieldBehavior) { }
     
-    open func `return`(in container: ELTextFieldGenericContainer<Configuration>) { }
+    open func container(_ behavior: ELTextFieldBehavior, changedText text: String) { }
     
-    open func becameDisabled(in container: ELTextFieldGenericContainer<Configuration>) { }
+    open func `return`(in behavior: ELTextFieldBehavior) { }
+    
+    open func becameDisabled(in behavior: ELTextFieldBehavior) { }
 }

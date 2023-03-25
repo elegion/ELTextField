@@ -21,6 +21,7 @@ public protocol ELTextFieldBehavior: ELTextInputDelegate {
     var isValid: Bool { get }
 
     var onAction: ((BehaviorAction) -> Void)? { get set }
+    var containerDelegate: OutputHandlerProtocol? { get set }
 
     func configure(textInput: ELTextInput & ELTextInputConfigurable)
     func updateState(_ state: ELTextFieldState)
