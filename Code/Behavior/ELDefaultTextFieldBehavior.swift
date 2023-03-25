@@ -18,7 +18,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     }
 
     public var onAction: ((BehaviorAction) -> Void)?
-    weak public var containerDelegate: OutputHandlerProtocol?
+    public weak var containerDelegate: OutputHandlerProtocol?
     var textInput: (ELTextInput & ELTextInputConfigurable)?
 
     public init(

@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 
 public protocol OutputHandlerProtocol: AnyObject {
-    
+
     func startEditing(in behavior: ELTextFieldBehavior)
     func endEditing(in behavior: ELTextFieldBehavior)
     func container(_ behavior: ELTextFieldBehavior, changedText text: String)
@@ -23,9 +23,9 @@ open class ELTextFieldGenericContainer<
     Configuration: ELTextFieldConfigurationProtocol,
     Behavior: ELTextFieldBehavior
 >: UIView, OutputHandlerProtocol {
-    
+
     public typealias C = Configuration
-    
+
     public let textInput: ELTextInput & ELTextInputConfigurable
 
     public init(type: ELTextInputType = .singleline) {
@@ -73,15 +73,14 @@ open class ELTextFieldGenericContainer<
 
         return textInput.becomeFirstResponder()
     }
-    
-    
-    open func startEditing(in behavior: ELTextFieldBehavior) { }
-    
-    open func endEditing(in behavior: ELTextFieldBehavior) { }
-    
-    open func container(_ behavior: ELTextFieldBehavior, changedText text: String) { }
-    
-    open func `return`(in behavior: ELTextFieldBehavior) { }
-    
-    open func becameDisabled(in behavior: ELTextFieldBehavior) { }
+
+    open func startEditing(in behavior: ELTextFieldBehavior) {}
+
+    open func endEditing(in behavior: ELTextFieldBehavior) {}
+
+    open func container(_ behavior: ELTextFieldBehavior, changedText text: String) {}
+
+    open func `return`(in behavior: ELTextFieldBehavior) {}
+
+    open func becameDisabled(in behavior: ELTextFieldBehavior) {}
 }

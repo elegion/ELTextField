@@ -6,14 +6,18 @@
 //  Copyright © 2023 E-legion. All rights reserved.
 //
 
-import Foundation
 import ELTextField
+import Foundation
 import UIKit
 
 public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
     public enum AnyValueGender {
-        case male, female, it, many, notMatter
-        
+        case male
+        case female
+        case it
+        case many
+        case notMatter
+
         //        var text: String {
         //            switch self {
         //            case .female:
@@ -29,38 +33,42 @@ public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
         //            }
         //        }
     }
-    
+
     let floatingPlaceholder: String?
     let anyValueGender: AnyValueGender
     //    var updateSelectedValueText: Closure.In<String?>?
     //    public var onClearTap: Closure.Void?
-    
-    public init(text: String? = nil,
-                textMapper: ((String?) -> NSAttributedString?)? = nil,
-                floatingPlaceholder: String? = nil,
-                anyValueGender: AnyValueGender,
-                placeholderMapper _: ((String?) -> NSAttributedString?)? = nil,
-                rightButtonItem _: ELRightItem? = nil,
-                showClearButton _: Bool = false,
-                mask: ELTextFieldInputMask = ELDefaultTextMask(),
-                traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
-                validator: ELTextFieldValidator = ELDefaultTextFieldValidator()) {
+
+    public init(
+        text: String? = nil,
+        textMapper: ((String?) -> NSAttributedString?)? = nil,
+        floatingPlaceholder: String? = nil,
+        anyValueGender: AnyValueGender,
+        placeholderMapper _: ((String?) -> NSAttributedString?)? = nil,
+        rightButtonItem _: ELRightItem? = nil,
+        showClearButton _: Bool = false,
+        mask: ELTextFieldInputMask = ELDefaultTextMask(),
+        traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
+        validator: ELTextFieldValidator = ELDefaultTextFieldValidator()
+    ) {
         self.floatingPlaceholder = floatingPlaceholder
         self.anyValueGender = anyValueGender
         let formattedText = mask.maskedText(from: text)
-        super.init(text: formattedText,
-                   textMapper: textMapper,
-                   placeholder: nil,
-                   placeholderMapper: nil,
-                   rightItem: nil,
-                   mask: mask,
-                   traits: traits,
-                   validator: validator)
+        super.init(
+            text: formattedText,
+            textMapper: textMapper,
+            placeholder: nil,
+            placeholderMapper: nil,
+            rightItem: nil,
+            mask: mask,
+            traits: traits,
+            validator: validator
+        )
     }
-    
+
     override public func updateText(_ newText: String?) {
         super.updateText(newText)
-        
+
         //        updateSelectedValueText?(newText)
     }
 }
@@ -68,9 +76,11 @@ public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
 public struct PNSearchTextFieldContainerModel: Identifiable, Hashable {
     public var id: UUID
     let behavior: PNSearchTextFieldBehavior
-    
-    public init(id: UUID = UUID(),
-                behavior: PNSearchTextFieldBehavior) {
+
+    public init(
+        id: UUID = UUID(),
+        behavior: PNSearchTextFieldBehavior
+    ) {
         self.id = id
         self.behavior = behavior
     }
@@ -78,31 +88,33 @@ public struct PNSearchTextFieldContainerModel: Identifiable, Hashable {
 
 final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPlaceholderTextFieldConfiguration, PNSearchTextFieldBehavior> {
     private enum LabelAppearance {
-        case large, small
+        case large
+        case small
     }
-    
+
     private enum Layout {
         static let horizontalInsets: CGFloat = 16
     }
+
     private var currentAppearance = LabelAppearance.large
-    
+
     private lazy var selectedParameterView: UIView = {
-        let view = UIView()//PNSelectedParameterView(type: .any)
+        let view = UIView() // PNSelectedParameterView(type: .any)
         return view
     }()
-    
+
     private let floatingPlaceholder: UILabel = {
         let label = UILabel()
         label.layer.anchorPoint = .zero
         label.layer.position = .zero
         return label
     }()
-    
+
     private let separatorView = SeparatorView()
-    
+
     override init(type: ELTextInputType = .singleline) {
         super.init(type: type)
-        
+
         addSubview(floatingPlaceholder)
         addSubview(selectedParameterView)
         addSubview(separatorView)
@@ -116,10 +128,10 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
         addGestureRecognizer(tapGesture)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         addSubview(floatingPlaceholder)
         addSubview(selectedParameterView)
         addSubview(separatorView)
@@ -133,15 +145,15 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
         addGestureRecognizer(tapGesture)
     }
-    
+
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override public func setBehavior(_ behavior: PNSearchTextFieldBehavior?) {
         super.setBehavior(behavior)
-        
+
         floatingPlaceholder.attributedText = behavior?
             .floatingPlaceholder?
             .attribute
@@ -164,7 +176,7 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         updateSelectedParameterAppearance(text: behavior?.viewModel.text)
         setBehaviorHandler {
             [weak self, weak behavior] action in
-            
+
             let newAppearance: LabelAppearance
             switch action {
             case .startEditing:
@@ -179,7 +191,7 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
             }
         }
     }
-    
+
     private func updatePlaceholder(appearance: LabelAppearance) {
         switch appearance {
         case .small:
@@ -196,18 +208,25 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
             floatingPlaceholderSize = floatingPlaceholder.frame.size
         } else {
             let viewWidth = frame.width
-            floatingPlaceholderSize = CGSize(width: viewWidth - selectedParameterView.frame.width - Layout.horizontalInsets * 2 - 8,
-                                             height: floatingPlaceholder.frame.height)
+            floatingPlaceholderSize = CGSize(
+                width: viewWidth - selectedParameterView.frame.width - Layout.horizontalInsets * 2 - 8,
+                height: floatingPlaceholder.frame.height
+            )
         }
-        floatingPlaceholder.frame = .init(origin: .init(x: Layout.horizontalInsets,
-                                                        y: 60 / 2 - offset),
-                                          size: floatingPlaceholderSize)
+        floatingPlaceholder.frame = .init(
+            origin: .init(
+                x: Layout.horizontalInsets,
+                y: 60 / 2 - offset
+            ),
+            size: floatingPlaceholderSize
+        )
     }
-    
-    @objc private func didTap() {
+
+    @objc
+    private func didTap() {
         _ = becomeFirstResponder()
     }
-    
+
     private func updateSelectedParameterAppearance(text: String?) {
         guard let text, !text.isEmpty else {
             //            selectedParameterView.configure(with: .any)
@@ -217,10 +236,10 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         selectedParameterView.sizeToFit()
         updatePlaceholder(appearance: currentAppearance)
     }
-    
-    public override func layoutSubviews() {
+
+    override public func layoutSubviews() {
         super.layoutSubviews()
-        
+
         updatePlaceholder(appearance: currentAppearance)
     }
 }

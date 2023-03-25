@@ -6,12 +6,12 @@
 //  Copyright © 2023 E-legion. All rights reserved.
 //
 
-import Foundation
 import ELTextField
+import Foundation
 import UIKit
 
 final class PNFloatingPlaceholderTextFieldContainer: ELDefaultTextFieldGenericContainer<PNFloatingPlaceholderTextFieldConfiguration> {
-    
+
     private let floatingLabel = UILabel()
     private let separatorView = SeparatorView()
 
@@ -36,7 +36,7 @@ final class PNFloatingPlaceholderTextFieldContainer: ELDefaultTextFieldGenericCo
 
     override public func setBehavior(_ behavior: ELDefaultTextFieldBehavior?) {
         super.setBehavior(behavior)
-        
+
         updateFloatingLabelAppearance(isVisible: !(behavior?.viewModel.text?.isEmpty ?? true))
         floatingLabel.attributedText = behavior?
             .viewModel
@@ -51,24 +51,25 @@ final class PNFloatingPlaceholderTextFieldContainer: ELDefaultTextFieldGenericCo
             self.floatingLabel.alpha = isVisible ? 1 : .zero
         }
     }
-    
+
     override func container(_ behavior: ELTextFieldBehavior, changedText text: String) {
         updateFloatingLabelAppearance(isVisible: !text.isEmpty)
     }
 }
 
 final class SeparatorView: UIView {
-    
+
     override var intrinsicContentSize: CGSize {
         CGSize(width: super.intrinsicContentSize.width, height: 0.5)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         backgroundColor = R.color.grayCCCCCE()
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

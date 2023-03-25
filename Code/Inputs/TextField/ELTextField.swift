@@ -121,7 +121,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
 }
 
 extension ELTextField: ELTextInputConfigurable {
-    
+
     func configureLayer(_ configuration: ELTextInputLayerConfiguration) {
         layer.borderColor = configuration.borderColor?.cgColor
         layer.borderWidth = configuration.borderWidth ?? .zero

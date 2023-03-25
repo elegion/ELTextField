@@ -19,8 +19,10 @@ let package = Package(
             name: "ELTextField",
             path: "Code"
         ),
-        .testTarget(name: "ELTextFieldTests",
-                    dependencies: ["ELTextField"],
-                    path: "Tests")
+        .testTarget(
+            name: "ELTextFieldTests",
+            dependencies: ["ELTextField"],
+            path: "Tests"
+        )
     ]
 )

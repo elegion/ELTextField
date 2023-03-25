@@ -10,16 +10,16 @@ import SnapKit
 import UIKit
 
 class ViewController: UIViewController {
-//    private var someBehavior = ELDefaultTextFieldBehavior(placeholder: "Some value",
-//                                                          rightItem: .image(
-//                                                            image: UIImage(systemName: "xmark"),
-//                                                            mode: .always))
+    ///    private var someBehavior = ELDefaultTextFieldBehavior(placeholder: "Some value",
+    ///                                                          rightItem: .image(
+    ///                                                            image: UIImage(systemName: "xmark"),
+    ///                                                            mode: .always))
     private var someBehavior = PNSearchTextFieldBehavior(floatingPlaceholder: "Some floating", anyValueGender: .female)
     private var someTextField = PNSearchTextFieldContainer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .white
         view.addSubview(someTextField)
         someTextField.setBehavior(someBehavior)

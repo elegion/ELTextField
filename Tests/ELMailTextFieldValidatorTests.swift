@@ -1,12 +1,12 @@
 //
 //  ELMailTextFieldValidatorTests.swift
-//  
+//
 //
 //  Created by viktor.volkov on 25.03.2023.
 //
 
-import XCTest
 @testable import ELTextField
+import XCTest
 
 final class ELMailTextFieldValidatorTests: XCTestCase {
 
