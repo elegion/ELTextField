@@ -7,15 +7,15 @@ import Foundation
 import UIKit
 
 /// Протокол, в котором описаны методы делегата TextInput'a
-public protocol TextInputOutput: AnyObject {
-    func textInputShouldClear(_ textInput: TextInput) -> Bool
-    func textInputShouldBeginEditing(_ textInput: TextInput) -> Bool
-    func textInputdDidEndEditing(_ textInput: TextInput)
-    func textInput(_ textInput: TextInput & UITextInput,
+public protocol ELTextInputOutput: AnyObject {
+    func textInputShouldClear(_ textInput: ELTextInput) -> Bool
+    func textInputShouldBeginEditing(_ textInput: ELTextInput) -> Bool
+    func textInputdDidEndEditing(_ textInput: ELTextInput)
+    func textInput(_ textInput: ELTextInput & UITextInput,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool
-    func textInputShouldReturn(_ textInput: TextInput) -> Bool
-    func textInput(_ textInput: TextInput,
+    func textInputShouldReturn(_ textInput: ELTextInput) -> Bool
+    func textInput(_ textInput: ELTextInput,
                    canPerformAction action: Selector,
                    withSender sender: Any?) -> Bool
 }

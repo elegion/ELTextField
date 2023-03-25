@@ -6,7 +6,7 @@
 import Foundation
 import UIKit
 
-public protocol TextInput: UIView {
+public protocol ELTextInput: UIView {
     var attributedTextMapper: ((String?) -> NSAttributedString?)? { get set }
     var enteredText: String? { get set }
     var input: UIView? { get set }

@@ -6,7 +6,7 @@
 import Foundation
 import UIKit
 
-public struct IntrinsicHeight {
+public struct ELIntrinsicHeight {
     let singleline: CGFloat
     let multiline: CGFloat
 
@@ -22,7 +22,7 @@ public struct IntrinsicHeight {
 }
 
 /// Позиция RightView
-public enum RightViewPosition {
+public enum ELRightViewPosition {
     /// Явные значения позиции
     case absolute(topRight: CGPoint, size: CGSize)
     /// По центру по горизонтали
@@ -47,16 +47,16 @@ public enum RightViewPosition {
     }
 }
 
-public struct TextInputRectConfiguration {
+public struct ELTextInputRectConfiguration {
     public let textInset: UIEdgeInsets?
     public let editingInset: UIEdgeInsets?
-    public let rightViewPosition: RightViewPosition?
-    public let intrinsicHeight: IntrinsicHeight
+    public let rightViewPosition: ELRightViewPosition?
+    public let intrinsicHeight: ELIntrinsicHeight
 
     public init(textInset: UIEdgeInsets? = nil,
                 editingInset: UIEdgeInsets? = nil,
-                rightViewPosition: RightViewPosition? = nil,
-                intrinsicHeight: IntrinsicHeight) {
+                rightViewPosition: ELRightViewPosition? = nil,
+                intrinsicHeight: ELIntrinsicHeight) {
         self.textInset = textInset
         self.editingInset = editingInset
         self.rightViewPosition = rightViewPosition

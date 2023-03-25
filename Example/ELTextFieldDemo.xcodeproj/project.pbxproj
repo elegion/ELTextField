@@ -20,7 +20,7 @@
 		55EA5C1F29CEF78A00464D65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55EA5C2229CEF78A00464D65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55EA5C2429CEF78A00464D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55EA5C2B29CEF83D00464D65 /* ELTextField */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ELTextField; path = ..; sourceTree = "<group>"; };
+		55EA5C2E29CEFD0100464D65 /* ELTextField */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ELTextField; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +37,7 @@
 		55EA5C0A29CEF78A00464D65 = {
 			isa = PBXGroup;
 			children = (
-				55EA5C2A29CEF83D00464D65 /* Packages */,
+				55EA5C2D29CEFD0100464D65 /* Packages */,
 				55EA5C1529CEF78A00464D65 /* ELTextFieldDemo */,
 				55EA5C1429CEF78A00464D65 /* Products */,
 			);
@@ -63,10 +63,10 @@
 			path = ELTextFieldDemo;
 			sourceTree = "<group>";
 		};
-		55EA5C2A29CEF83D00464D65 /* Packages */ = {
+		55EA5C2D29CEFD0100464D65 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				55EA5C2B29CEF83D00464D65 /* ELTextField */,
+				55EA5C2E29CEFD0100464D65 /* ELTextField */,
 			);
 			name = Packages;
 			sourceTree = "<group>";

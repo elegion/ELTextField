@@ -6,10 +6,10 @@
 import Foundation
 import UIKit
 
-class TextView<Configuration: TextFieldConfigurationProtocol>: UITextView, UITextViewDelegate {
+class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, UITextViewDelegate {
     var attributedTextMapper: ((String?) -> NSAttributedString?)?
 
-    private var rectConfiguration: TextInputRectConfiguration {
+    private var rectConfiguration: ELTextInputRectConfiguration {
         Configuration.rect()
     }
 
@@ -25,8 +25,8 @@ class TextView<Configuration: TextFieldConfigurationProtocol>: UITextView, UITex
         set { placeholderLabel.attributedText = newValue }
     }
 
-    public weak var outputDelegate: TextInputOutput?
-    var behaviorAction: ((TextFieldBehaviorAction) -> Void)?
+    public weak var outputDelegate: ELTextInputOutput?
+    var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)?
 
     var placeholderHidden: Bool {
         get { placeholderLabel.isHidden }
@@ -82,7 +82,7 @@ class TextView<Configuration: TextFieldConfigurationProtocol>: UITextView, UITex
     }
 }
 
-extension TextView: TextInput {
+extension ELTextView: ELTextInput {
     var input: UIView? {
         get { inputView }
         set { inputView = newValue }
@@ -113,14 +113,14 @@ extension TextView: TextInput {
     }
 }
 
-extension TextView: TextInputConfigurable {
-    func configureLayer(_ configuration: TextInputLayerConfiguration) {
+extension ELTextView: ELTextInputConfigurable {
+    func configureLayer(_ configuration: ELTextInputLayerConfiguration) {
         layer.borderColor = configuration.borderColor?.cgColor
         layer.borderWidth = configuration.borderWidth ?? .zero
         layer.cornerRadius = configuration.cornerRadius ?? .zero
     }
 
-    func configureTraits(_ traits: TextFieldInputTraits) {
+    func configureTraits(_ traits: ELTextFieldInputTraits) {
         isSecureTextEntry = traits.isSecureTextEntry
         keyboardType = traits.keyboardType
         textContentType = traits.contentType
@@ -130,7 +130,7 @@ extension TextView: TextInputConfigurable {
         autocapitalizationType = traits.autocapitalizationType
     }
 
-    func configureViewModel(_ viewModel: TextInputViewModel) {
+    func configureViewModel(_ viewModel: ELTextInputViewModel) {
         attributedTextMapper = viewModel.attributedTextMapper
         enteredText = viewModel.text
         if let attributedPlaceholderMapper = viewModel.attributedPlaceholderMapper {
@@ -141,7 +141,7 @@ extension TextView: TextInputConfigurable {
         updateState(viewModel.state)
     }
 
-    func updateState(_ textFieldState: TextFieldState) {
+    func updateState(_ textFieldState: ELTextFieldState) {
         configureLayer(Configuration.layer(for: textFieldState))
     }
 }

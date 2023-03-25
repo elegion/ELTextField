@@ -6,7 +6,7 @@
 import Foundation
 import UIKit
 
-public protocol TextFieldInputTraits {
+public protocol ELTextFieldInputTraits {
     var isSecureTextEntry: Bool { get set }
     var keyboardType: UIKeyboardType { get set }
     var contentType: UITextContentType? { get set }
@@ -16,7 +16,7 @@ public protocol TextFieldInputTraits {
     var autocapitalizationType: UITextAutocapitalizationType { get set }
 }
 
-public struct DefaultTextFieldInputTraits: TextFieldInputTraits {
+public struct DefaultTextFieldInputTraits: ELTextFieldInputTraits {
     public var isSecureTextEntry: Bool = false
     public var keyboardType: UIKeyboardType = .default
     public var contentType: UITextContentType?

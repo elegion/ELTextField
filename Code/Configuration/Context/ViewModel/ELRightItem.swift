@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public enum RightItem {
+public enum ELRightItem {
     public enum Behavior {
         case delete
         case custom(onTap: () -> Void)

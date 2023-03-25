@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct DefaultTextMask: TextFieldInputMask {
+public struct ELDefaultTextMask: ELTextFieldInputMask {
     public func maskedText(from rawText: String?) -> String {
         rawText ?? ""
     }

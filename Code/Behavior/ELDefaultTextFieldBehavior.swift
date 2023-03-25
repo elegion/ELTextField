@@ -6,11 +6,11 @@
 import Foundation
 import UIKit
 
-open class DefaultTextFieldBehavior: NSObject, TextFieldBehavior {
-    public var mask: TextFieldInputMask
-    public var traits: TextFieldInputTraits
-    public var validator: TextFieldValidator
-    public var viewModel: TextInputViewModel
+open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
+    public var mask: ELTextFieldInputMask
+    public var traits: ELTextFieldInputTraits
+    public var validator: ELTextFieldValidator
+    public var viewModel: ELTextInputViewModel
 
     open var isValid: Bool {
         validator.isValid(text: viewModel.text)
@@ -21,21 +21,21 @@ open class DefaultTextFieldBehavior: NSObject, TextFieldBehavior {
     public var onReturn: (() -> Void)?
     public var onTapDisabled: (() -> Void)?
 
-    public var textInput: (TextInput & TextInputConfigurable)?
+    public var textInput: (ELTextInput & ELTextInputConfigurable)?
 
     public init(text: String? = nil,
                 textMapper: ((String?) -> NSAttributedString?)? = nil,
                 placeholder: String? = nil,
                 placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
-                rightButtonItem: RightItem? = nil,
+                rightButtonItem: ELRightItem? = nil,
                 showClearButton: Bool = false,
-                mask: TextFieldInputMask = DefaultTextMask(),
-                traits: TextFieldInputTraits = DefaultTextFieldInputTraits(),
-                validator: TextFieldValidator = DefaultTextFieldValidator()) {
+                mask: ELTextFieldInputMask = ELDefaultTextMask(),
+                traits: ELTextFieldInputTraits = DefaultTextFieldInputTraits(),
+                validator: ELTextFieldValidator = DefaultTextFieldValidator()) {
         self.mask = mask
         self.traits = traits
         self.validator = validator
-        self.viewModel = TextInputViewModel(text: text,
+        self.viewModel = ELTextInputViewModel(text: text,
                                             placeholder: placeholder,
                                             rightButtonItem: rightButtonItem,
                                             showClearButton: showClearButton,
@@ -44,7 +44,7 @@ open class DefaultTextFieldBehavior: NSObject, TextFieldBehavior {
                                             attributedTextMapper: textMapper)
     }
 
-    open func configure(textInput: TextInput & TextInputConfigurable) {
+    open func configure(textInput: ELTextInput & ELTextInputConfigurable) {
         self.textInput = textInput
         textInput.input = nil
         textInput.accesory = nil
@@ -52,7 +52,7 @@ open class DefaultTextFieldBehavior: NSObject, TextFieldBehavior {
         textInput.configureViewModel(viewModel)
     }
 
-    public func updateState(_ state: TextFieldState) {
+    public func updateState(_ state: ELTextFieldState) {
         viewModel.state = state
         textInput?.updateState(viewModel.state)
     }
@@ -61,12 +61,12 @@ open class DefaultTextFieldBehavior: NSObject, TextFieldBehavior {
         updateText(newValue: newText)
     }
 
-    public func textInputShouldClear(_: TextInput) -> Bool {
+    public func textInputShouldClear(_: ELTextInput) -> Bool {
         updateText("")
         return true
     }
 
-    open func textInputShouldBeginEditing(_: TextInput) -> Bool {
+    open func textInputShouldBeginEditing(_: ELTextInput) -> Bool {
         switch viewModel.state {
         case .disabled:
             onTapDisabled?()
@@ -77,7 +77,7 @@ open class DefaultTextFieldBehavior: NSObject, TextFieldBehavior {
         }
     }
 
-    open func textInputdDidEndEditing(_: TextInput) {
+    open func textInputdDidEndEditing(_: ELTextInput) {
         updateState(.default)
         onEndEditing?()
     }
@@ -86,7 +86,7 @@ open class DefaultTextFieldBehavior: NSObject, TextFieldBehavior {
     /// https://stackoverflow.com/questions/58560843/ios-13-crash-with-swipekeyboard-and-textfieldshouldchangecharactersin
     private var lastEntry: String?
 
-    public func textInput(_ textInput: TextInput & UITextInput,
+    public func textInput(_ textInput: ELTextInput & UITextInput,
                           shouldChangeCharactersIn range: NSRange,
                           replacementString string: String) -> Bool {
         if viewModel.state != .error {
@@ -131,13 +131,13 @@ open class DefaultTextFieldBehavior: NSObject, TextFieldBehavior {
         onChanged?(viewModel.text ?? "")
     }
 
-    public func textInputShouldReturn(_ textInput: TextInput) -> Bool {
+    public func textInputShouldReturn(_ textInput: ELTextInput) -> Bool {
         onReturn?()
         textInput.resignFirstResponder()
         return true
     }
 
-    open func textInput(_: TextInput, canPerformAction _: Selector, withSender _: Any?) -> Bool {
+    open func textInput(_: ELTextInput, canPerformAction _: Selector, withSender _: Any?) -> Bool {
         true
     }
 }

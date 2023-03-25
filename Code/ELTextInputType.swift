@@ -6,7 +6,7 @@
 import Foundation
 import UIKit
 
-public enum TextInputType {
+public enum ELTextInputType {
     case singleline
     case multiline
 

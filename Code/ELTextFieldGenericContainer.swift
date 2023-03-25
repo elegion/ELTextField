@@ -6,11 +6,11 @@
 import Foundation
 import UIKit
 
-open class TextFieldGenericContainer<Configuration: TextFieldConfigurationProtocol>: UIView {
-    public var textInput: TextInput & TextInputConfigurable
+open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationProtocol>: UIView {
+    public var textInput: ELTextInput & ELTextInputConfigurable
 
-    public init(type: TextInputType = .singleline) {
-        self.textInput = type.isSingleline ? TextField<Configuration>() : TextView<Configuration>()
+    public init(type: ELTextInputType = .singleline) {
+        self.textInput = type.isSingleline ? ELTextField<Configuration>() : ELTextView<Configuration>()
         super.init(frame: .zero)
 
         addSubview(textInput)
@@ -22,7 +22,7 @@ open class TextFieldGenericContainer<Configuration: TextFieldConfigurationProtoc
     }
 
     override public init(frame: CGRect) {
-        self.textInput = TextField<Configuration>()
+        self.textInput = ELTextField<Configuration>()
         super.init(frame: frame)
 
         addSubview(textInput)
@@ -38,7 +38,7 @@ open class TextFieldGenericContainer<Configuration: TextFieldConfigurationProtoc
         fatalError("init(coder:) has not been implemented")
     }
 
-    open func setBehavior(_ behavior: TextFieldBehavior?) {
+    open func setBehavior(_ behavior: ELTextFieldBehavior?) {
         guard let behavior = behavior else {
             return
         }
@@ -46,7 +46,7 @@ open class TextFieldGenericContainer<Configuration: TextFieldConfigurationProtoc
         textInput.outputDelegate = behavior
     }
 
-    public func setBehaviorHandler(_ handler: ((TextFieldBehaviorAction) -> Void)?) {
+    public func setBehaviorHandler(_ handler: ((ELTextFieldBehaviorAction) -> Void)?) {
         textInput.behaviorAction = handler
     }
 

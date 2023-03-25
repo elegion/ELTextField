@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 
 /// Конфигурация Layer
-public struct TextInputLayerConfiguration {
+public struct ELTextInputLayerConfiguration {
     public let borderColor: UIColor?
     public let borderWidth: CGFloat?
     public let cornerRadius: CGFloat?

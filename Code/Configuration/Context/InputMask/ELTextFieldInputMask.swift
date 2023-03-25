@@ -6,7 +6,7 @@
 import Foundation
 
 /// Маска для преобразования введенного текста в пользовательское представление и наоборот
-public protocol TextFieldInputMask {
+public protocol ELTextFieldInputMask {
     /// Возвращает текст, пригодный для отображения пользователю
     func maskedText(from rawText: String?) -> String
     /// Возвращает текст в 'сыром' виде

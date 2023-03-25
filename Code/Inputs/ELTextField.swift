@@ -6,15 +6,15 @@
 import Foundation
 import UIKit
 
-class TextField<Configuration: TextFieldConfigurationProtocol>: UITextField, UITextFieldDelegate {
+class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField, UITextFieldDelegate {
     var attributedTextMapper: ((String?) -> NSAttributedString?)?
 
-    private var rectConfiguration: TextInputRectConfiguration {
+    private var rectConfiguration: ELTextInputRectConfiguration {
         Configuration.rect()
     }
 
-    public weak var outputDelegate: TextInputOutput?
-    var behaviorAction: ((TextFieldBehaviorAction) -> Void)?
+    public weak var outputDelegate: ELTextInputOutput?
+    var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -100,7 +100,7 @@ class TextField<Configuration: TextFieldConfigurationProtocol>: UITextField, UIT
     }
 }
 
-extension TextField: TextInput {
+extension ELTextField: ELTextInput {
     var enteredText: String? {
         get { text }
         set {
@@ -128,15 +128,15 @@ extension TextField: TextInput {
     }
 }
 
-extension TextField: TextInputConfigurable {
-    func configureLayer(_ configuration: TextInputLayerConfiguration) {
+extension ELTextField: ELTextInputConfigurable {
+    func configureLayer(_ configuration: ELTextInputLayerConfiguration) {
         layer.borderColor = configuration.borderColor?.cgColor
         layer.borderWidth = configuration.borderWidth ?? .zero
         layer.cornerRadius = configuration.cornerRadius ?? .zero
         rightImageView?.tintColor = configuration.tintColor
     }
 
-    func configureTraits(_ traits: TextFieldInputTraits) {
+    func configureTraits(_ traits: ELTextFieldInputTraits) {
         isSecureTextEntry = traits.isSecureTextEntry
         keyboardType = traits.keyboardType
         textContentType = traits.contentType
@@ -146,7 +146,7 @@ extension TextField: TextInputConfigurable {
         autocapitalizationType = traits.autocapitalizationType
     }
 
-    func configureViewModel(_ viewModel: TextInputViewModel) {
+    func configureViewModel(_ viewModel: ELTextInputViewModel) {
         attributedTextMapper = viewModel.attributedTextMapper
         enteredText = viewModel.text
         if let attributedPlaceholderMapper = viewModel.attributedPlaceholderMapper {
@@ -160,7 +160,7 @@ extension TextField: TextInputConfigurable {
         updateState(viewModel.state)
     }
 
-    func updateState(_ textFieldState: TextFieldState) {
+    func updateState(_ textFieldState: ELTextFieldState) {
         configureLayer(Configuration.layer(for: textFieldState))
     }
 
@@ -168,7 +168,7 @@ extension TextField: TextInputConfigurable {
         textFieldShouldClear(self)
     }
 
-    private func setRightImageView(with item: RightItem?) {
+    private func setRightImageView(with item: ELRightItem?) {
         guard let item = item else {
             rightViewMode = .never
             return

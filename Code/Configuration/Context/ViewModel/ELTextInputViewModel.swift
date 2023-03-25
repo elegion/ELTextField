@@ -6,12 +6,12 @@
 import Foundation
 import UIKit
 
-public struct TextInputViewModel {
+public struct ELTextInputViewModel {
     public var text: String?
     public var placeholder: String?
-    public var rightButtonItem: RightItem?
+    public var rightButtonItem: ELRightItem?
     public var showClearButton: Bool
-    public var state: TextFieldState
+    public var state: ELTextFieldState
 
     public var attributedPlaceholderMapper: ((String?) -> NSAttributedString?)?
     public var attributedTextMapper: ((String?) -> NSAttributedString?)?

@@ -6,7 +6,7 @@
 import Foundation
 
 /// Состояние TextField
-public enum TextFieldState {
+public enum ELTextFieldState {
     /// По умолчанию
     case `default`
     /// Ошибка (например, валидации)

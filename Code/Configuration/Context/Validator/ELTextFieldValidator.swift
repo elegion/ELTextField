@@ -5,11 +5,11 @@
 
 import Foundation
 
-public protocol TextFieldValidator {
+public protocol ELTextFieldValidator {
     func isValid(text: String?) -> Bool
 }
 
-public class DefaultTextFieldValidator: TextFieldValidator {
+public class DefaultTextFieldValidator: ELTextFieldValidator {
     public func isValid(text: String?) -> Bool {
         text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
     }
