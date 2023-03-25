@@ -165,7 +165,9 @@ extension ELTextField: ELTextInputConfigurable {
     }
 
     func updateState(_ textFieldState: ELTextFieldState) {
-        configureLayer(Configuration.layer(for: textFieldState))
+        UIView.animate(withDuration: CATransaction.animationDuration(), delay: .zero) {
+            self.configureLayer(Configuration.layer(for: textFieldState))
+        }
     }
 
     private func didTapOnDeleteAction() {
