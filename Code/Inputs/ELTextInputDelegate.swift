@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 
 /// Протокол, в котором описаны методы делегата TextInput'a
-public protocol ELTextInputOutput: AnyObject {
+public protocol ELTextInputDelegate: AnyObject {
     func textInputShouldClear(_ textInput: ELTextInput) -> Bool
     func textInputShouldBeginEditing(_ textInput: ELTextInput) -> Bool
     func textInputdDidEndEditing(_ textInput: ELTextInput)

@@ -13,7 +13,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
         Configuration.rect()
     }
 
-    public weak var outputDelegate: ELTextInputOutput?
+    public weak var outputDelegate: ELTextInputDelegate?
     var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)?
 
     override init(frame: CGRect) {

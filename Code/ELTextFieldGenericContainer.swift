@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 
 open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationProtocol>: UIView {
-    public var textInput: ELTextInput & ELTextInputConfigurable
+    public let textInput: ELTextInput & ELTextInputConfigurable
 
     public init(type: ELTextInputType = .singleline) {
         self.textInput = type.isSingleline ? ELTextField<Configuration>() : ELTextView<Configuration>()

@@ -12,8 +12,8 @@ public enum ELTextFieldBehaviorAction {
 }
 
 /// Протокол, который позволяет конфигурировать представление TextInput
-public protocol ELTextInputConfigurable {
-    var outputDelegate: ELTextInputOutput? { get set }
+public protocol ELTextInputConfigurable: AnyObject {
+    var outputDelegate: ELTextInputDelegate? { get set }
     var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)? { get set }
 
     func configureLayer(_ configuration: ELTextInputLayerConfiguration)

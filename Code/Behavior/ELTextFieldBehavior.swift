@@ -12,7 +12,7 @@ public enum BehaviorAction {
     case tapOnDisabled
 }
 
-public protocol ELTextFieldBehavior: ELTextInputOutput {
+public protocol ELTextFieldBehavior: ELTextInputDelegate {
     var mask: ELTextFieldInputMask { get }
     var traits: ELTextFieldInputTraits { get }
     var validator: ELTextFieldValidator { get }

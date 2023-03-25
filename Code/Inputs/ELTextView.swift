@@ -25,7 +25,7 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
         set { placeholderLabel.attributedText = newValue }
     }
 
-    public weak var outputDelegate: ELTextInputOutput?
+    public weak var outputDelegate: ELTextInputDelegate?
     var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)?
 
     var placeholderHidden: Bool {
