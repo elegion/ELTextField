@@ -6,6 +6,7 @@
 import Foundation
 import UIKit
 
+/// Класс, описывающий поведение поля ввода
 open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     public var mask: ELTextFieldInputMask
     public var traits: ELTextFieldInputTraits
@@ -15,11 +16,8 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     open var isValid: Bool {
         validator.isValid(text: viewModel.text)
     }
-
-    public var onChanged: ((String) -> Void)?
-    public var onEndEditing: (() -> Void)?
-    public var onReturn: (() -> Void)?
-    public var onTapDisabled: (() -> Void)?
+    
+    public var onAction: ((BehaviorAction) -> Void)?
 
     public var textInput: (ELTextInput & ELTextInputConfigurable)?
 
@@ -27,8 +25,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
                 textMapper: ((String?) -> NSAttributedString?)? = nil,
                 placeholder: String? = nil,
                 placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
-                rightButtonItem: ELRightItem? = nil,
-                showClearButton: Bool = false,
+                rightItem: ELRightItem? = nil,
                 mask: ELTextFieldInputMask = ELDefaultTextMask(),
                 traits: ELTextFieldInputTraits = DefaultTextFieldInputTraits(),
                 validator: ELTextFieldValidator = DefaultTextFieldValidator()) {
@@ -37,8 +34,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         self.validator = validator
         self.viewModel = ELTextInputViewModel(text: text,
                                             placeholder: placeholder,
-                                            rightButtonItem: rightButtonItem,
-                                            showClearButton: showClearButton,
+                                              rightItem: rightItem,
                                             state: .default,
                                             attributedPlaceholderMapper: placeholderMapper,
                                             attributedTextMapper: textMapper)
@@ -69,7 +65,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     open func textInputShouldBeginEditing(_: ELTextInput) -> Bool {
         switch viewModel.state {
         case .disabled:
-            onTapDisabled?()
+            onAction?(.tapOnDisabled)
             return false
         default:
             updateState(.editing)
@@ -79,7 +75,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
 
     open func textInputdDidEndEditing(_: ELTextInput) {
         updateState(.default)
-        onEndEditing?()
+        onAction?(.endEditing)
     }
 
     /// При вводе текста свайпом происходит рекурсивный вызов методов:
@@ -128,11 +124,11 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     private func updateText(newValue: String?) {
         textInput?.enteredText = newValue
         viewModel.text = newValue.isNilOrEmpty == true ? nil : newValue
-        onChanged?(viewModel.text ?? "")
+        onAction?(.changed(newValue: viewModel.text ?? ""))
     }
 
     public func textInputShouldReturn(_ textInput: ELTextInput) -> Bool {
-        onReturn?()
+        onAction?(.return)
         textInput.resignFirstResponder()
         return true
     }

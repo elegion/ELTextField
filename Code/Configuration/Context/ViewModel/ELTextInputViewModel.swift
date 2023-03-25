@@ -9,8 +9,7 @@ import UIKit
 public struct ELTextInputViewModel {
     public var text: String?
     public var placeholder: String?
-    public var rightButtonItem: ELRightItem?
-    public var showClearButton: Bool
+    public var rightItem: ELRightItem?
     public var state: ELTextFieldState
 
     public var attributedPlaceholderMapper: ((String?) -> NSAttributedString?)?

@@ -158,9 +158,8 @@ extension ELTextField: ELTextInputConfigurable {
         } else {
             placeholder = viewModel.placeholder
         }
-        setRightImageView(with: viewModel.rightButtonItem)
+        setRightImageView(with: viewModel.rightItem)
 
-        clearButtonMode = viewModel.showClearButton ? .whileEditing : .never
         updateState(viewModel.state)
     }
 
@@ -219,6 +218,9 @@ extension ELTextField: ELTextInputConfigurable {
         case let .custom(view, mode):
             rightImageView = view
             rightViewMode = mode
+        default:
+            break
         }
+        clearButtonMode = item.isSystemClear ? .whileEditing : .never
     }
 }

@@ -5,6 +5,7 @@
 
 import Foundation
 
+/// Валидатор для проверки корректности введенного текста
 public protocol ELTextFieldValidator {
     func isValid(text: String?) -> Bool
 }
