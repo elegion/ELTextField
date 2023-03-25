@@ -15,7 +15,14 @@ public protocol OutputHandlerProtocol: AnyObject {
     func becameDisabled(in behavior: ELTextFieldBehavior)
 }
 
-open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationProtocol>: UIView, OutputHandlerProtocol {
+public typealias ELDefaultTextFieldGenericContainer<
+    C: ELTextFieldConfigurationProtocol
+> = ELTextFieldGenericContainer<C, ELDefaultTextFieldBehavior>
+
+open class ELTextFieldGenericContainer<
+    Configuration: ELTextFieldConfigurationProtocol,
+    Behavior: ELTextFieldBehavior
+>: UIView, OutputHandlerProtocol {
     
     public typealias C = Configuration
     
@@ -50,7 +57,7 @@ open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationPr
         fatalError("init(coder:) has not been implemented")
     }
 
-    open func setBehavior(_ behavior: ELTextFieldBehavior?) {
+    open func setBehavior(_ behavior: Behavior?) {
         behavior?.configure(textInput: textInput)
         behavior?.containerDelegate = self
         textInput.textInputDelegate = behavior

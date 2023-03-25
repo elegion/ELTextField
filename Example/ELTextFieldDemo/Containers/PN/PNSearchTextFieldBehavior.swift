@@ -13,28 +13,28 @@ import UIKit
 public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
     public enum AnyValueGender {
         case male, female, it, many, notMatter
-
-//        var text: String {
-//            switch self {
-//            case .female:
-//                return R.string.search.anyFemale()
-//            case .male:
-//                return R.string.search.anyMale()
-//            case .it:
-//                return R.string.search.anyIt()
-//            case .many:
-//                return R.string.search.anyMany()
-//            case .notMatter:
-//                return R.string.search.anyNotMatter()
-//            }
-//        }
+        
+        //        var text: String {
+        //            switch self {
+        //            case .female:
+        //                return R.string.search.anyFemale()
+        //            case .male:
+        //                return R.string.search.anyMale()
+        //            case .it:
+        //                return R.string.search.anyIt()
+        //            case .many:
+        //                return R.string.search.anyMany()
+        //            case .notMatter:
+        //                return R.string.search.anyNotMatter()
+        //            }
+        //        }
     }
-
+    
     let floatingPlaceholder: String?
     let anyValueGender: AnyValueGender
-//    var updateSelectedValueText: Closure.In<String?>?
-//    public var onClearTap: Closure.Void?
-
+    //    var updateSelectedValueText: Closure.In<String?>?
+    //    public var onClearTap: Closure.Void?
+    
     public init(text: String? = nil,
                 textMapper: ((String?) -> NSAttributedString?)? = nil,
                 floatingPlaceholder: String? = nil,
@@ -57,18 +57,18 @@ public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
                    traits: traits,
                    validator: validator)
     }
-
+    
     override public func updateText(_ newText: String?) {
         super.updateText(newText)
-
-//        updateSelectedValueText?(newText)
+        
+        //        updateSelectedValueText?(newText)
     }
 }
 
 public struct PNSearchTextFieldContainerModel: Identifiable, Hashable {
     public var id: UUID
     let behavior: PNSearchTextFieldBehavior
-
+    
     public init(id: UUID = UUID(),
                 behavior: PNSearchTextFieldBehavior) {
         self.id = id
@@ -76,33 +76,33 @@ public struct PNSearchTextFieldContainerModel: Identifiable, Hashable {
     }
 }
 
-final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPlaceholderTextFieldConfiguration> {
+final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPlaceholderTextFieldConfiguration, PNSearchTextFieldBehavior> {
     private enum LabelAppearance {
         case large, small
     }
-
+    
     private enum Layout {
         static let horizontalInsets: CGFloat = 16
     }
     private var currentAppearance = LabelAppearance.large
-
+    
     private lazy var selectedParameterView: UIView = {
         let view = UIView()//PNSelectedParameterView(type: .any)
         return view
     }()
-
+    
     private let floatingPlaceholder: UILabel = {
         let label = UILabel()
         label.layer.anchorPoint = .zero
         label.layer.position = .zero
         return label
     }()
-
+    
     private let separatorView = SeparatorView()
-
+    
     override init(type: ELTextInputType = .singleline) {
         super.init(type: type)
-
+        
         addSubview(floatingPlaceholder)
         addSubview(selectedParameterView)
         addSubview(separatorView)
@@ -116,10 +116,10 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
         addGestureRecognizer(tapGesture)
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         addSubview(floatingPlaceholder)
         addSubview(selectedParameterView)
         addSubview(separatorView)
@@ -133,40 +133,38 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
         addGestureRecognizer(tapGesture)
     }
-
+    
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override public func setBehavior(_ behavior: ELTextFieldBehavior?) {
+    
+    override public func setBehavior(_ behavior: PNSearchTextFieldBehavior?) {
         super.setBehavior(behavior)
-
-        if let searchBehavior = behavior as? PNSearchTextFieldBehavior {
-            floatingPlaceholder.attributedText = searchBehavior
-                .floatingPlaceholder?
-                .attribute
-                .with(font: .systemFont(ofSize: 17, weight: .regular))
-                .with(foregroundColor: R.color.gray919195())
-                .build()
-//            selectedParameterView.setAnyText(searchBehavior.anyValueGender.text)
-//            searchBehavior.updateSelectedValueText = {
-//                [weak self] newText in
-//
-//                self?.updateSelectedParameterAppearance(text: newText)
-//            }
-//            selectedParameterView.onClearTap = {
-//                [weak searchBehavior] in
-//
-//                searchBehavior?.onClearTap?()
-//                searchBehavior?.updateText("")
-//            }
-        }
+        
+        floatingPlaceholder.attributedText = behavior?
+            .floatingPlaceholder?
+            .attribute
+            .with(font: .systemFont(ofSize: 17, weight: .regular))
+            .with(foregroundColor: R.color.gray919195())
+            .build()
+        //            selectedParameterView.setAnyText(searchBehavior.anyValueGender.text)
+        //            searchBehavior.updateSelectedValueText = {
+        //                [weak self] newText in
+        //
+        //                self?.updateSelectedParameterAppearance(text: newText)
+        //            }
+        //            selectedParameterView.onClearTap = {
+        //                [weak searchBehavior] in
+        //
+        //                searchBehavior?.onClearTap?()
+        //                searchBehavior?.updateText("")
+        //            }
         updatePlaceholder(appearance: currentAppearance)
         updateSelectedParameterAppearance(text: behavior?.viewModel.text)
         setBehaviorHandler {
             [weak self, weak behavior] action in
-
+            
             let newAppearance: LabelAppearance
             switch action {
             case .startEditing:
@@ -181,7 +179,7 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
             }
         }
     }
-
+    
     private func updatePlaceholder(appearance: LabelAppearance) {
         switch appearance {
         case .small:
@@ -205,17 +203,17 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
                                                         y: 60 / 2 - offset),
                                           size: floatingPlaceholderSize)
     }
-
+    
     @objc private func didTap() {
         _ = becomeFirstResponder()
     }
-
+    
     private func updateSelectedParameterAppearance(text: String?) {
         guard let text, !text.isEmpty else {
-//            selectedParameterView.configure(with: .any)
+            //            selectedParameterView.configure(with: .any)
             return
         }
-//        selectedParameterView.configure(with: .selected(text: text))
+        //        selectedParameterView.configure(with: .selected(text: text))
         selectedParameterView.sizeToFit()
         updatePlaceholder(appearance: currentAppearance)
     }

@@ -10,7 +10,7 @@ import Foundation
 import ELTextField
 import UIKit
 
-final class PNFloatingPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPlaceholderTextFieldConfiguration> {
+final class PNFloatingPlaceholderTextFieldContainer: ELDefaultTextFieldGenericContainer<PNFloatingPlaceholderTextFieldConfiguration> {
     
     private let floatingLabel = UILabel()
     private let separatorView = SeparatorView()
@@ -34,7 +34,7 @@ final class PNFloatingPlaceholderTextFieldContainer: ELTextFieldGenericContainer
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func setBehavior(_ behavior: ELTextFieldBehavior?) {
+    override public func setBehavior(_ behavior: ELDefaultTextFieldBehavior?) {
         super.setBehavior(behavior)
         
         updateFloatingLabelAppearance(isVisible: !(behavior?.viewModel.text?.isEmpty ?? true))
