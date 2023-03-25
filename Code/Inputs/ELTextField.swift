@@ -96,7 +96,11 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     func textFieldShouldReturn(_: UITextField) -> Bool {
-        return outputDelegate?.textInputShouldReturn(self) ?? true
+        outputDelegate?.textInputShouldReturn(self) ?? true
+    }
+    
+    @objc private func didTapOnDelete() {
+        
     }
 }
 
@@ -181,22 +185,32 @@ extension ELTextField: ELTextInputConfigurable {
             rightViewMode = mode
         case let .action(image, mode, behavior):
             let button = UIButton(type: .system)
-            let action: UIAction
-            switch behavior {
-            case .delete:
-                action = UIAction {
-                    [weak self] _ in
+            if #available(iOS 14.0, *) {
+                let action: UIAction
+                switch behavior {
+                case .delete:
+                    action = UIAction {
+                        [weak self] _ in
 
-                    self?.didTapOnDeleteAction()
+                        self?.didTapOnDeleteAction()
+                    }
+                case let .custom(tapAction):
+                    action = UIAction {
+                        _ in
+
+                        tapAction()
+                    }
                 }
-            case let .custom(tapAction):
-                action = UIAction {
-                    _ in
-
-                    tapAction()
+                button.addAction(action, for: .touchUpInside)
+            } else {
+                switch behavior {
+                case .delete:
+                    button.addTarget(self, action: #selector(didTapOnDelete), for: .touchUpInside)
+                case .custom:
+                    #warning("Не обработано")
+                    break
                 }
             }
-            button.addAction(action, for: .touchUpInside)
             button.setImage(image, for: .normal)
             rightImageView = button
             rightViewMode = mode

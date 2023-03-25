@@ -7,7 +7,6 @@ import Foundation
 
 /// Протокол для представления Контейнера инпута
 public protocol ELTextFieldConfigurationProtocol {
-    static func layer() -> ELTextInputLayerConfiguration
     static func layer(for state: ELTextFieldState) -> ELTextInputLayerConfiguration
     static func rect() -> ELTextInputRectConfiguration
 }

@@ -11,6 +11,8 @@
 		55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C1A29CEF78A00464D65 /* ViewController.swift */; };
 		55EA5C2029CEF78A00464D65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5C1F29CEF78A00464D65 /* Assets.xcassets */; };
 		55EA5C2329CEF78A00464D65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5C2129CEF78A00464D65 /* LaunchScreen.storyboard */; };
+		55EA5C3129CF006A00464D65 /* ELTextField in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3029CF006A00464D65 /* ELTextField */; };
+		55EA5C3429CF009000464D65 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3329CF009000464D65 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EA5C3129CF006A00464D65 /* ELTextField in Frameworks */,
+				55EA5C3429CF009000464D65 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +44,7 @@
 				55EA5C2D29CEFD0100464D65 /* Packages */,
 				55EA5C1529CEF78A00464D65 /* ELTextFieldDemo */,
 				55EA5C1429CEF78A00464D65 /* Products */,
+				55EA5C2F29CF006900464D65 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +76,13 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		55EA5C2F29CF006900464D65 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -87,6 +99,10 @@
 			dependencies = (
 			);
 			name = ELTextFieldDemo;
+			packageProductDependencies = (
+				55EA5C3029CF006A00464D65 /* ELTextField */,
+				55EA5C3329CF009000464D65 /* SnapKit */,
+			);
 			productName = ELTextFieldDemo;
 			productReference = 55EA5C1329CEF78A00464D65 /* ELTextFieldDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -116,6 +132,9 @@
 				Base,
 			);
 			mainGroup = 55EA5C0A29CEF78A00464D65;
+			packageReferences = (
+				55EA5C3229CF009000464D65 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 55EA5C1429CEF78A00464D65 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -355,6 +374,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		55EA5C3229CF009000464D65 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		55EA5C3029CF006A00464D65 /* ELTextField */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ELTextField;
+		};
+		55EA5C3329CF009000464D65 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55EA5C3229CF009000464D65 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 55EA5C0B29CEF78A00464D65 /* Project object */;
 }

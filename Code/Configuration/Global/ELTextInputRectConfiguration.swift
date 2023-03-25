@@ -6,8 +6,11 @@
 import Foundation
 import UIKit
 
+/// Высота контейнера ввода
 public struct ELIntrinsicHeight {
+    /// Высота однострочного контейнера
     let singleline: CGFloat
+    /// Высота многострочного контейнера
     let multiline: CGFloat
 
     public init(singleline: CGFloat,
@@ -25,7 +28,7 @@ public struct ELIntrinsicHeight {
 public enum ELRightViewPosition {
     /// Явные значения позиции
     case absolute(topRight: CGPoint, size: CGSize)
-    /// По центру по горизонтали
+    /// Позиция будет выровнена по горизонтальной оси
     case centerHorizontally(rightInset: CGFloat, size: CGSize)
 
     var size: CGSize {
@@ -47,6 +50,7 @@ public enum ELRightViewPosition {
     }
 }
 
+/// Конфигурация размера контейнера и позиции поля ввода
 public struct ELTextInputRectConfiguration {
     public let textInset: UIEdgeInsets?
     public let editingInset: UIEdgeInsets?
@@ -58,7 +62,7 @@ public struct ELTextInputRectConfiguration {
                 rightViewPosition: ELRightViewPosition? = nil,
                 intrinsicHeight: ELIntrinsicHeight) {
         self.textInset = textInset
-        self.editingInset = editingInset
+        self.editingInset = editingInset ?? textInset
         self.rightViewPosition = rightViewPosition
         self.intrinsicHeight = intrinsicHeight
     }
