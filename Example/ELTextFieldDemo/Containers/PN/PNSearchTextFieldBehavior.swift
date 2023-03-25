@@ -18,20 +18,9 @@ public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
         case many
         case notMatter
         
-        //        var text: String {
-        //            switch self {
-        //            case .female:
-        //                return R.string.search.anyFemale()
-        //            case .male:
-        //                return R.string.search.anyMale()
-        //            case .it:
-        //                return R.string.search.anyIt()
-        //            case .many:
-        //                return R.string.search.anyMany()
-        //            case .notMatter:
-        //                return R.string.search.anyNotMatter()
-        //            }
-        //        }
+        var text: String {
+            "любая"
+        }
     }
     
     let floatingPlaceholder: String?
@@ -98,8 +87,9 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
     
     private var currentAppearance = LabelAppearance.large
     
-    private lazy var selectedParameterView: UIView = {
-        let view = UIView() // PNSelectedParameterView(type: .any)
+    private lazy var selectedParameterLabel: UILabel = {
+        let view = UILabel()
+        view.backgroundColor = .yellow
         return view
     }()
     
@@ -116,9 +106,9 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         super.init(type: type)
         
         addSubview(floatingPlaceholder)
-        addSubview(selectedParameterView)
+        addSubview(selectedParameterLabel)
         addSubview(separatorView)
-        selectedParameterView.snp.makeConstraints {
+        selectedParameterLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(Layout.horizontalInsets)
             $0.centerY.equalToSuperview()
         }
@@ -133,9 +123,9 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         super.init(frame: frame)
         
         addSubview(floatingPlaceholder)
-        addSubview(selectedParameterView)
+        addSubview(selectedParameterLabel)
         addSubview(separatorView)
-        selectedParameterView.snp.makeConstraints {
+        selectedParameterLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(Layout.horizontalInsets)
             $0.centerY.equalToSuperview()
         }
@@ -160,6 +150,7 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
             .with(font: .systemFont(ofSize: 17, weight: .regular))
             .with(foregroundColor: R.color.gray919195())
             .build()
+        selectedParameterLabel.text = behavior?.anyValueGender.text
         //            selectedParameterView.setAnyText(searchBehavior.anyValueGender.text)
         //            searchBehavior.updateSelectedValueText = {
         //                [weak self] newText in
@@ -185,7 +176,7 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         }
         textInput.alpha = appearance == .small ? 1 : .zero
         floatingPlaceholder.sizeToFit()
-        selectedParameterView.sizeToFit()
+        selectedParameterLabel.sizeToFit()
         let offset = appearance == .small
         ? (floatingPlaceholder.frame.height + 60 / 10)
         : floatingPlaceholder.frame.height / 2
@@ -194,7 +185,7 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
             floatingPlaceholderSize = floatingPlaceholder.frame.size
         } else {
             let viewWidth = frame.width
-            let placeholderWidth = viewWidth - selectedParameterView.frame.width - Layout.horizontalInsets * 2 - 8
+            let placeholderWidth = viewWidth - selectedParameterLabel.frame.width - Layout.horizontalInsets * 2 - 8
             floatingPlaceholderSize = CGSize(
                 width: placeholderWidth,
                 height: floatingPlaceholder.frame.height
@@ -220,7 +211,7 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
             return
         }
         //        selectedParameterView.configure(with: .selected(text: text))
-        selectedParameterView.sizeToFit()
+        selectedParameterLabel.sizeToFit()
         updatePlaceholder(appearance: currentAppearance)
     }
     
@@ -239,6 +230,7 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
     
     override func endEditing(in behavior: ELTextFieldBehavior) {
         updateSelectedParameterAppearance(text: behavior.value)
+        selectedParameterLabel.text = behavior.value
         UIView.animate(withDuration: CATransaction.animationDuration()) {
             self.currentAppearance = .large
             self.updatePlaceholder(appearance: .large)

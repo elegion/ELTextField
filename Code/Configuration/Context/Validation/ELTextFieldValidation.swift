@@ -1,19 +1,20 @@
 //
-// Created by viktor.volkov on 18.01.2022.
-// Copyright © 2022 'E-Legion' Ltd. All rights reserved.
+//  File.swift
+//  
+//
+//  Created by viktor.volkov on 25.03.2023.
 //
 
 import Foundation
 
-/// Валидатор для проверки корректности введенного текста
-public protocol ELTextFieldValidator {
-    func isValid(text: String?) -> Bool
-}
-
+/// Правило срабатывания валидации поля ввода
 public enum ELTextFieldValidationRule {
+    /// Каждый раз при изменении текста
     case onChange
+    /// При завершении редактирования
     case onEndEditing
-    case none
+    /// Никогда
+    case never
 }
 
 public struct ELTextFieldValidation {
@@ -27,7 +28,7 @@ public struct ELTextFieldValidation {
     }
     
     public init(validator: ELTextFieldValidator) {
-        self.init(validator: validator, rule: .none)
+        self.init(validator: validator, rule: .never)
     }
     
     public static let `default` = ELTextFieldValidation.init(validator: ELDefaultTextFieldValidator())

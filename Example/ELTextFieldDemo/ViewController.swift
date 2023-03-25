@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     ///                                                          rightItem: .image(
     ///                                                            image: UIImage(systemName: "xmark"),
     ///                                                            mode: .always))
-    private var someBehavior = PNSearchTextFieldBehavior(floatingPlaceholder: "Some floating", anyValueGender: .female)
+    private var someBehavior = PNSearchTextFieldBehavior(floatingPlaceholder: "Почта", anyValueGender: .female)
     private var someTextField = PNSearchTextFieldContainer()
 
     override func viewDidLoad() {
