@@ -10,11 +10,11 @@ import SnapKit
 import UIKit
 
 class ViewController: UIViewController {
-    private var someBehavior = ELDefaultTextFieldBehavior(rightItem: .image(
-        image: UIImage(systemName: "xmark"),
-        mode: .always
-    ), mask: ELPhoneTextMask(phoneCode: "8", inputMask: "$ (###) ### ####", outputMask: "$##########", applyCodeOnEmpty: true))
-    private var someTextField = ELTextFieldGenericContainer<SimplestConfiguration>(type: .singleline)
+    private var someBehavior = ELDefaultTextFieldBehavior(placeholder: "Some value",
+                                                          rightItem: .image(
+                                                            image: UIImage(systemName: "xmark"),
+                                                            mode: .always))
+    private var someTextField = PNFloatingPlaceholderTextFieldContainer()
 
     override func viewDidLoad() {
         super.viewDidLoad()

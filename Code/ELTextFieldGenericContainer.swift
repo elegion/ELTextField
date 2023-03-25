@@ -6,7 +6,20 @@
 import Foundation
 import UIKit
 
-open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationProtocol>: UIView {
+public protocol OutputHandlerProtocol {
+    associatedtype C: ELTextFieldConfigurationProtocol
+    
+    func startEditing(in container: ELTextFieldGenericContainer<C>)
+    func endEditing(in container: ELTextFieldGenericContainer<C>)
+    func container(_ container: ELTextFieldGenericContainer<C>, changedText text: String)
+    func `return`(in container: ELTextFieldGenericContainer<C>)
+    func becameDisabled(in container: ELTextFieldGenericContainer<C>)
+}
+
+open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationProtocol>: UIView, OutputHandlerProtocol {
+    
+    public typealias C = Configuration
+    
     public let textInput: ELTextInput & ELTextInputConfigurable
 
     public init(type: ELTextInputType = .singleline) {
@@ -39,11 +52,8 @@ open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationPr
     }
 
     open func setBehavior(_ behavior: ELTextFieldBehavior?) {
-        guard let behavior = behavior else {
-            return
-        }
-        behavior.configure(textInput: textInput)
-        textInput.outputDelegate = behavior
+        behavior?.configure(textInput: textInput)
+        textInput.textInputDelegate = behavior
     }
 
     public func setBehaviorHandler(_ handler: ((ELTextFieldBehaviorAction) -> Void)?) {
@@ -56,4 +66,14 @@ open class ELTextFieldGenericContainer<Configuration: ELTextFieldConfigurationPr
 
         return textInput.becomeFirstResponder()
     }
+    
+    open func startEditing(in container: ELTextFieldGenericContainer<Configuration>) { }
+    
+    open func container(_ container: ELTextFieldGenericContainer<Configuration>, changedText text: String) { }
+    
+    open func endEditing(in container: ELTextFieldGenericContainer<Configuration>) { }
+    
+    open func `return`(in container: ELTextFieldGenericContainer<Configuration>) { }
+    
+    open func becameDisabled(in container: ELTextFieldGenericContainer<Configuration>) { }
 }

@@ -25,7 +25,7 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
         set { placeholderLabel.attributedText = newValue }
     }
 
-    public weak var outputDelegate: ELTextInputDelegate?
+    public weak var textInputDelegate: ELTextInputDelegate?
     var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)?
 
     var placeholderHidden: Bool {
@@ -73,11 +73,11 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
     }
 
     func textViewShouldBeginEditing(_: UITextView) -> Bool {
-        outputDelegate?.textInputShouldBeginEditing(self) ?? true
+        textInputDelegate?.textInputShouldBeginEditing(self) ?? true
     }
 
     func textViewDidEndEditing(_: UITextView) {
-        outputDelegate?.textInputdDidEndEditing(self)
+        textInputDelegate?.textInputdDidEndEditing(self)
     }
 
     func textView(
@@ -86,7 +86,7 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
         replacementText text: String
     ) -> Bool {
         placeholderLabel.isHidden = !(range.location == .zero && text.isEmpty)
-        return outputDelegate?.textInput(
+        return textInputDelegate?.textInput(
             self,
             shouldChangeCharactersIn: range,
             replacementString: text

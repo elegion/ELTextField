@@ -13,6 +13,11 @@
 		55EA5C2329CEF78A00464D65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5C2129CEF78A00464D65 /* LaunchScreen.storyboard */; };
 		55EA5C3129CF006A00464D65 /* ELTextField in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3029CF006A00464D65 /* ELTextField */; };
 		55EA5C3429CF009000464D65 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3329CF009000464D65 /* SnapKit */; };
+		55EA5C3729CF3DCF00464D65 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5C3629CF3DCF00464D65 /* Colors.xcassets */; };
+		55EA5C3A29CF3E5100464D65 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3929CF3E5100464D65 /* RswiftLibrary */; };
+		55EA5C4429CF401B00464D65 /* Swissors in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C4329CF401B00464D65 /* Swissors */; };
+		55EA5C4929CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C4829CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift */; };
+		55EA5C4D29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C4C29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +28,9 @@
 		55EA5C2229CEF78A00464D65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55EA5C2429CEF78A00464D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55EA5C2E29CEFD0100464D65 /* ELTextField */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ELTextField; path = ..; sourceTree = "<group>"; };
+		55EA5C3629CF3DCF00464D65 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		55EA5C4829CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNFloatingPlaceholderTextFieldConfiguration.swift; sourceTree = "<group>"; };
+		55EA5C4C29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNFloatingPlaceholderTextFieldContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,7 +39,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				55EA5C3129CF006A00464D65 /* ELTextField in Frameworks */,
+				55EA5C4429CF401B00464D65 /* Swissors in Frameworks */,
 				55EA5C3429CF009000464D65 /* SnapKit in Frameworks */,
+				55EA5C3A29CF3E5100464D65 /* RswiftLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,11 +69,13 @@
 		55EA5C1529CEF78A00464D65 /* ELTextFieldDemo */ = {
 			isa = PBXGroup;
 			children = (
+				55EA5C3529CF3DAF00464D65 /* Containers */,
 				55EA5C1629CEF78A00464D65 /* AppDelegate.swift */,
 				55EA5C1A29CEF78A00464D65 /* ViewController.swift */,
 				55EA5C1F29CEF78A00464D65 /* Assets.xcassets */,
 				55EA5C2129CEF78A00464D65 /* LaunchScreen.storyboard */,
 				55EA5C2429CEF78A00464D65 /* Info.plist */,
+				55EA5C3629CF3DCF00464D65 /* Colors.xcassets */,
 			);
 			path = ELTextFieldDemo;
 			sourceTree = "<group>";
@@ -83,6 +95,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		55EA5C3529CF3DAF00464D65 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				55EA5C4E29CF42F700464D65 /* PN */,
+			);
+			path = Containers;
+			sourceTree = "<group>";
+		};
+		55EA5C4E29CF42F700464D65 /* PN */ = {
+			isa = PBXGroup;
+			children = (
+				55EA5C4C29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift */,
+				55EA5C4829CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift */,
+			);
+			path = PN;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -97,11 +126,14 @@
 			buildRules = (
 			);
 			dependencies = (
+				55EA5C3C29CF3E9000464D65 /* PBXTargetDependency */,
 			);
 			name = ELTextFieldDemo;
 			packageProductDependencies = (
 				55EA5C3029CF006A00464D65 /* ELTextField */,
 				55EA5C3329CF009000464D65 /* SnapKit */,
+				55EA5C3929CF3E5100464D65 /* RswiftLibrary */,
+				55EA5C4329CF401B00464D65 /* Swissors */,
 			);
 			productName = ELTextFieldDemo;
 			productReference = 55EA5C1329CEF78A00464D65 /* ELTextFieldDemo.app */;
@@ -134,6 +166,8 @@
 			mainGroup = 55EA5C0A29CEF78A00464D65;
 			packageReferences = (
 				55EA5C3229CF009000464D65 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				55EA5C3829CF3E5100464D65 /* XCRemoteSwiftPackageReference "R.swift" */,
+				55EA5C4229CF401B00464D65 /* XCRemoteSwiftPackageReference "ios-Swissors" */,
 			);
 			productRefGroup = 55EA5C1429CEF78A00464D65 /* Products */;
 			projectDirPath = "";
@@ -149,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EA5C3729CF3DCF00464D65 /* Colors.xcassets in Resources */,
 				55EA5C2329CEF78A00464D65 /* LaunchScreen.storyboard in Resources */,
 				55EA5C2029CEF78A00464D65 /* Assets.xcassets in Resources */,
 			);
@@ -162,11 +197,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */,
+				55EA5C4D29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift in Sources */,
+				55EA5C4929CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift in Sources */,
 				55EA5C1729CEF78A00464D65 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		55EA5C3C29CF3E9000464D65 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 55EA5C3B29CF3E9000464D65 /* RswiftGenerateInternalResources */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		55EA5C2129CEF78A00464D65 /* LaunchScreen.storyboard */ = {
@@ -384,6 +428,22 @@
 				version = 5.6.0;
 			};
 		};
+		55EA5C3829CF3E5100464D65 /* XCRemoteSwiftPackageReference "R.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-cain13/R.swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 7.3.0;
+			};
+		};
+		55EA5C4229CF401B00464D65 /* XCRemoteSwiftPackageReference "ios-Swissors" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegion/ios-Swissors";
+			requirement = {
+				kind = exactVersion;
+				version = 2.5.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -395,6 +455,20 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 55EA5C3229CF009000464D65 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		55EA5C3929CF3E5100464D65 /* RswiftLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55EA5C3829CF3E5100464D65 /* XCRemoteSwiftPackageReference "R.swift" */;
+			productName = RswiftLibrary;
+		};
+		55EA5C3B29CF3E9000464D65 /* RswiftGenerateInternalResources */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "plugin:RswiftGenerateInternalResources";
+		};
+		55EA5C4329CF401B00464D65 /* Swissors */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55EA5C4229CF401B00464D65 /* XCRemoteSwiftPackageReference "ios-Swissors" */;
+			productName = Swissors;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -13,7 +13,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
         Configuration.rect()
     }
 
-    public weak var outputDelegate: ELTextInputDelegate?
+    public weak var textInputDelegate: ELTextInputDelegate?
     var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)?
 
     private var rightItemAction: (() -> Void)?
@@ -72,16 +72,16 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        outputDelegate?.textInput(self, canPerformAction: action, withSender: sender) ?? true
+        textInputDelegate?.textInput(self, canPerformAction: action, withSender: sender) ?? true
     }
 
     @discardableResult
     func textFieldShouldClear(_: UITextField) -> Bool {
-        outputDelegate?.textInputShouldClear(self) ?? true
+        textInputDelegate?.textInputShouldClear(self) ?? true
     }
 
     func textFieldShouldBeginEditing(_: UITextField) -> Bool {
-        outputDelegate?.textInputShouldBeginEditing(self) ?? true
+        textInputDelegate?.textInputShouldBeginEditing(self) ?? true
     }
 
     func textFieldDidBeginEditing(_: UITextField) {
@@ -90,7 +90,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
 
     func textFieldDidEndEditing(_: UITextField) {
         behaviorAction?(.endEditing)
-        outputDelegate?.textInputdDidEndEditing(self)
+        textInputDelegate?.textInputdDidEndEditing(self)
     }
 
     func textField(
@@ -98,7 +98,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
     ) -> Bool {
-        outputDelegate?.textInput(
+        textInputDelegate?.textInput(
             self,
             shouldChangeCharactersIn: range,
             replacementString: string
@@ -106,7 +106,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     func textFieldShouldReturn(_: UITextField) -> Bool {
-        outputDelegate?.textInputShouldReturn(self) ?? true
+        textInputDelegate?.textInputShouldReturn(self) ?? true
     }
 
     @objc
