@@ -9,3 +9,26 @@ import Foundation
 public protocol ELTextFieldValidator {
     func isValid(text: String?) -> Bool
 }
+
+public enum ELTextFieldValidationRule {
+    case onChange
+    case onEndEditing
+    case none
+}
+
+public struct ELTextFieldValidation {
+    public let validator: ELTextFieldValidator
+    public let rule: ELTextFieldValidationRule
+    
+    public init(validator: ELTextFieldValidator,
+                rule: ELTextFieldValidationRule) {
+        self.validator = validator
+        self.rule = rule
+    }
+    
+    public init(validator: ELTextFieldValidator) {
+        self.init(validator: validator, rule: .none)
+    }
+    
+    public static let `default` = ELTextFieldValidation.init(validator: ELDefaultTextFieldValidator())
+}

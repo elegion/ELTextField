@@ -11,6 +11,7 @@ public protocol OutputHandlerProtocol: AnyObject {
     func startEditing(in behavior: ELTextFieldBehavior)
     func endEditing(in behavior: ELTextFieldBehavior)
     func container(_ behavior: ELTextFieldBehavior, changedText text: String)
+    func container(_ behavior: ELTextFieldBehavior, changedState: ELTextFieldState)
     func `return`(in behavior: ELTextFieldBehavior)
     func becameDisabled(in behavior: ELTextFieldBehavior)
 }
@@ -75,6 +76,8 @@ open class ELTextFieldGenericContainer<
     open func endEditing(in behavior: ELTextFieldBehavior) {}
 
     open func container(_ behavior: ELTextFieldBehavior, changedText text: String) {}
+    
+    open func container(_ behavior: ELTextFieldBehavior, changedState: ELTextFieldState) {}
 
     open func `return`(in behavior: ELTextFieldBehavior) {}
 

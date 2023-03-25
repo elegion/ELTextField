@@ -59,7 +59,7 @@ final class PNFloatingPlaceholderTextFieldContainer: ELDefaultTextFieldGenericCo
 final class SeparatorView: UIView {
 
     override var intrinsicContentSize: CGSize {
-        CGSize(width: super.intrinsicContentSize.width, height: 0.5)
+        CGSize(width: super.intrinsicContentSize.width, height: 1)
     }
 
     override init(frame: CGRect) {

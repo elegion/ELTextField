@@ -10,7 +10,7 @@ import UIKit
 open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     public var mask: ELTextFieldInputMask
     public var traits: ELTextFieldInputTraits
-    public var validator: ELTextFieldValidator
+    public var validation: ELTextFieldValidation
     private var viewModel: ELTextInputViewModel
     public var placeholder: String? {
         viewModel.placeholder
@@ -19,7 +19,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         viewModel.text ?? ""
     }
     open var isValid: Bool {
-        validator.isValid(text: viewModel.text)
+        validation.validator.isValid(text: viewModel.text)
     }
 
     public var onAction: ((BehaviorAction) -> Void)?
@@ -34,11 +34,11 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         rightItem: ELRightItem? = nil,
         mask: ELTextFieldInputMask = ELDefaultTextMask(),
         traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
-        validator: ELTextFieldValidator = ELDefaultTextFieldValidator()
+        validation: ELTextFieldValidation = .default
     ) {
         self.mask = mask
         self.traits = traits
-        self.validator = validator
+        self.validation = validation
         self.viewModel = ELTextInputViewModel(
             text: text,
             placeholder: placeholder,
@@ -60,6 +60,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     public func updateState(_ state: ELTextFieldState) {
         viewModel.state = state
         textInput?.updateState(viewModel.state)
+        containerDelegate?.container(self, changedState: state)
     }
 
     open func updateText(_ newText: String?) {
@@ -91,6 +92,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         updateState(.default)
         onAction?(.endEditing)
         containerDelegate?.endEditing(in: self)
+        triggerValidation(for: .onEndEditing, isEditing: false)
     }
 
     /// При вводе текста свайпом происходит рекурсивный вызов методов:
@@ -127,6 +129,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             }
             let newValue = mask.maskedText(from: newText)
             updateText(newValue: newValue)
+            triggerValidation(for: .onChange, isEditing: true)
             if !isTextEmpty {
                 textInput.setCursorPosition(
                     newTextLength: newText.count,
@@ -145,6 +148,16 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         viewModel.text = newValue.isNilOrEmpty ? nil : newValue
         onAction?(.changed(newValue: viewModel.text ?? ""))
         containerDelegate?.container(self, changedText: viewModel.text ?? "")
+    }
+    
+    private func triggerValidation(for rule: ELTextFieldValidationRule, isEditing: Bool) {
+        if validation.rule == rule {
+            if isValid {
+                updateState(isEditing ? .editing : .default)
+            } else {
+                updateState(.error)
+            }
+        }
     }
 
     public func textInputShouldReturn(_ textInput: ELTextInput) -> Bool {

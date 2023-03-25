@@ -15,7 +15,7 @@ public enum BehaviorAction {
 public protocol ELTextFieldBehavior: ELTextInputDelegate {
     var mask: ELTextFieldInputMask { get }
     var traits: ELTextFieldInputTraits { get }
-    var validator: ELTextFieldValidator { get }
+    var validation: ELTextFieldValidation { get }
     var placeholder: String? { get }
     var value: String { get }
     var isValid: Bool { get }

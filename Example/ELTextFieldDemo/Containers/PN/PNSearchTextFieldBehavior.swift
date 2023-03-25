@@ -49,7 +49,7 @@ public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
         showClearButton _: Bool = false,
         mask: ELTextFieldInputMask = ELDefaultTextMask(),
         traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
-        validator: ELTextFieldValidator = ELDefaultTextFieldValidator()
+        validation: ELTextFieldValidation = .init(validator: ELMailTextFieldValidator(), rule: .onChange)
     ) {
         self.floatingPlaceholder = floatingPlaceholder
         self.anyValueGender = anyValueGender
@@ -62,7 +62,7 @@ public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
             rightItem: nil,
             mask: mask,
             traits: traits,
-            validator: validator
+            validation: validation
         )
     }
     
@@ -242,6 +242,15 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         UIView.animate(withDuration: CATransaction.animationDuration()) {
             self.currentAppearance = .large
             self.updatePlaceholder(appearance: .large)
+        }
+    }
+    
+    override func container(_ behavior: ELTextFieldBehavior, changedState: ELTextFieldState) {
+        switch changedState {
+        case .error:
+            separatorView.backgroundColor = .red
+        default:
+            separatorView.backgroundColor = R.color.grayCCCCCE()
         }
     }
 }
