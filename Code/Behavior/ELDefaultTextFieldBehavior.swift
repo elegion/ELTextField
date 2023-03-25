@@ -19,7 +19,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
 
     public var onAction: ((BehaviorAction) -> Void)?
 
-    public var textInput: (ELTextInput & ELTextInputConfigurable)?
+    var textInput: (ELTextInput & ELTextInputConfigurable)?
 
     public init(
         text: String? = nil,
