@@ -15,7 +15,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
 
     public weak var outputDelegate: ELTextInputDelegate?
     var behaviorAction: ((ELTextFieldBehaviorAction) -> Void)?
-    
+
     private var rightItemAction: (() -> Void)?
 
     override init(frame: CGRect) {
@@ -58,13 +58,17 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
             yPos = bounds.height / 2 - rightViewSize.height / 2
         }
         let origin = CGPoint(x: xPos, y: yPos)
-        return CGRect(origin: origin,
-                      size: rightViewSize)
+        return CGRect(
+            origin: origin,
+            size: rightViewSize
+        )
     }
 
     override var intrinsicContentSize: CGSize {
-        CGSize(width: super.intrinsicContentSize.width,
-               height: rectConfiguration.intrinsicHeight.singleline)
+        CGSize(
+            width: super.intrinsicContentSize.width,
+            height: rectConfiguration.intrinsicHeight.singleline
+        )
     }
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
@@ -89,29 +93,34 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
         outputDelegate?.textInputdDidEndEditing(self)
     }
 
-    func textField(_: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
-        outputDelegate?.textInput(self,
-                                  shouldChangeCharactersIn: range,
-                                  replacementString: string) ?? true
+    func textField(
+        _: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        outputDelegate?.textInput(
+            self,
+            shouldChangeCharactersIn: range,
+            replacementString: string
+        ) ?? true
     }
 
     func textFieldShouldReturn(_: UITextField) -> Bool {
         outputDelegate?.textInputShouldReturn(self) ?? true
     }
-    
-    @objc private func didTapOnDelete() {
+
+    @objc
+    private func didTapOnDelete() {
         didTapOnDeleteAction()
     }
-    
-    @objc private func didTapOnRightAction() {
+
+    @objc
+    private func didTapOnRightAction() {
         rightItemAction?()
     }
 }
 
 extension ELTextField: ELTextInputConfigurable {
-    
     func configureLayer(_ configuration: ELTextInputLayerConfiguration) {
         layer.borderColor = configuration.borderColor?.cgColor
         layer.borderWidth = configuration.borderWidth ?? .zero
@@ -189,7 +198,6 @@ extension ELTextField: ELTextInputConfigurable {
                 case let .custom(action):
                     rightItemAction = action
                     button.addTarget(self, action: #selector(didTapOnRightAction), for: .touchUpInside)
-                    break
                 }
             }
             button.setImage(image, for: .normal)

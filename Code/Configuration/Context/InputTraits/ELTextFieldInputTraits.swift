@@ -17,7 +17,7 @@ public protocol ELTextFieldInputTraits {
 }
 
 public struct ELDefaultTextFieldInputTraits: ELTextFieldInputTraits {
-    public var isSecureTextEntry: Bool = false
+    public var isSecureTextEntry = false
     public var keyboardType: UIKeyboardType = .default
     public var contentType: UITextContentType?
     public var returnKeyType: UIReturnKeyType = .done

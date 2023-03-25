@@ -8,7 +8,6 @@ import Foundation
 import UIKit
 
 extension ELTextField: ELTextInput {
-    
     var enteredText: String? {
         get { text }
         set {

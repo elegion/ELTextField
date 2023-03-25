@@ -43,15 +43,21 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
         let textInset = rectConfiguration.textInset ?? .zero
         let leadingConstant = textInset.left
-        placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                  constant: leadingConstant).isActive = true
+        placeholderLabel.leadingAnchor.constraint(
+            equalTo: leadingAnchor,
+            constant: leadingConstant
+        ).isActive = true
         let topConstant = textInset.top
-        placeholderLabel.topAnchor.constraint(equalTo: topAnchor,
-                                              constant: topConstant).isActive = true
-        textContainerInset = UIEdgeInsets(top: topConstant,
-                                          left: leadingConstant - 4,
-                                          bottom: textInset.bottom,
-                                          right: textInset.right)
+        placeholderLabel.topAnchor.constraint(
+            equalTo: topAnchor,
+            constant: topConstant
+        ).isActive = true
+        textContainerInset = UIEdgeInsets(
+            top: topConstant,
+            left: leadingConstant - 4,
+            bottom: textInset.bottom,
+            right: textInset.right
+        )
     }
 
     @available(*, unavailable)
@@ -60,8 +66,10 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
     }
 
     override var intrinsicContentSize: CGSize {
-        CGSize(width: super.intrinsicContentSize.width,
-               height: rectConfiguration.intrinsicHeight.multiline)
+        CGSize(
+            width: super.intrinsicContentSize.width,
+            height: rectConfiguration.intrinsicHeight.multiline
+        )
     }
 
     func textViewShouldBeginEditing(_: UITextView) -> Bool {
@@ -72,13 +80,17 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
         outputDelegate?.textInputdDidEndEditing(self)
     }
 
-    func textView(_: UITextView,
-                  shouldChangeTextIn range: NSRange,
-                  replacementText text: String) -> Bool {
+    func textView(
+        _: UITextView,
+        shouldChangeTextIn range: NSRange,
+        replacementText text: String
+    ) -> Bool {
         placeholderLabel.isHidden = !(range.location == .zero && text.isEmpty)
-        return outputDelegate?.textInput(self,
-                                         shouldChangeCharactersIn: range,
-                                         replacementString: text) ?? true
+        return outputDelegate?.textInput(
+            self,
+            shouldChangeCharactersIn: range,
+            replacementString: text
+        ) ?? true
     }
 }
 

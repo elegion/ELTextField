@@ -1,0 +1,36 @@
+--indent 4
+
+--swiftversion 5.6
+
+--wrapcollections before-first
+--wrapparameters before-first
+--wraparguments before-first
+--funcattributes prev-line
+--typeattributes prev-line
+--self init-only
+--elseposition same-line
+--patternlet hoist
+--markcategories true
+--markextensions never
+--marktypes never
+--redundanttype inferred
+--stripunusedargs closure-only
+--typeblanklines preserve
+--commas inline
+
+--disable wrapMultilineStatementBraces
+--disable organizeDeclarations
+--enable unusedArguments
+--enable blankLineAfterImports
+--enable blankLinesBetweenImports
+--enable blankLinesBetweenScopes
+--enable blockComments
+--enable docComments
+--enable isEmpty
+--enable markTypes
+--enable redundantLet
+--enable sortDeclarations
+--enable sortedSwitchCases
+--enable wrapConditionalBodies
+--enable wrapEnumCases
+--enable wrapSwitchCases

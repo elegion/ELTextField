@@ -3,15 +3,21 @@
 
 import PackageDescription
 
-let package = Package(name: "ELTextField",
-                      platforms: [
-                          .iOS(.v12),
-                      ],
-                      products: [
-                          .library(name: "ELTextField",
-                                   targets: ["ELTextField"]),
-                      ],
-                      targets: [
-                          .target(name: "ELTextField",
-                                  path: "Code"),
-                      ])
+let package = Package(
+    name: "ELTextField",
+    platforms: [
+        .iOS(.v12)
+    ],
+    products: [
+        .library(
+            name: "ELTextField",
+            targets: ["ELTextField"]
+        )
+    ],
+    targets: [
+        .target(
+            name: "ELTextField",
+            path: "Code"
+        )
+    ]
+)

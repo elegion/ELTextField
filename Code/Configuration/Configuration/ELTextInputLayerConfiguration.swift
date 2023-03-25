@@ -13,10 +13,12 @@ public struct ELTextInputLayerConfiguration {
     public let cornerRadius: CGFloat?
     public let tintColor: UIColor?
 
-    public init(borderColor: UIColor?,
-                borderWidth: CGFloat?,
-                cornerRadius: CGFloat,
-                tintColor: UIColor?) {
+    public init(
+        borderColor: UIColor?,
+        borderWidth: CGFloat?,
+        cornerRadius: CGFloat,
+        tintColor: UIColor?
+    ) {
         self.borderColor = borderColor
         self.borderWidth = borderWidth
         self.cornerRadius = cornerRadius

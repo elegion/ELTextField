@@ -11,11 +11,15 @@ public protocol ELTextInputDelegate: AnyObject {
     func textInputShouldClear(_ textInput: ELTextInput) -> Bool
     func textInputShouldBeginEditing(_ textInput: ELTextInput) -> Bool
     func textInputdDidEndEditing(_ textInput: ELTextInput)
-    func textInput(_ textInput: ELTextInput & UITextInput,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool
+    func textInput(
+        _ textInput: ELTextInput & UITextInput,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool
     func textInputShouldReturn(_ textInput: ELTextInput) -> Bool
-    func textInput(_ textInput: ELTextInput,
-                   canPerformAction action: Selector,
-                   withSender sender: Any?) -> Bool
+    func textInput(
+        _ textInput: ELTextInput,
+        canPerformAction action: Selector,
+        withSender sender: Any?
+    ) -> Bool
 }

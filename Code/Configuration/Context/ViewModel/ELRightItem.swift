@@ -15,15 +15,17 @@ public enum ELRightItem {
         case delete
         case custom(onTap: () -> Void)
     }
-    
+
     case image(image: UIImage?, mode: UITextField.ViewMode)
     case action(image: UIImage?, mode: UITextField.ViewMode, behavior: Behavior)
     case custom(view: UIView, mode: UITextField.ViewMode)
     case systemClear
-    
+
     var isSystemClear: Bool {
         switch self {
-        case .image, .action, .custom:
+        case .action,
+             .custom,
+             .image:
             return false
         case .systemClear:
             return true

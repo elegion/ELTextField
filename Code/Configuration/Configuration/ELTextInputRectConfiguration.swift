@@ -13,8 +13,10 @@ public struct ELIntrinsicHeight {
     /// Высота многострочного контейнера
     let multiline: CGFloat
 
-    public init(singleline: CGFloat,
-                multiline: CGFloat) {
+    public init(
+        singleline: CGFloat,
+        multiline: CGFloat
+    ) {
         self.singleline = singleline
         self.multiline = multiline
     }
@@ -57,10 +59,12 @@ public struct ELTextInputRectConfiguration {
     public let rightViewPosition: ELRightViewPosition?
     public let intrinsicHeight: ELIntrinsicHeight
 
-    public init(textInset: UIEdgeInsets? = nil,
-                editingInset: UIEdgeInsets? = nil,
-                rightViewPosition: ELRightViewPosition? = nil,
-                intrinsicHeight: ELIntrinsicHeight) {
+    public init(
+        textInset: UIEdgeInsets? = nil,
+        editingInset: UIEdgeInsets? = nil,
+        rightViewPosition: ELRightViewPosition? = nil,
+        intrinsicHeight: ELIntrinsicHeight
+    ) {
         self.textInset = textInset
         self.editingInset = editingInset ?? textInset
         self.rightViewPosition = rightViewPosition
