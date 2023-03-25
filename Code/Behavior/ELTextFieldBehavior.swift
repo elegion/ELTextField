@@ -16,8 +16,8 @@ public protocol ELTextFieldBehavior: ELTextInputDelegate {
     var mask: ELTextFieldInputMask { get }
     var traits: ELTextFieldInputTraits { get }
     var validator: ELTextFieldValidator { get }
-    var viewModel: ELTextInputViewModel { get }
-
+    var placeholder: String? { get }
+    var value: String { get }
     var isValid: Bool { get }
 
     var onAction: ((BehaviorAction) -> Void)? { get set }

@@ -37,9 +37,8 @@ final class PNFloatingPlaceholderTextFieldContainer: ELDefaultTextFieldGenericCo
     override public func setBehavior(_ behavior: ELDefaultTextFieldBehavior?) {
         super.setBehavior(behavior)
 
-        updateFloatingLabelAppearance(isVisible: !(behavior?.viewModel.text?.isEmpty ?? true))
+        updateFloatingLabelAppearance(isVisible: !(behavior?.value.isEmpty ?? true))
         floatingLabel.attributedText = behavior?
-            .viewModel
             .placeholder?
             .attribute
             .with(font: .systemFont(ofSize: 12, weight: .regular))

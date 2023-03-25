@@ -11,8 +11,13 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     public var mask: ELTextFieldInputMask
     public var traits: ELTextFieldInputTraits
     public var validator: ELTextFieldValidator
-    public var viewModel: ELTextInputViewModel
-
+    private var viewModel: ELTextInputViewModel
+    public var placeholder: String? {
+        viewModel.placeholder
+    }
+    public var value: String {
+        viewModel.text ?? ""
+    }
     open var isValid: Bool {
         validator.isValid(text: viewModel.text)
     }
@@ -137,7 +142,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
 
     private func updateText(newValue: String?) {
         textInput?.enteredText = newValue
-        viewModel.text = newValue.isNilOrEmpty == true ? nil : newValue
+        viewModel.text = newValue.isNilOrEmpty ? nil : newValue
         onAction?(.changed(newValue: viewModel.text ?? ""))
         containerDelegate?.container(self, changedText: viewModel.text ?? "")
     }
