@@ -12,37 +12,39 @@ public struct ELPhoneTextMask: ELTextFieldInputMask {
     let phoneCode: String
     let inputMask: String
     let outputMask: String
+    let applyCodeOnEmpty: Bool
     
     public func maskedText(from rawText: String?) -> String {
-        (rawText ?? "")
-            .components(separatedBy: .decimalDigits.inverted)
-            .joined()
-            .applyPhonePatternOnNumbers(phoneCode: phoneCode,
-                                        pattern: inputMask,
-                                        phoneCodeCharacter: "$",
-                                        replacementCharacter: "#")
+        convert(text: rawText, using: inputMask)
     }
     
     public func rawText(from maskedText: String?) -> String {
-        removePhoneCode(phoneCode, from: maskedText ?? "")
-            .components(separatedBy: .decimalDigits.inverted)
-            .joined()
-            .applyPhonePatternOnNumbers(phoneCode: phoneCode,
-                                        pattern: outputMask,
-                                        phoneCodeCharacter: "$",
-                                        replacementCharacter: "#")
+        convert(text: maskedText, using: outputMask)
     }
     
     public func deleteLastItemLogic(inputText: String) -> String {
-        ""
+        String(maskedText(from: inputText).dropLast())
     }
     
     public init(phoneCode: String,
                 inputMask: String,
-                outputMask: String) {
+                outputMask: String,
+                applyCodeOnEmpty: Bool = false) {
         self.phoneCode = phoneCode
         self.inputMask = inputMask
         self.outputMask = outputMask
+        self.applyCodeOnEmpty = applyCodeOnEmpty
+    }
+    
+    private func convert(text: String?, using mask: String) -> String {
+        removePhoneCode(phoneCode, from: text ?? "")
+            .components(separatedBy: .decimalDigits.inverted)
+            .joined()
+            .applyPhonePatternOnNumbers(phoneCode: phoneCode,
+                                        pattern: mask,
+                                        phoneCodeCharacter: "$",
+                                        replacementCharacter: "#",
+                                        applyOnEmpty: applyCodeOnEmpty)
     }
     
     private func removePhoneCode(_ code: String, from text: String) -> String {
@@ -59,12 +61,12 @@ private extension String {
                                     applyOnEmpty: Bool = false) -> String {
         var digits = self
         
-        if digits.isEmpty, applyOnEmpty, let firstDigitIndex = pattern.firstIndex(of: replacementCharacter) {
-            return String(pattern.prefix(upTo: firstDigitIndex))
-        }
-        
         let patternCopy = pattern.replacingOccurrences(of: String(phoneCodeCharacter), with: phoneCode)
         
+        if digits.isEmpty, applyOnEmpty, let firstDigitIndex = patternCopy.firstIndex(of: replacementCharacter) {
+            return String(patternCopy.prefix(upTo: firstDigitIndex))
+        }
+    
         for index in patternCopy.indices where index < digits.endIndex {
             let character = patternCopy[index]
             

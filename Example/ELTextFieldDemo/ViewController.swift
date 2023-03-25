@@ -13,14 +13,13 @@ class ViewController: UIViewController {
     private var someBehavior = ELDefaultTextFieldBehavior(rightItem: .image(
         image: UIImage(systemName: "xmark"),
         mode: .always
-    ))
+    ), mask: ELPhoneTextMask(phoneCode: "8", inputMask: "$ (###) ### ####", outputMask: "$##########", applyCodeOnEmpty: true))
     private var someTextField = ELTextFieldGenericContainer<SimplestConfiguration>(type: .singleline)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
         view.backgroundColor = .white
-
         view.addSubview(someTextField)
         someTextField.setBehavior(someBehavior)
         someTextField.snp.makeConstraints {
