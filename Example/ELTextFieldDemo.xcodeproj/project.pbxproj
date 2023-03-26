@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55614A6529D098C100CCFACD /* AbstractTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6429D098C100CCFACD /* AbstractTableViewCell.swift */; };
+		55614A6829D099DC00CCFACD /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6729D099DC00CCFACD /* Configurable.swift */; };
 		55EA5C1729CEF78A00464D65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C1629CEF78A00464D65 /* AppDelegate.swift */; };
 		55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C1A29CEF78A00464D65 /* ViewController.swift */; };
 		55EA5C2029CEF78A00464D65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5C1F29CEF78A00464D65 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55614A6429D098C100CCFACD /* AbstractTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewCell.swift; sourceTree = "<group>"; };
+		55614A6729D099DC00CCFACD /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		55EA5C1329CEF78A00464D65 /* ELTextFieldDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ELTextFieldDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EA5C1629CEF78A00464D65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55EA5C1A29CEF78A00464D65 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +54,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55614A5F29D0982D00CCFACD /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				55614A6129D0984900CCFACD /* Core */,
+				55EA5C3529CF3DAF00464D65 /* Containers */,
+				55EA5C1629CEF78A00464D65 /* AppDelegate.swift */,
+				55EA5C1A29CEF78A00464D65 /* ViewController.swift */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
+		55614A6129D0984900CCFACD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				55614A6429D098C100CCFACD /* AbstractTableViewCell.swift */,
+				55614A6729D099DC00CCFACD /* Configurable.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		55EA5C0A29CEF78A00464D65 = {
 			isa = PBXGroup;
 			children = (
@@ -71,9 +95,7 @@
 		55EA5C1529CEF78A00464D65 /* ELTextFieldDemo */ = {
 			isa = PBXGroup;
 			children = (
-				55EA5C3529CF3DAF00464D65 /* Containers */,
-				55EA5C1629CEF78A00464D65 /* AppDelegate.swift */,
-				55EA5C1A29CEF78A00464D65 /* ViewController.swift */,
+				55614A5F29D0982D00CCFACD /* Code */,
 				55EA5C1F29CEF78A00464D65 /* Assets.xcassets */,
 				55EA5C2129CEF78A00464D65 /* LaunchScreen.storyboard */,
 				55EA5C2429CEF78A00464D65 /* Info.plist */,
@@ -200,7 +222,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				55EA5C5129CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift in Sources */,
+				55614A6529D098C100CCFACD /* AbstractTableViewCell.swift in Sources */,
 				55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */,
+				55614A6829D099DC00CCFACD /* Configurable.swift in Sources */,
 				55EA5C4D29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift in Sources */,
 				55EA5C4929CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift in Sources */,
 				55EA5C1729CEF78A00464D65 /* AppDelegate.swift in Sources */,

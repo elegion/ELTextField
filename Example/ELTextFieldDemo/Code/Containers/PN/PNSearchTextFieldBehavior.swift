@@ -10,8 +10,8 @@ import ELTextField
 import Foundation
 import UIKit
 
-public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
-    public enum AnyValueGender {
+class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
+    enum AnyValueGender {
         case male
         case female
         case it
@@ -28,14 +28,13 @@ public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
     //    var updateSelectedValueText: Closure.In<String?>?
     //    public var onClearTap: Closure.Void?
     
-    public init(
+    init(
         text: String? = nil,
         textMapper: ((String?) -> NSAttributedString?)? = nil,
         floatingPlaceholder: String? = nil,
         anyValueGender: AnyValueGender,
         placeholderMapper _: ((String?) -> NSAttributedString?)? = nil,
         rightButtonItem _: ELRightItem? = nil,
-        showClearButton _: Bool = false,
         mask: ELTextFieldInputMask = ELDefaultTextMask(),
         traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
         validation: ELTextFieldValidation = .init(validator: ELMailTextFieldValidator(), rule: .onChange)
@@ -62,20 +61,8 @@ public class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
     }
 }
 
-public struct PNSearchTextFieldContainerModel: Identifiable, Hashable {
-    public var id: UUID
-    let behavior: PNSearchTextFieldBehavior
-    
-    public init(
-        id: UUID = UUID(),
-        behavior: PNSearchTextFieldBehavior
-    ) {
-        self.id = id
-        self.behavior = behavior
-    }
-}
-
 final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPlaceholderTextFieldConfiguration, PNSearchTextFieldBehavior> {
+    
     private enum LabelAppearance {
         case large
         case small
@@ -244,5 +231,12 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         default:
             separatorView.backgroundColor = R.color.grayCCCCCE()
         }
+    }
+}
+
+extension PNSearchTextFieldContainer: Configurable {
+    
+    func set(model: PNSearchTextFieldBehavior) {
+        setBehavior(model)
     }
 }

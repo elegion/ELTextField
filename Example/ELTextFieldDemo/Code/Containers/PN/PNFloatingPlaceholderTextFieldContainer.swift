@@ -28,6 +28,20 @@ final class PNFloatingPlaceholderTextFieldContainer: ELDefaultTextFieldGenericCo
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(floatingLabel)
+        addSubview(separatorView)
+        floatingLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(16)
+            $0.top.equalToSuperview().inset(11)
+        }
+        separatorView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
@@ -71,5 +85,12 @@ final class SeparatorView: UIView {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension PNFloatingPlaceholderTextFieldContainer: Configurable {
+    
+    func set(model: ELDefaultTextFieldBehavior) {
+        setBehavior(model)
     }
 }
