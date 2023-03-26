@@ -1,67 +1,16 @@
 //
-//  PNSearchTextFieldBehavior.swift
+//  PNFloatPlaceholderTextFieldContainer.swift
 //  ELTextFieldDemo
 //
-//  Created by viktor.volkov on 25.03.2023.
+//  Created by viktor.volkov on 26.03.2023.
 //  Copyright © 2023 E-legion. All rights reserved.
 //
 
-import ELTextField
 import Foundation
+import ELTextField
 import UIKit
 
-class PNSearchTextFieldBehavior: ELDefaultTextFieldBehavior {
-    enum AnyValueGender {
-        case male
-        case female
-        case it
-        case many
-        case notMatter
-        
-        var text: String {
-            "любая"
-        }
-    }
-    
-    let floatingPlaceholder: String?
-    let anyValueGender: AnyValueGender
-    //    var updateSelectedValueText: Closure.In<String?>?
-    //    public var onClearTap: Closure.Void?
-    
-    init(
-        text: String? = nil,
-        textMapper: ((String?) -> NSAttributedString?)? = nil,
-        floatingPlaceholder: String? = nil,
-        anyValueGender: AnyValueGender,
-        placeholderMapper _: ((String?) -> NSAttributedString?)? = nil,
-        rightButtonItem _: ELRightItem? = nil,
-        mask: ELTextFieldInputMask = ELDefaultTextMask(),
-        traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
-        validation: ELTextFieldValidation = .init(validator: ELMailTextFieldValidator(), rule: .onChange)
-    ) {
-        self.floatingPlaceholder = floatingPlaceholder
-        self.anyValueGender = anyValueGender
-        let formattedText = mask.maskedText(from: text)
-        super.init(
-            text: formattedText,
-            textMapper: textMapper,
-            placeholder: nil,
-            placeholderMapper: nil,
-            rightItem: nil,
-            mask: mask,
-            traits: traits,
-            validation: validation
-        )
-    }
-    
-    override public func updateText(_ newText: String?) {
-        super.updateText(newText)
-        
-        //        updateSelectedValueText?(newText)
-    }
-}
-
-final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPlaceholderTextFieldConfiguration, PNSearchTextFieldBehavior> {
+final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PNTopPlaceholderTextFieldConfiguration, PNFloatPlaceholderTextFieldBehavior> {
     
     private enum LabelAppearance {
         case large
@@ -74,9 +23,10 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
     
     private var currentAppearance = LabelAppearance.large
     
-    private lazy var selectedParameterLabel: UILabel = {
-        let view = UILabel()
-        view.backgroundColor = .yellow
+    private lazy var selectedParameterLabel: RoundInsetLabel = {
+        let view = RoundInsetLabel()
+        view.backgroundColor = R.color.yellowFCE66F()
+        view.insets = UIEdgeInsets(vertical: 4, horizontal: 12)
         return view
     }()
     
@@ -128,7 +78,7 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
         fatalError("init(coder:) has not been implemented")
     }
     
-    override public func setBehavior(_ behavior: PNSearchTextFieldBehavior?) {
+    override public func setBehavior(_ behavior: PNFloatPlaceholderTextFieldBehavior?) {
         super.setBehavior(behavior)
         
         floatingPlaceholder.attributedText = behavior?
@@ -194,10 +144,9 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
     
     private func updateSelectedParameterAppearance(text: String?) {
         guard let text, !text.isEmpty else {
-            //            selectedParameterView.configure(with: .any)
             return
         }
-        //        selectedParameterView.configure(with: .selected(text: text))
+        selectedParameterLabel.text = text
         selectedParameterLabel.sizeToFit()
         updatePlaceholder(appearance: currentAppearance)
     }
@@ -217,7 +166,11 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
     
     override func endEditing(in behavior: ELTextFieldBehavior) {
         updateSelectedParameterAppearance(text: behavior.value)
-        selectedParameterLabel.text = behavior.value
+        if behavior.value.isEmpty {
+            selectedParameterLabel.text = "Любое"
+        } else {
+            selectedParameterLabel.text = behavior.value
+        }
         UIView.animate(withDuration: CATransaction.animationDuration()) {
             self.currentAppearance = .large
             self.updatePlaceholder(appearance: .large)
@@ -234,9 +187,9 @@ final class PNSearchTextFieldContainer: ELTextFieldGenericContainer<PNFloatingPl
     }
 }
 
-extension PNSearchTextFieldContainer: Configurable {
+extension PNFloatPlaceholderTextFieldContainer: Configurable {
     
-    func set(model: PNSearchTextFieldBehavior) {
+    func set(model: PNFloatPlaceholderTextFieldBehavior) {
         setBehavior(model)
     }
 }

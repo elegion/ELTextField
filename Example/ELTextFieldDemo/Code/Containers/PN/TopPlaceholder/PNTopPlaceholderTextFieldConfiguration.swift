@@ -11,7 +11,7 @@ import Foundation
 import Swissors
 import UIKit
 
-enum PNFloatingPlaceholderTextFieldConfiguration: ELTextFieldConfigurationProtocol {
+enum PNTopPlaceholderTextFieldConfiguration: ELTextFieldConfigurationProtocol {
 
     static func layer(for state: ELTextField.ELTextFieldState) -> ELTextField.ELTextInputLayerConfiguration {
         .init(borderColor: nil, borderWidth: .zero, cornerRadius: .zero, tintColor: R.color.grayBBBBBF())

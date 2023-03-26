@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		55614A6529D098C100CCFACD /* AbstractTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6429D098C100CCFACD /* AbstractTableViewCell.swift */; };
 		55614A6829D099DC00CCFACD /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6729D099DC00CCFACD /* Configurable.swift */; };
+		55614A6D29D09D2E00CCFACD /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6C29D09D2E00CCFACD /* SeparatorView.swift */; };
+		55614A7029D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6F29D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift */; };
+		55614A7229D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7129D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift */; };
+		55614A7629D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7529D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift */; };
+		55614A7829D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7729D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift */; };
+		55614A7E29D09E6A00CCFACD /* RoundInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7D29D09E6A00CCFACD /* RoundInsetLabel.swift */; };
 		55EA5C1729CEF78A00464D65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C1629CEF78A00464D65 /* AppDelegate.swift */; };
 		55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C1A29CEF78A00464D65 /* ViewController.swift */; };
 		55EA5C2029CEF78A00464D65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5C1F29CEF78A00464D65 /* Assets.xcassets */; };
@@ -18,14 +24,17 @@
 		55EA5C3729CF3DCF00464D65 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5C3629CF3DCF00464D65 /* Colors.xcassets */; };
 		55EA5C3A29CF3E5100464D65 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3929CF3E5100464D65 /* RswiftLibrary */; };
 		55EA5C4429CF401B00464D65 /* Swissors in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C4329CF401B00464D65 /* Swissors */; };
-		55EA5C4929CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C4829CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift */; };
-		55EA5C4D29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C4C29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift */; };
-		55EA5C5129CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C5029CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		55614A6429D098C100CCFACD /* AbstractTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewCell.swift; sourceTree = "<group>"; };
 		55614A6729D099DC00CCFACD /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
+		55614A6C29D09D2E00CCFACD /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
+		55614A6F29D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNTopPlaceholderTextFieldContainer.swift; sourceTree = "<group>"; };
+		55614A7129D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNTopPlaceholderTextFieldConfiguration.swift; sourceTree = "<group>"; };
+		55614A7529D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNFloatPlaceholderTextFieldBehavior.swift; sourceTree = "<group>"; };
+		55614A7729D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNFloatPlaceholderTextFieldContainer.swift; sourceTree = "<group>"; };
+		55614A7D29D09E6A00CCFACD /* RoundInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundInsetLabel.swift; sourceTree = "<group>"; };
 		55EA5C1329CEF78A00464D65 /* ELTextFieldDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ELTextFieldDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EA5C1629CEF78A00464D65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55EA5C1A29CEF78A00464D65 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,9 +43,6 @@
 		55EA5C2429CEF78A00464D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55EA5C2E29CEFD0100464D65 /* ELTextField */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ELTextField; path = ..; sourceTree = "<group>"; };
 		55EA5C3629CF3DCF00464D65 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		55EA5C4829CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNFloatingPlaceholderTextFieldConfiguration.swift; sourceTree = "<group>"; };
-		55EA5C4C29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNFloatingPlaceholderTextFieldContainer.swift; sourceTree = "<group>"; };
-		55EA5C5029CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSearchTextFieldBehavior.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +74,38 @@
 		55614A6129D0984900CCFACD /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				55614A6A29D09D2100CCFACD /* Views */,
 				55614A6429D098C100CCFACD /* AbstractTableViewCell.swift */,
 				55614A6729D099DC00CCFACD /* Configurable.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		55614A6A29D09D2100CCFACD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				55614A6C29D09D2E00CCFACD /* SeparatorView.swift */,
+				55614A7D29D09E6A00CCFACD /* RoundInsetLabel.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		55614A7A29D09E3F00CCFACD /* FloatPlaceholder */ = {
+			isa = PBXGroup;
+			children = (
+				55614A7729D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift */,
+				55614A7529D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift */,
+			);
+			path = FloatPlaceholder;
+			sourceTree = "<group>";
+		};
+		55614A7C29D09E4C00CCFACD /* TopPlaceholder */ = {
+			isa = PBXGroup;
+			children = (
+				55614A7129D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift */,
+				55614A6F29D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift */,
+			);
+			path = TopPlaceholder;
 			sourceTree = "<group>";
 		};
 		55EA5C0A29CEF78A00464D65 = {
@@ -130,9 +164,8 @@
 		55EA5C4E29CF42F700464D65 /* PN */ = {
 			isa = PBXGroup;
 			children = (
-				55EA5C4C29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift */,
-				55EA5C4829CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift */,
-				55EA5C5029CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift */,
+				55614A7C29D09E4C00CCFACD /* TopPlaceholder */,
+				55614A7A29D09E3F00CCFACD /* FloatPlaceholder */,
 			);
 			path = PN;
 			sourceTree = "<group>";
@@ -221,12 +254,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55EA5C5129CF4B1A00464D65 /* PNSearchTextFieldBehavior.swift in Sources */,
+				55614A7829D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift in Sources */,
 				55614A6529D098C100CCFACD /* AbstractTableViewCell.swift in Sources */,
+				55614A6D29D09D2E00CCFACD /* SeparatorView.swift in Sources */,
+				55614A7029D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift in Sources */,
+				55614A7229D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift in Sources */,
+				55614A7629D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift in Sources */,
 				55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */,
+				55614A7E29D09E6A00CCFACD /* RoundInsetLabel.swift in Sources */,
 				55614A6829D099DC00CCFACD /* Configurable.swift in Sources */,
-				55EA5C4D29CF42B300464D65 /* PNFloatingPlaceholderTextFieldContainer.swift in Sources */,
-				55EA5C4929CF429900464D65 /* PNFloatingPlaceholderTextFieldConfiguration.swift in Sources */,
 				55EA5C1729CEF78A00464D65 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

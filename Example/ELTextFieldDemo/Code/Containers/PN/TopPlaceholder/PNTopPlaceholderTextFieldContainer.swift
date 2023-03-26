@@ -10,7 +10,7 @@ import ELTextField
 import Foundation
 import UIKit
 
-final class PNFloatingPlaceholderTextFieldContainer: ELDefaultTextFieldGenericContainer<PNFloatingPlaceholderTextFieldConfiguration> {
+final class PNTopPlaceholderTextFieldContainer: ELDefaultTextFieldGenericContainer<PNTopPlaceholderTextFieldConfiguration> {
 
     private let floatingLabel = UILabel()
     private let separatorView = SeparatorView()
@@ -70,25 +70,7 @@ final class PNFloatingPlaceholderTextFieldContainer: ELDefaultTextFieldGenericCo
     }
 }
 
-final class SeparatorView: UIView {
-
-    override var intrinsicContentSize: CGSize {
-        CGSize(width: super.intrinsicContentSize.width, height: 1)
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        backgroundColor = R.color.grayCCCCCE()
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension PNFloatingPlaceholderTextFieldContainer: Configurable {
+extension PNTopPlaceholderTextFieldContainer: Configurable {
     
     func set(model: ELDefaultTextFieldBehavior) {
         setBehavior(model)

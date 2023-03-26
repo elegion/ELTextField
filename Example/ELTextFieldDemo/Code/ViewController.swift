@@ -15,20 +15,25 @@ class ViewController: UIViewController {
     }
     enum Items: Hashable {
         case topPlaceholder(model: ELDefaultTextFieldBehavior)
-        case search(model: PNSearchTextFieldBehavior)
+        case search(model: PNFloatPlaceholderTextFieldBehavior)
     }
     
     private let items: [Items] = [
         .topPlaceholder(model: .init(placeholder: "Hello")),
-        .search(model: PNSearchTextFieldBehavior(floatingPlaceholder: "Имя", anyValueGender: .female)),
-        .search(model: PNSearchTextFieldBehavior(floatingPlaceholder: "Фамилия", anyValueGender: .female)),
-        .search(model: PNSearchTextFieldBehavior(floatingPlaceholder: "Почта", anyValueGender: .female)),
+        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Имя", anyValueGender: .female)),
+        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Фамилия", anyValueGender: .female)),
+        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Почта", anyValueGender: .female)),
+        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Номер телефона",
+                                                           anyValueGender: .female,
+                                                           mask: ELPhoneTextMask(phoneCode: "+7",
+                                                                                 inputMask: "$ (###) ### ## ##",
+                                                                                 outputMask: "$##########"))),
     ]
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(cellType: AbstractTableViewCell<PNSearchTextFieldContainer>.self)
-        tableView.register(cellType: AbstractTableViewCell<PNFloatingPlaceholderTextFieldContainer>.self)
+        tableView.register(cellType: AbstractTableViewCell<PNFloatPlaceholderTextFieldContainer>.self)
+        tableView.register(cellType: AbstractTableViewCell<PNTopPlaceholderTextFieldContainer>.self)
         return tableView
     }()
     private var dataSource: UITableViewDiffableDataSource<Sections, Items>?
@@ -51,12 +56,12 @@ class ViewController: UIViewController {
             
             switch itemIdentifier {
             case let .topPlaceholder(model):
-                let cell = tableView.dequeueCell(of: AbstractTableViewCell<PNFloatingPlaceholderTextFieldContainer>.self,
+                let cell = tableView.dequeueCell(of: AbstractTableViewCell<PNTopPlaceholderTextFieldContainer>.self,
                                                  for: indexPath)
                 cell.set(model: model)
                 return cell
             case let .search(model):
-                let cell = tableView.dequeueCell(of: AbstractTableViewCell<PNSearchTextFieldContainer>.self, for: indexPath)
+                let cell = tableView.dequeueCell(of: AbstractTableViewCell<PNFloatPlaceholderTextFieldContainer>.self, for: indexPath)
                 cell.set(model: model)
                 return cell
             }
