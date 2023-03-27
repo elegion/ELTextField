@@ -15,17 +15,22 @@ public enum ELRightItem {
         case delete
         case custom(onTap: () -> Void)
     }
-
+    /// Статичное изображение
     case image(image: UIImage?, mode: UITextField.ViewMode)
+    /// Статичное изображение с возможностью обработки нажатия
     case action(image: UIImage?, mode: UITextField.ViewMode, behavior: Behavior)
+    /// Кастомная view
     case custom(view: UIView, mode: UITextField.ViewMode)
+    case secure(image: UIImage?, mode: UITextField.ViewMode)
+    /// Системна кнопка очистки поля
     case systemClear
 
     var isSystemClear: Bool {
         switch self {
         case .action,
              .custom,
-             .image:
+             .image,
+             .secure:
             return false
         case .systemClear:
             return true

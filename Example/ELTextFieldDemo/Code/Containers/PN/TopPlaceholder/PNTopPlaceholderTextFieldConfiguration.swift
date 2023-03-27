@@ -20,7 +20,7 @@ enum PNTopPlaceholderTextFieldConfiguration: ELTextFieldConfigurationProtocol {
     static func rect() -> ELTextField.ELTextInputRectConfiguration {
         .init(
             textInset: UIEdgeInsets(top: 26, bottom: 12, horizontal: 16),
-            rightViewPosition: .centerHorizontally(rightInset: 20, size: CGSize(value: 12)),
+            rightViewPosition: .centerHorizontally(rightInset: 20, size: CGSize(value: 40)),
             intrinsicHeight: .init(singleline: 60)
         )
     }

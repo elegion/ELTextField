@@ -19,7 +19,7 @@ class PNFloatPlaceholderTextFieldBehavior: ELDefaultTextFieldBehavior {
         case notMatter
         
         var text: String {
-            "любая"
+            "Любое"
         }
     }
     

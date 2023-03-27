@@ -88,6 +88,7 @@ final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PN
             .with(foregroundColor: R.color.gray919195())
             .build()
         selectedParameterLabel.text = behavior?.anyValueGender.text
+        selectedParameterLabel.backgroundColor = R.color.grayF1F1F4()
         //            selectedParameterView.setAnyText(searchBehavior.anyValueGender.text)
         //            searchBehavior.updateSelectedValueText = {
         //                [weak self] newText in
@@ -168,8 +169,10 @@ final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PN
         updateSelectedParameterAppearance(text: behavior.value)
         if behavior.value.isEmpty {
             selectedParameterLabel.text = "Любое"
+            selectedParameterLabel.backgroundColor = R.color.grayF1F1F4()
         } else {
             selectedParameterLabel.text = behavior.value
+            selectedParameterLabel.backgroundColor = R.color.yellowFCE66F()
         }
         UIView.animate(withDuration: CATransaction.animationDuration()) {
             self.currentAppearance = .large

@@ -15,6 +15,7 @@
 		55614A7629D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7529D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift */; };
 		55614A7829D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7729D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift */; };
 		55614A7E29D09E6A00CCFACD /* RoundInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7D29D09E6A00CCFACD /* RoundInsetLabel.swift */; };
+		55614A8129D0A35100CCFACD /* PasswordBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A8029D0A35100CCFACD /* PasswordBehavior.swift */; };
 		55EA5C1729CEF78A00464D65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C1629CEF78A00464D65 /* AppDelegate.swift */; };
 		55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5C1A29CEF78A00464D65 /* ViewController.swift */; };
 		55EA5C2029CEF78A00464D65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5C1F29CEF78A00464D65 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		55614A7529D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNFloatPlaceholderTextFieldBehavior.swift; sourceTree = "<group>"; };
 		55614A7729D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNFloatPlaceholderTextFieldContainer.swift; sourceTree = "<group>"; };
 		55614A7D29D09E6A00CCFACD /* RoundInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundInsetLabel.swift; sourceTree = "<group>"; };
+		55614A8029D0A35100CCFACD /* PasswordBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordBehavior.swift; sourceTree = "<group>"; };
 		55EA5C1329CEF78A00464D65 /* ELTextFieldDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ELTextFieldDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EA5C1629CEF78A00464D65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55EA5C1A29CEF78A00464D65 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				55614A6A29D09D2100CCFACD /* Views */,
 				55614A6429D098C100CCFACD /* AbstractTableViewCell.swift */,
 				55614A6729D099DC00CCFACD /* Configurable.swift */,
+				55614A8029D0A35100CCFACD /* PasswordBehavior.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */,
 				55614A7E29D09E6A00CCFACD /* RoundInsetLabel.swift in Sources */,
 				55614A6829D099DC00CCFACD /* Configurable.swift in Sources */,
+				55614A8129D0A35100CCFACD /* PasswordBehavior.swift in Sources */,
 				55EA5C1729CEF78A00464D65 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

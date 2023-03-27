@@ -205,6 +205,22 @@ extension ELTextField: ELTextInputConfigurable {
         case let .custom(view, mode):
             rightImageView = view
             rightViewMode = mode
+        case let .secure(image, mode):
+            let button = UIButton()
+            if #available(iOS 14.0, *) {
+                button.addAction(UIAction {
+                    [weak self, weak button] _ in
+                    
+                    self?.isSecureTextEntry.toggle()
+                    button?.isSelected.toggle()
+                }, for: .touchUpInside)
+            }
+            rightImageView = button
+            button.setImage(image, for: .normal)
+            if #available(iOS 13.0, *) {
+                button.setImage(UIImage(systemName: "eye.slash.fill"), for: .selected)
+            }
+            rightViewMode = mode
         default:
             break
         }

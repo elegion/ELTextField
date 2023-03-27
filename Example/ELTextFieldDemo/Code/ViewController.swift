@@ -19,15 +19,16 @@ class ViewController: UIViewController {
     }
     
     private let items: [Items] = [
-        .topPlaceholder(model: .init(placeholder: "Hello")),
-        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Имя", anyValueGender: .female)),
-        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Фамилия", anyValueGender: .female)),
-        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Почта", anyValueGender: .female)),
-        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Номер телефона",
-                                                           anyValueGender: .female,
-                                                           mask: ELPhoneTextMask(phoneCode: "+7",
-                                                                                 inputMask: "$ (###) ### ## ##",
-                                                                                 outputMask: "$##########"))),
+//        .topPlaceholder(model: .init(placeholder: "Hello")),
+        .topPlaceholder(model: PasswordBehavior()),
+//        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Имя", anyValueGender: .female)),
+//        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Фамилия", anyValueGender: .female)),
+//        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Почта", anyValueGender: .female)),
+//        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Номер телефона",
+//                                                           anyValueGender: .female,
+//                                                           mask: ELPhoneTextMask(phoneCode: "+7",
+//                                                                                 inputMask: "$ (###) ### ## ##",
+//                                                                                 outputMask: "$##########"))),
     ]
     
     private lazy var tableView: UITableView = {
