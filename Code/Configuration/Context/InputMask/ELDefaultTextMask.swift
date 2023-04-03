@@ -14,7 +14,7 @@ public struct ELDefaultTextMask: ELTextFieldInputMask {
         maskedText ?? ""
     }
 
-    public func deleteLastItemLogic(inputText: String) -> String {
+    public func deleteLastItem(inputText: String) -> String {
         String(maskedText(from: inputText).dropLast())
     }
 

@@ -22,7 +22,7 @@ public struct ELPhoneTextMask: ELTextFieldInputMask {
         convert(text: maskedText, using: outputMask)
     }
 
-    public func deleteLastItemLogic(inputText: String) -> String {
+    public func deleteLastItem(inputText: String) -> String {
         String(maskedText(from: inputText).dropLast())
     }
 

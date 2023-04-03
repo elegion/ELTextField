@@ -128,7 +128,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             let isTextEmpty = textInput.enteredText?.isEmpty ?? true
             let newText: String
             if (range.location + range.length) == text.count, range.length == 1 {
-                newText = mask.deleteLastItemLogic(inputText: text)
+                newText = mask.deleteLastItem(inputText: text)
             } else {
                 newText = text.replacingCharacters(in: swiftRange, with: string)
             }
@@ -156,12 +156,13 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     }
     
     private func triggerValidation(for rule: ELTextFieldValidationRule, isEditing: Bool) {
-        if validation.rule == rule {
-            if isValid {
-                updateState(isEditing ? .editing : .default)
-            } else {
-                updateState(.error)
-            }
+        guard validation.rule == rule else {
+            return
+        }
+        if isValid {
+            updateState(isEditing ? .editing : .default)
+        } else {
+            updateState(.error)
         }
     }
 

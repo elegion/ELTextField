@@ -11,6 +11,6 @@ public protocol ELTextFieldInputMask {
     func maskedText(from rawText: String?) -> String
     /// Возвращает текст в 'сыром' виде
     func rawText(from maskedText: String?) -> String
-    /// Логика удаления последнего элемента
-    func deleteLastItemLogic(inputText: String) -> String
+    /// Удаление последнего элемента
+    func deleteLastItem(inputText: String) -> String
 }
