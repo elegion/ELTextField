@@ -17,10 +17,11 @@ class ViewController: UIViewController {
         case topPlaceholder(model: ELDefaultTextFieldBehavior)
         case search(model: PNFloatPlaceholderTextFieldBehavior)
         case tl(model: ELDefaultTextFieldBehavior)
+        case tlMultiline(model: ELDefaultTextFieldBehavior)
     }
     
     private let items: [Items] = [
-        .topPlaceholder(model: .init(placeholder: "Hello")),
+        .topPlaceholder(model: MailBehavior()),
         .topPlaceholder(model: PasswordBehavior()),
         .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Имя", anyValueGender: .female)),
         .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Фамилия", anyValueGender: .female)),
@@ -30,9 +31,8 @@ class ViewController: UIViewController {
                                                            mask: ELPhoneTextMask(phoneCode: "+7",
                                                                                  inputMask: "$ (###) ### ## ##",
                                                                                  outputMask: "$##########"))),
-        .tl(model: .init(placeholder: "Название услуги", placeholderMapper: {
-            $0?.attribute.with(font: .systemFont(ofSize: 16, weight: .bold)).build()
-        }, validation: .init(validator: ELMailTextFieldValidator(), rule: .onEndEditing)))
+        .tl(model: MailBehavior()),
+        .tlMultiline(model: MailBehavior()),
     ]
     
     private lazy var tableView: UITableView = {
@@ -40,6 +40,7 @@ class ViewController: UIViewController {
         tableView.register(cellType: AbstractTableViewCell<PNFloatPlaceholderTextFieldContainer>.self)
         tableView.register(cellType: AbstractTableViewCell<PNTopPlaceholderTextFieldContainer>.self)
         tableView.register(cellType: AbstractTableViewCell<TLTextFieldContainer>.self)
+        tableView.register(cellType: MultilineTextFieldTableViewCell.self)
         tableView.separatorStyle = .none
         return tableView
     }()
@@ -73,6 +74,10 @@ class ViewController: UIViewController {
                 return cell
             case let .tl(model):
                 let cell = tableView.dequeueCell(of: AbstractTableViewCell<TLTextFieldContainer>.self, for: indexPath)
+                cell.set(model: model)
+                return cell
+            case let .tlMultiline(model):
+                let cell = tableView.dequeueCell(of: MultilineTextFieldTableViewCell.self, for: indexPath)
                 cell.set(model: model)
                 return cell
             }

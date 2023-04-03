@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// Протокол для представления конфигурации Контейнера инпута
+/// Протокол для представления конфигурации контейнера ввода
 public protocol ELTextFieldConfigurationProtocol {
     
     /// Layer для состояний

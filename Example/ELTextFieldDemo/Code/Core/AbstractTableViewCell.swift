@@ -9,6 +9,7 @@
 import Foundation
 import SnapKit
 import UIKit
+import ELTextField
 
 final class AbstractTableViewCell<View: UIView>: UITableViewCell, Configurable where View: Configurable {
     
@@ -30,5 +31,31 @@ final class AbstractTableViewCell<View: UIView>: UITableViewCell, Configurable w
     
     func set(model: View.Model) {
         view.set(model: model)
+    }
+}
+
+final class MultilineTextFieldTableViewCell: UITableViewCell, Configurable {
+    
+    private let view = TLTextFieldContainer(type: .multiline)
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.addSubview(view)
+        view.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(UIEdgeInsets(value: 16))
+        }
+        selectionStyle = .none
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MultilineTextFieldTableViewCell {
+    
+    func set(model: ELDefaultTextFieldBehavior) {
+        view.setBehavior(model)
     }
 }

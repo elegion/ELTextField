@@ -9,16 +9,6 @@ import Foundation
 import UIKit
 
 extension ELTextView: ELTextInput {
-    var input: UIView? {
-        get { inputView }
-        set { inputView = newValue }
-    }
-
-    var accesory: UIView? {
-        get { inputAccessoryView }
-        set { inputAccessoryView = newValue }
-    }
-
     var enteredText: String? {
         get { text }
         set {
@@ -31,6 +21,16 @@ extension ELTextView: ELTextInput {
                 placeholderHidden = !val.isEmpty
             }
         }
+    }
+    
+    var input: UIView? {
+        get { inputView }
+        set { inputView = newValue }
+    }
+
+    var accesory: UIView? {
+        get { inputAccessoryView }
+        set { inputAccessoryView = newValue }
     }
 
     var rightImageView: UIView? {

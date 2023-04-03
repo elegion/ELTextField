@@ -9,8 +9,9 @@
 import Foundation
 import ELTextField
 import UIKit
+import Swissors
 
-final class TLTextFieldContainer: ELDefaultTextFieldGenericContainer<ELTextFieldConfiguration> {
+final class TLTextFieldContainer: ELDefaultTextFieldGenericContainer<TLTextFieldConfiguration> {
     
 }
 
@@ -21,22 +22,21 @@ extension TLTextFieldContainer: Configurable {
     }
 }
 
-enum ELTextFieldConfiguration: ELTextFieldConfigurationProtocol {
+
+final class MailBehavior: ELDefaultTextFieldBehavior {
     
-    static func layer(for state: ELTextField.ELTextFieldState) -> ELTextField.ELTextInputLayerConfiguration {
-        let borderColor: UIColor?
-        switch state {
-        case .default, .disabled:
-            borderColor = R.color.gray919195()
-        case .error:
-            borderColor = .red
-        case .editing:
-            borderColor = .black
+    init(mail: String = "") {
+        let mapper: (String?) -> NSAttributedString? = {
+            $0?.attribute.with(font: .systemFont(ofSize: 15, weight: .bold)).build()
         }
-        return .init(borderColor: borderColor, borderWidth: 1, cornerRadius: 8, tintColor: .white)
-    }
-    
-    static func rect() -> ELTextField.ELTextInputRectConfiguration {
-        .init(textInset: UIEdgeInsets(left: 16), containerHeight: .init(singleline: 60))
+        super.init(text: mail,
+                   textMapper: mapper,
+                   placeholder: "Почта",
+                   placeholderMapper: mapper,
+                   mask: ELPhoneTextMask(phoneCode: "+7",
+                                         inputMask: "$ (###) ### ## ##",
+                                         outputMask: "$##########"),
+                   validation: .init(validator: ELMailTextFieldValidator(),
+                                     rule: .onEndEditing))
     }
 }
