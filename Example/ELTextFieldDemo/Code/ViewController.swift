@@ -16,25 +16,31 @@ class ViewController: UIViewController {
     enum Items: Hashable {
         case topPlaceholder(model: ELDefaultTextFieldBehavior)
         case search(model: PNFloatPlaceholderTextFieldBehavior)
+        case tl(model: ELDefaultTextFieldBehavior)
     }
     
     private let items: [Items] = [
-//        .topPlaceholder(model: .init(placeholder: "Hello")),
+        .topPlaceholder(model: .init(placeholder: "Hello")),
         .topPlaceholder(model: PasswordBehavior()),
-//        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Имя", anyValueGender: .female)),
-//        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Фамилия", anyValueGender: .female)),
-//        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Почта", anyValueGender: .female)),
-//        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Номер телефона",
-//                                                           anyValueGender: .female,
-//                                                           mask: ELPhoneTextMask(phoneCode: "+7",
-//                                                                                 inputMask: "$ (###) ### ## ##",
-//                                                                                 outputMask: "$##########"))),
+        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Имя", anyValueGender: .female)),
+        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Фамилия", anyValueGender: .female)),
+        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Почта", anyValueGender: .female)),
+        .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Номер телефона",
+                                                           anyValueGender: .female,
+                                                           mask: ELPhoneTextMask(phoneCode: "+7",
+                                                                                 inputMask: "$ (###) ### ## ##",
+                                                                                 outputMask: "$##########"))),
+        .tl(model: .init(placeholder: "Название услуги", placeholderMapper: {
+            $0?.attribute.with(font: .systemFont(ofSize: 16, weight: .bold)).build()
+        }, validation: .init(validator: ELMailTextFieldValidator(), rule: .onEndEditing)))
     ]
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(cellType: AbstractTableViewCell<PNFloatPlaceholderTextFieldContainer>.self)
         tableView.register(cellType: AbstractTableViewCell<PNTopPlaceholderTextFieldContainer>.self)
+        tableView.register(cellType: AbstractTableViewCell<TLTextFieldContainer>.self)
+        tableView.separatorStyle = .none
         return tableView
     }()
     private var dataSource: UITableViewDiffableDataSource<Sections, Items>?
@@ -63,6 +69,10 @@ class ViewController: UIViewController {
                 return cell
             case let .search(model):
                 let cell = tableView.dequeueCell(of: AbstractTableViewCell<PNFloatPlaceholderTextFieldContainer>.self, for: indexPath)
+                cell.set(model: model)
+                return cell
+            case let .tl(model):
+                let cell = tableView.dequeueCell(of: AbstractTableViewCell<TLTextFieldContainer>.self, for: indexPath)
                 cell.set(model: model)
                 return cell
             }

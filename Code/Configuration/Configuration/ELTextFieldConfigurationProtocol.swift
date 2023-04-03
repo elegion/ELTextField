@@ -7,6 +7,7 @@ import Foundation
 
 /// Протокол для представления конфигурации Контейнера инпута
 public protocol ELTextFieldConfigurationProtocol {
+    
     /// Layer для состояний
     static func layer(for state: ELTextFieldState) -> ELTextInputLayerConfiguration
     /// Возвращает размер контейнера и позиции для поля ввода

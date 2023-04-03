@@ -25,8 +25,6 @@ open class ELTextFieldGenericContainer<
     Behavior: ELTextFieldBehavior
 >: UIView, OutputHandlerProtocol {
 
-    public typealias C = Configuration
-
     public let textInput: ELTextInput & ELTextInputConfigurable
 
     public init(type: ELTextInputType = .singleline) {

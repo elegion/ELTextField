@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		551DC1BE29D99B7B002FD40D /* TLTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551DC1BD29D99B7B002FD40D /* TLTextFieldContainer.swift */; };
 		55614A6529D098C100CCFACD /* AbstractTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6429D098C100CCFACD /* AbstractTableViewCell.swift */; };
 		55614A6829D099DC00CCFACD /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6729D099DC00CCFACD /* Configurable.swift */; };
 		55614A6D29D09D2E00CCFACD /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6C29D09D2E00CCFACD /* SeparatorView.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		551DC1BD29D99B7B002FD40D /* TLTextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLTextFieldContainer.swift; sourceTree = "<group>"; };
 		55614A6429D098C100CCFACD /* AbstractTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewCell.swift; sourceTree = "<group>"; };
 		55614A6729D099DC00CCFACD /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		55614A6C29D09D2E00CCFACD /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		551DC1BB29D99B1B002FD40D /* TL */ = {
+			isa = PBXGroup;
+			children = (
+				551DC1BD29D99B7B002FD40D /* TLTextFieldContainer.swift */,
+			);
+			path = TL;
+			sourceTree = "<group>";
+		};
 		55614A5F29D0982D00CCFACD /* Code */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +169,7 @@
 		55EA5C3529CF3DAF00464D65 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
+				551DC1BB29D99B1B002FD40D /* TL */,
 				55EA5C4E29CF42F700464D65 /* PN */,
 			);
 			path = Containers;
@@ -262,6 +273,7 @@
 				55614A6D29D09D2E00CCFACD /* SeparatorView.swift in Sources */,
 				55614A7029D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift in Sources */,
 				55614A7229D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift in Sources */,
+				551DC1BE29D99B7B002FD40D /* TLTextFieldContainer.swift in Sources */,
 				55614A7629D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift in Sources */,
 				55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */,
 				55614A7E29D09E6A00CCFACD /* RoundInsetLabel.swift in Sources */,

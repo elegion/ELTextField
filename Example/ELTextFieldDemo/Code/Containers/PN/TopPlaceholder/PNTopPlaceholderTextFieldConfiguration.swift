@@ -14,14 +14,17 @@ import UIKit
 enum PNTopPlaceholderTextFieldConfiguration: ELTextFieldConfigurationProtocol {
 
     static func layer(for state: ELTextField.ELTextFieldState) -> ELTextField.ELTextInputLayerConfiguration {
-        .init(borderColor: nil, borderWidth: .zero, cornerRadius: .zero, tintColor: R.color.grayBBBBBF())
+        .init(borderColor: nil,
+              borderWidth: .zero,
+              cornerRadius: .zero,
+              tintColor: R.color.grayBBBBBF())
     }
 
     static func rect() -> ELTextField.ELTextInputRectConfiguration {
         .init(
             textInset: UIEdgeInsets(top: 26, bottom: 12, horizontal: 16),
             rightViewPosition: .centerHorizontally(rightInset: 20, size: CGSize(value: 40)),
-            intrinsicHeight: .init(singleline: 60)
+            containerHeight: .init(singleline: 60)
         )
     }
 }

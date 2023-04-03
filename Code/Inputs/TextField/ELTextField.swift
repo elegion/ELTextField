@@ -7,13 +7,14 @@ import Foundation
 import UIKit
 
 class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField, UITextFieldDelegate {
+    
     var attributedTextMapper: ((String?) -> NSAttributedString?)?
 
     private var rectConfiguration: ELTextInputRectConfiguration {
         Configuration.rect()
     }
 
-    public weak var textInputDelegate: ELTextInputDelegate?
+    weak var textInputDelegate: ELTextInputDelegate?
 
     private var rightItemAction: (() -> Void)?
 
@@ -66,7 +67,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     override var intrinsicContentSize: CGSize {
         CGSize(
             width: super.intrinsicContentSize.width,
-            height: rectConfiguration.intrinsicHeight.singleline
+            height: rectConfiguration.containerHeight.singleline
         )
     }
 

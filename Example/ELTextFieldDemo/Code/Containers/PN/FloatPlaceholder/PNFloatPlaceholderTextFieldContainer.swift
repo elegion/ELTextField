@@ -89,18 +89,6 @@ final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PN
             .build()
         selectedParameterLabel.text = behavior?.anyValueGender.text
         selectedParameterLabel.backgroundColor = R.color.grayF1F1F4()
-        //            selectedParameterView.setAnyText(searchBehavior.anyValueGender.text)
-        //            searchBehavior.updateSelectedValueText = {
-        //                [weak self] newText in
-        //
-        //                self?.updateSelectedParameterAppearance(text: newText)
-        //            }
-        //            selectedParameterView.onClearTap = {
-        //                [weak searchBehavior] in
-        //
-        //                searchBehavior?.onClearTap?()
-        //                searchBehavior?.updateText("")
-        //            }
         updatePlaceholder(appearance: currentAppearance)
         updateSelectedParameterAppearance(text: behavior?.value)
     }

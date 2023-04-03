@@ -65,7 +65,7 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
     override var intrinsicContentSize: CGSize {
         CGSize(
             width: super.intrinsicContentSize.width,
-            height: rectConfiguration.intrinsicHeight.multiline
+            height: rectConfiguration.containerHeight.multiline
         )
     }
 

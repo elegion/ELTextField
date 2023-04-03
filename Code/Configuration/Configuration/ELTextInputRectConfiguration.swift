@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 
 /// Высота контейнера ввода
-public struct ELIntrinsicHeight {
+public struct ELContainerHeight {
     /// Высота однострочного контейнера
     let singleline: CGFloat
     /// Высота многострочного контейнера
@@ -57,17 +57,17 @@ public struct ELTextInputRectConfiguration {
     public let textInset: UIEdgeInsets?
     public let editingInset: UIEdgeInsets?
     public let rightViewPosition: ELRightViewPosition?
-    public let intrinsicHeight: ELIntrinsicHeight
+    public let containerHeight: ELContainerHeight
 
     public init(
         textInset: UIEdgeInsets? = nil,
         editingInset: UIEdgeInsets? = nil,
         rightViewPosition: ELRightViewPosition? = nil,
-        intrinsicHeight: ELIntrinsicHeight
+        containerHeight: ELContainerHeight
     ) {
         self.textInset = textInset
         self.editingInset = editingInset ?? textInset
         self.rightViewPosition = rightViewPosition
-        self.intrinsicHeight = intrinsicHeight
+        self.containerHeight = containerHeight
     }
 }

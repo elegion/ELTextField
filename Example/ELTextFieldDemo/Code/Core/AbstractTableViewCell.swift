@@ -19,8 +19,9 @@ final class AbstractTableViewCell<View: UIView>: UITableViewCell, Configurable w
         
         contentView.addSubview(view)
         view.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalToSuperview().inset(UIEdgeInsets(value: 16))
         }
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {

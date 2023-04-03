@@ -25,8 +25,6 @@ class PNFloatPlaceholderTextFieldBehavior: ELDefaultTextFieldBehavior {
     
     let floatingPlaceholder: String?
     let anyValueGender: AnyValueGender
-    //    var updateSelectedValueText: Closure.In<String?>?
-    //    public var onClearTap: Closure.Void?
     
     init(
         text: String? = nil,
