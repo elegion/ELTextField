@@ -8,22 +8,27 @@ import UIKit
 
 /// Класс, описывающий поведение поля ввода
 open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
-    public var mask: ELTextFieldInputMask
-    public var traits: ELTextFieldInputTraits
-    public var validation: ELTextFieldValidation
+    
+    public let mask: ELTextFieldInputMask
+    public let traits: ELTextFieldInputTraits
+    public let validation: ELTextFieldValidation
+    
     private var viewModel: ELTextInputViewModel
+    
     public var placeholder: String? {
         viewModel.placeholder
     }
+    
     public var value: String {
         viewModel.text ?? ""
     }
+    
     open var isValid: Bool {
         validation.validator.isValid(text: viewModel.text)
     }
 
-    public var onAction: ((BehaviorAction) -> Void)?
-    public weak var containerDelegate: OutputHandlerProtocol?
+    public var onAction: ((ELBehaviorAction) -> Void)?
+    public weak var containerDelegate: ELContainerDelegate?
     var textInput: (ELTextInput & ELTextInputConfigurable)?
 
     public init(
@@ -173,6 +178,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
 }
 
 private extension Optional where Wrapped == String {
+    
     var isNilOrEmpty: Bool {
         self == nil || self?.isEmpty == true
     }

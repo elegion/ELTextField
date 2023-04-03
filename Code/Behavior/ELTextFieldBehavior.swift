@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum BehaviorAction {
+public enum ELBehaviorAction {
     case changed(newValue: String)
     case endEditing
     case `return`
@@ -20,8 +20,8 @@ public protocol ELTextFieldBehavior: ELTextInputDelegate {
     var value: String { get }
     var isValid: Bool { get }
 
-    var onAction: ((BehaviorAction) -> Void)? { get set }
-    var containerDelegate: OutputHandlerProtocol? { get set }
+    var onAction: ((ELBehaviorAction) -> Void)? { get set }
+    var containerDelegate: ELContainerDelegate? { get set }
 
     func configure(textInput: ELTextInput & ELTextInputConfigurable)
     func updateState(_ state: ELTextFieldState)
