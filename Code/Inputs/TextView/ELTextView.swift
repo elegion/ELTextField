@@ -92,10 +92,12 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
 }
 
 extension ELTextView: ELTextInputConfigurable {
+    
     func configureLayer(_ configuration: ELTextInputLayerConfiguration) {
         layer.borderColor = configuration.borderColor?.cgColor
         layer.borderWidth = configuration.borderWidth ?? .zero
         layer.cornerRadius = configuration.cornerRadius ?? .zero
+        rightImageView?.tintColor = configuration.tintColor
     }
 
     func configureTraits(_ traits: ELTextFieldInputTraits) {
@@ -120,6 +122,8 @@ extension ELTextView: ELTextInputConfigurable {
     }
 
     func updateState(_ textFieldState: ELTextFieldState) {
-        configureLayer(Configuration.layer(for: textFieldState))
+        UIView.animate(withDuration: CATransaction.animationDuration(), delay: .zero) {
+            self.configureLayer(Configuration.layer(for: textFieldState))
+        }
     }
 }

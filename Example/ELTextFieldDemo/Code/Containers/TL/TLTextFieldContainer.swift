@@ -35,9 +35,6 @@ final class MailBehavior: ELDefaultTextFieldBehavior {
                    placeholder: "Почта",
                    placeholderMapper: mapper,
                    rightItem: rightImage,
-                   mask: ELPhoneTextMask(phoneCode: "+7",
-                                         inputMask: "$ (###) ### ## ##",
-                                         outputMask: "$##########"),
                    validation: .init(validator: ELMailTextFieldValidator(),
                                      rule: .onEndEditing))
     }

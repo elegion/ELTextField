@@ -219,9 +219,6 @@ extension ELTextField: ELTextInputConfigurable {
             rightImageView = button
             button.setImage(showImage, for: .normal)
             button.setImage(hideImage, for: .selected)
-            if #available(iOS 13.0, *) {
-                button.setImage(UIImage(systemName: "eye.slash.fill"), for: .selected)
-            }
             rightViewMode = mode
         default:
             break
