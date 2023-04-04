@@ -29,10 +29,12 @@ final class MailBehavior: ELDefaultTextFieldBehavior {
         let mapper: (String?) -> NSAttributedString? = {
             $0?.attribute.with(font: .systemFont(ofSize: 15, weight: .bold)).build()
         }
+        let rightImage = ELRightItem.image(image: UIImage(systemName: "checkmark"), mode: .always)
         super.init(text: mail,
                    textMapper: mapper,
                    placeholder: "Почта",
                    placeholderMapper: mapper,
+                   rightItem: rightImage,
                    mask: ELPhoneTextMask(phoneCode: "+7",
                                          inputMask: "$ (###) ### ## ##",
                                          outputMask: "$##########"),

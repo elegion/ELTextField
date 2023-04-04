@@ -21,8 +21,9 @@ public enum ELRightItem {
     case action(image: UIImage?, mode: UITextField.ViewMode, behavior: Behavior)
     /// Кастомная view
     case custom(view: UIView, mode: UITextField.ViewMode)
-    case secure(image: UIImage?, mode: UITextField.ViewMode)
-    /// Системна кнопка очистки поля
+    /// Отображение контента поля ввода пароля
+    case secure(showImage: UIImage?, hideImage: UIImage?, mode: UITextField.ViewMode)
+    /// Системная кнопка очистки поля
     case systemClear
 
     var isSystemClear: Bool {

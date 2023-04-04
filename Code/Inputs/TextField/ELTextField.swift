@@ -169,7 +169,7 @@ extension ELTextField: ELTextInputConfigurable {
         switch rightItem {
         case let .image(image, mode):
             let imageView = UIImageView(image: image)
-            imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = .center
             rightImageView = imageView
             rightViewMode = mode
         case let .action(image, mode, behavior):
@@ -206,7 +206,7 @@ extension ELTextField: ELTextInputConfigurable {
         case let .custom(view, mode):
             rightImageView = view
             rightViewMode = mode
-        case let .secure(image, mode):
+        case let .secure(showImage, hideImage, mode):
             let button = UIButton()
             if #available(iOS 14.0, *) {
                 button.addAction(UIAction {
@@ -217,7 +217,8 @@ extension ELTextField: ELTextInputConfigurable {
                 }, for: .touchUpInside)
             }
             rightImageView = button
-            button.setImage(image, for: .normal)
+            button.setImage(showImage, for: .normal)
+            button.setImage(hideImage, for: .selected)
             if #available(iOS 13.0, *) {
                 button.setImage(UIImage(systemName: "eye.slash.fill"), for: .selected)
             }

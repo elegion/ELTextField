@@ -16,7 +16,9 @@ class PasswordBehavior: ELDefaultTextFieldBehavior {
         var traits = ELDefaultTextFieldInputTraits()
         traits.isSecureTextEntry = true
         super.init(placeholder: "Пароль",
-                   rightItem: .secure(image: UIImage(systemName: "eye.fill"), mode: .always),
+                   rightItem: .secure(showImage: UIImage(systemName: "eye.fill"),
+                                      hideImage: UIImage(systemName: "eye.slash.fill"),
+                                      mode: .always),
                    traits: traits)
     }
 }
