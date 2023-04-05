@@ -55,7 +55,7 @@ final class MultilineTextFieldTableViewCell: UITableViewCell, Configurable {
 
 extension MultilineTextFieldTableViewCell {
     
-    func set(model: ELDefaultTextFieldBehavior) {
+    func set(model: TLTextFieldBehavior) {
         view.setBehavior(model)
     }
 }

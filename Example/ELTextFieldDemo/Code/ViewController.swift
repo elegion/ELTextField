@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     enum Items: Hashable {
         case topPlaceholder(model: ELDefaultTextFieldBehavior)
         case search(model: PNFloatPlaceholderTextFieldBehavior)
-        case tl(model: ELDefaultTextFieldBehavior)
-        case tlMultiline(model: ELDefaultTextFieldBehavior)
+        case tl(model: TLTextFieldBehavior)
+        case tlMultiline(model: TLTextFieldBehavior)
     }
     
     private let items: [Items] = [
