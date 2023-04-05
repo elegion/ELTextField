@@ -13,7 +13,7 @@
 		55614A6829D099DC00CCFACD /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6729D099DC00CCFACD /* Configurable.swift */; };
 		55614A6D29D09D2E00CCFACD /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6C29D09D2E00CCFACD /* SeparatorView.swift */; };
 		55614A7029D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A6F29D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift */; };
-		55614A7229D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7129D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift */; };
+		55614A7229D09DC100CCFACD /* PNTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7129D09DC100CCFACD /* PNTextFieldConfiguration.swift */; };
 		55614A7629D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7529D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift */; };
 		55614A7829D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7729D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift */; };
 		55614A7E29D09E6A00CCFACD /* RoundInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55614A7D29D09E6A00CCFACD /* RoundInsetLabel.swift */; };
@@ -27,6 +27,7 @@
 		55EA5C3729CF3DCF00464D65 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5C3629CF3DCF00464D65 /* Colors.xcassets */; };
 		55EA5C3A29CF3E5100464D65 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3929CF3E5100464D65 /* RswiftLibrary */; };
 		55EA5C4429CF401B00464D65 /* Swissors in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C4329CF401B00464D65 /* Swissors */; };
+		55F2D65929DD3951007CBDE7 /* TLTextFieldBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F2D65829DD3951007CBDE7 /* TLTextFieldBehavior.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +37,7 @@
 		55614A6729D099DC00CCFACD /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		55614A6C29D09D2E00CCFACD /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		55614A6F29D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNTopPlaceholderTextFieldContainer.swift; sourceTree = "<group>"; };
-		55614A7129D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNTopPlaceholderTextFieldConfiguration.swift; sourceTree = "<group>"; };
+		55614A7129D09DC100CCFACD /* PNTextFieldConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNTextFieldConfiguration.swift; sourceTree = "<group>"; };
 		55614A7529D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNFloatPlaceholderTextFieldBehavior.swift; sourceTree = "<group>"; };
 		55614A7729D09E1100CCFACD /* PNFloatPlaceholderTextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNFloatPlaceholderTextFieldContainer.swift; sourceTree = "<group>"; };
 		55614A7D29D09E6A00CCFACD /* RoundInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundInsetLabel.swift; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		55EA5C2429CEF78A00464D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55EA5C2E29CEFD0100464D65 /* ELTextField */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ELTextField; path = ..; sourceTree = "<group>"; };
 		55EA5C3629CF3DCF00464D65 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		55F2D65829DD3951007CBDE7 /* TLTextFieldBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLTextFieldBehavior.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 			children = (
 				551DC1BD29D99B7B002FD40D /* TLTextFieldContainer.swift */,
 				551DC1BF29DA8D60002FD40D /* TLTextFieldConfiguration.swift */,
+				55F2D65829DD3951007CBDE7 /* TLTextFieldBehavior.swift */,
 			);
 			path = TL;
 			sourceTree = "<group>";
@@ -126,7 +129,6 @@
 		55614A7C29D09E4C00CCFACD /* TopPlaceholder */ = {
 			isa = PBXGroup;
 			children = (
-				55614A7129D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift */,
 				55614A6F29D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift */,
 			);
 			path = TopPlaceholder;
@@ -189,6 +191,7 @@
 		55EA5C4E29CF42F700464D65 /* PN */ = {
 			isa = PBXGroup;
 			children = (
+				55614A7129D09DC100CCFACD /* PNTextFieldConfiguration.swift */,
 				55614A7C29D09E4C00CCFACD /* TopPlaceholder */,
 				55614A7A29D09E3F00CCFACD /* FloatPlaceholder */,
 			);
@@ -284,10 +287,11 @@
 				55614A6D29D09D2E00CCFACD /* SeparatorView.swift in Sources */,
 				55614A7029D09D9000CCFACD /* PNTopPlaceholderTextFieldContainer.swift in Sources */,
 				551DC1C029DA8D60002FD40D /* TLTextFieldConfiguration.swift in Sources */,
-				55614A7229D09DC100CCFACD /* PNTopPlaceholderTextFieldConfiguration.swift in Sources */,
+				55614A7229D09DC100CCFACD /* PNTextFieldConfiguration.swift in Sources */,
 				551DC1BE29D99B7B002FD40D /* TLTextFieldContainer.swift in Sources */,
 				55614A7629D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift in Sources */,
 				55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */,
+				55F2D65929DD3951007CBDE7 /* TLTextFieldBehavior.swift in Sources */,
 				55614A7E29D09E6A00CCFACD /* RoundInsetLabel.swift in Sources */,
 				55614A6829D099DC00CCFACD /* Configurable.swift in Sources */,
 				55614A8129D0A35100CCFACD /* PasswordBehavior.swift in Sources */,

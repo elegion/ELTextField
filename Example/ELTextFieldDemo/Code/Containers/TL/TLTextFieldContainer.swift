@@ -24,8 +24,6 @@ final class TLTextFieldContainer: ELTextFieldGenericContainer<TLTextFieldConfigu
     
     private let floatingPlaceholderLabel: UILabel = {
         let label = UILabel()
-        label.isUserInteractionEnabled = false
-        label.backgroundColor = .clear
         label.layer.anchorPoint = .zero
         label.layer.position = .zero
         return label
@@ -142,36 +140,5 @@ final class MailBehavior: TLTextFieldBehavior {
                    rightItem: rightImage,
                    validation: .init(validator: ELMailTextFieldValidator(),
                                      rule: .onEndEditing))
-    }
-}
-
-class TLTextFieldBehavior: ELDefaultTextFieldBehavior {
-    
-    let floatingPlaceholder: String?
-    
-    override init(text: String? = nil,
-                  textMapper: ((String?) -> NSAttributedString?)? = nil,
-                  placeholder: String? = nil,
-                  placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
-                  rightItem: ELRightItem? = nil,
-                  mask: ELTextFieldInputMask = ELDefaultTextMask(),
-                  traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
-                  validation: ELTextFieldValidation = .default) {
-        let mapper: (String?) -> NSAttributedString? = {
-            $0?.attribute.with(font: .systemFont(ofSize: 15, weight: .regular)).with(foregroundColor: R.color.black1F22229()).build()
-        }
-        self.floatingPlaceholder = placeholder
-        super.init(
-            text: text,
-            textMapper: mapper,
-            placeholder: nil,
-            placeholderMapper: nil,
-            rightItem: .action(image: UIImage(systemName: "xmark.circle"),
-                               mode: .always,
-                               behavior: .delete),
-            mask: mask,
-            traits: traits,
-            validation: validation
-        )
     }
 }

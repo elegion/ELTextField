@@ -10,7 +10,7 @@ import ELTextField
 import Foundation
 import UIKit
 
-final class PNTopPlaceholderTextFieldContainer: ELDefaultTextFieldGenericContainer<PNTopPlaceholderTextFieldConfiguration> {
+final class PNTopPlaceholderTextFieldContainer: ELDefaultTextFieldGenericContainer<PNTextFieldConfiguration> {
 
     private let floatingLabel = UILabel()
     private let separatorView = SeparatorView()

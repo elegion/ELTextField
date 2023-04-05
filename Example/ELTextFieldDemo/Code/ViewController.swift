@@ -32,6 +32,13 @@ class ViewController: UIViewController {
                                                                                  inputMask: "$ (###) ### ## ##",
                                                                                  outputMask: "$##########"))),
         .tl(model: MailBehavior()),
+        .tl(model: .init(placeholder: "Телефончик",
+                         rightItem: .action(image: UIImage(systemName: "xmark.circle"),
+                                            mode: .whileEditing,
+                                            behavior: .delete),
+                         mask: ELPhoneTextMask(phoneCode: "+7",
+                                               inputMask: "$ (###) ### ## ##",
+                                               outputMask: "$##########"))),
         .tlMultiline(model: MailBehavior()),
     ]
     

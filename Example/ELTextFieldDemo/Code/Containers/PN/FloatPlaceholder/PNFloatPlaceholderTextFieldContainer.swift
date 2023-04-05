@@ -10,7 +10,7 @@ import Foundation
 import ELTextField
 import UIKit
 
-final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PNTopPlaceholderTextFieldConfiguration, PNFloatPlaceholderTextFieldBehavior> {
+final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PNTextFieldConfiguration, PNFloatPlaceholderTextFieldBehavior> {
     
     private enum LabelAppearance {
         case large
