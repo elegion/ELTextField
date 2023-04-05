@@ -1,0 +1,25 @@
+//
+//  SKTextFieldConfiguration.swift
+//  ELTextFieldDemo
+//
+//  Created by viktor.volkov on 05.04.2023.
+//  Copyright © 2023 E-legion. All rights reserved.
+//
+
+import Foundation
+import ELTextField
+import UIKit
+import Swissors
+
+enum SKTextFieldConfiguration: ELTextFieldConfigurationProtocol {
+    
+    static func layer(for state: ELTextField.ELTextFieldState) -> ELTextField.ELTextInputLayerConfiguration {
+        let color: UIColor = (state == .default) ? UIColor.gray : UIColor.blue
+        return .init(borderColor: color, borderWidth: 1, cornerRadius: 8, tintColor: .red)
+    }
+    
+    static func rect() -> ELTextField.ELTextInputRectConfiguration {
+        .init(textInset: UIEdgeInsets(left: 16),
+              rightViewPosition: .centerHorizontally(rightInset: 16, size: CGSize(value: 24)) ,containerHeight: .init(singleline: 48))
+    }
+}

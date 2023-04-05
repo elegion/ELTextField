@@ -133,11 +133,14 @@ final class MailBehavior: TLTextFieldBehavior {
             $0?.attribute.with(font: .systemFont(ofSize: 15, weight: .bold)).build()
         }
         let rightImage = ELRightItem.image(image: UIImage(systemName: "checkmark"), mode: .always)
+        var traits = ELDefaultTextFieldInputTraits()
+        traits.keyboardType = .phonePad
         super.init(text: mail,
                    textMapper: mapper,
                    placeholder: "Почта",
                    placeholderMapper: mapper,
                    rightItem: rightImage,
+                   traits: traits,
                    validation: .init(validator: ELMailTextFieldValidator(),
                                      rule: .onEndEditing))
     }

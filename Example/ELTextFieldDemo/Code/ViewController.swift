@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     }
     enum Items: Hashable {
         case topPlaceholder(model: ELDefaultTextFieldBehavior)
+        case sk(model: ELDefaultTextFieldBehavior)
         case search(model: PNFloatPlaceholderTextFieldBehavior)
         case tl(model: TLTextFieldBehavior)
         case tlMultiline(model: TLTextFieldBehavior)
@@ -23,6 +24,12 @@ class ViewController: UIViewController {
     private let items: [Items] = [
         .topPlaceholder(model: MailBehavior()),
         .topPlaceholder(model: PasswordBehavior()),
+        .sk(model: .init(text: "allo",
+                         placeholder: "Привет",
+                         rightItem: .action(image: UIImage(systemName: "pencil"),
+                                            mode: .always,
+                                            behavior: .delete))),
+        .sk(model: MailBehavior()),
         .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Имя", anyValueGender: .female)),
         .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Фамилия", anyValueGender: .female)),
         .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Почта", anyValueGender: .female)),
@@ -45,6 +52,7 @@ class ViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(cellType: AbstractTableViewCell<PNFloatPlaceholderTextFieldContainer>.self)
+        tableView.register(cellType: AbstractTableViewCell<SKTextFieldContainer>.self)
         tableView.register(cellType: AbstractTableViewCell<PNTopPlaceholderTextFieldContainer>.self)
         tableView.register(cellType: AbstractTableViewCell<TLTextFieldContainer>.self)
         tableView.register(cellType: MultilineTextFieldTableViewCell.self)
@@ -73,6 +81,10 @@ class ViewController: UIViewController {
             case let .topPlaceholder(model):
                 let cell = tableView.dequeueCell(of: AbstractTableViewCell<PNTopPlaceholderTextFieldContainer>.self,
                                                  for: indexPath)
+                cell.set(model: model)
+                return cell
+            case let .sk(model):
+                let cell = tableView.dequeueCell(of: AbstractTableViewCell<SKTextFieldContainer>.self, for: indexPath)
                 cell.set(model: model)
                 return cell
             case let .search(model):

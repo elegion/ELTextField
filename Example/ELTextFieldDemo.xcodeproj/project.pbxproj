@@ -28,6 +28,8 @@
 		55EA5C3A29CF3E5100464D65 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3929CF3E5100464D65 /* RswiftLibrary */; };
 		55EA5C4429CF401B00464D65 /* Swissors in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C4329CF401B00464D65 /* Swissors */; };
 		55F2D65929DD3951007CBDE7 /* TLTextFieldBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F2D65829DD3951007CBDE7 /* TLTextFieldBehavior.swift */; };
+		55FC635229DDBD0C00C8BE05 /* SKTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC635129DDBD0C00C8BE05 /* SKTextFieldConfiguration.swift */; };
+		55FC635529DDBDE500C8BE05 /* SKTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC635429DDBDE500C8BE05 /* SKTextFieldContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,8 @@
 		55EA5C2E29CEFD0100464D65 /* ELTextField */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ELTextField; path = ..; sourceTree = "<group>"; };
 		55EA5C3629CF3DCF00464D65 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		55F2D65829DD3951007CBDE7 /* TLTextFieldBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLTextFieldBehavior.swift; sourceTree = "<group>"; };
+		55FC635129DDBD0C00C8BE05 /* SKTextFieldConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKTextFieldConfiguration.swift; sourceTree = "<group>"; };
+		55FC635429DDBDE500C8BE05 /* SKTextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKTextFieldContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,7 @@
 		55EA5C3529CF3DAF00464D65 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
+				55FC634F29DDBCEC00C8BE05 /* SK */,
 				551DC1BB29D99B1B002FD40D /* TL */,
 				55EA5C4E29CF42F700464D65 /* PN */,
 			);
@@ -196,6 +201,15 @@
 				55614A7A29D09E3F00CCFACD /* FloatPlaceholder */,
 			);
 			path = PN;
+			sourceTree = "<group>";
+		};
+		55FC634F29DDBCEC00C8BE05 /* SK */ = {
+			isa = PBXGroup;
+			children = (
+				55FC635129DDBD0C00C8BE05 /* SKTextFieldConfiguration.swift */,
+				55FC635429DDBDE500C8BE05 /* SKTextFieldContainer.swift */,
+			);
+			path = SK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,12 +304,14 @@
 				55614A7229D09DC100CCFACD /* PNTextFieldConfiguration.swift in Sources */,
 				551DC1BE29D99B7B002FD40D /* TLTextFieldContainer.swift in Sources */,
 				55614A7629D09DE200CCFACD /* PNFloatPlaceholderTextFieldBehavior.swift in Sources */,
+				55FC635229DDBD0C00C8BE05 /* SKTextFieldConfiguration.swift in Sources */,
 				55EA5C1B29CEF78A00464D65 /* ViewController.swift in Sources */,
 				55F2D65929DD3951007CBDE7 /* TLTextFieldBehavior.swift in Sources */,
 				55614A7E29D09E6A00CCFACD /* RoundInsetLabel.swift in Sources */,
 				55614A6829D099DC00CCFACD /* Configurable.swift in Sources */,
 				55614A8129D0A35100CCFACD /* PasswordBehavior.swift in Sources */,
 				55EA5C1729CEF78A00464D65 /* AppDelegate.swift in Sources */,
+				55FC635529DDBDE500C8BE05 /* SKTextFieldContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
