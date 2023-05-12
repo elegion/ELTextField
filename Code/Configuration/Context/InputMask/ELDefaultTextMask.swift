@@ -20,3 +20,25 @@ public struct ELDefaultTextMask: ELTextFieldInputMask {
 
     public init() {}
 }
+
+
+public struct ELDigitTextMask: ELTextFieldInputMask {
+    
+    private let mask: String
+    
+    public init(mask: String) {
+        self.mask = mask
+    }
+    
+    public func maskedText(from rawText: String?) -> String {
+        rawText?.applyPatternOnNumbers(pattern: mask, replacementCharacter: "#") ?? ""
+    }
+    
+    public func rawText(from maskedText: String?) -> String {
+        maskedText?.components(separatedBy: CharacterSet.decimalDigits.inverted).joined() ?? ""
+    }
+    
+    public func deleteLastItem(inputText: String) -> String {
+        String(maskedText(from: inputText).dropLast())
+    }
+}

@@ -36,7 +36,7 @@ final class AbstractTableViewCell<View: UIView>: UITableViewCell, Configurable w
 
 final class MultilineTextFieldTableViewCell: UITableViewCell, Configurable {
     
-    private let view = TLTextFieldContainer(type: .multiline)
+    private let view = SKTextFieldContainer(type: .multiline)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,7 +55,7 @@ final class MultilineTextFieldTableViewCell: UITableViewCell, Configurable {
 
 extension MultilineTextFieldTableViewCell {
     
-    func set(model: TLTextFieldBehavior) {
+    func set(model: ELDefaultTextFieldBehavior) {
         view.setBehavior(model)
     }
 }

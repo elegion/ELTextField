@@ -56,7 +56,7 @@ public struct ELPhoneTextMask: ELTextFieldInputMask {
     }
 }
 
-private extension String {
+extension String {
 
     func applyPhonePatternOnNumbers(
         phoneCode: String,
@@ -82,5 +82,25 @@ private extension String {
         }
 
         return String(digits.prefix(patternCopy.count))
+    }
+    
+    func applyPatternOnNumbers(pattern: String,
+                               replacementCharacter: Character,
+                               applyOnEmpty: Bool = false) -> String {
+        var digits = components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+
+        if digits.isEmpty, applyOnEmpty, let firstDigitIndex = pattern.firstIndex(of: replacementCharacter) {
+            return String(pattern.prefix(upTo: firstDigitIndex))
+        }
+        
+        for index in pattern.indices where index < digits.endIndex {
+            let character = pattern[index]
+            
+            if character != replacementCharacter {
+                digits.insert(character, at: index)
+            }
+        }
+        
+        return String(digits.prefix(pattern.count))
     }
 }

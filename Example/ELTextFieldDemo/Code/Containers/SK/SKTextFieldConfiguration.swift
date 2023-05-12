@@ -19,7 +19,7 @@ enum SKTextFieldConfiguration: ELTextFieldConfigurationProtocol {
     }
     
     static func rect() -> ELTextField.ELTextInputRectConfiguration {
-        .init(textInset: UIEdgeInsets(left: 16),
-              rightViewPosition: .centerHorizontally(rightInset: 16, size: CGSize(value: 24)) ,containerHeight: .init(singleline: 48))
+        .init(textInset: .init(top: 12, left: 16, bottom: 12, right: .zero),
+              rightViewPosition: .centerHorizontally(rightInset: 16, size: CGSize(value: 24)) ,containerHeight: .init(singleline: 48, multiline: 160))
     }
 }
