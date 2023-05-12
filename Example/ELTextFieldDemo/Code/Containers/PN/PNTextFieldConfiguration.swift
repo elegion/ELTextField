@@ -24,7 +24,7 @@ enum PNTextFieldConfiguration: ELTextFieldConfigurationProtocol {
         .init(
             textInset: UIEdgeInsets(top: 26, bottom: 12, horizontal: 16),
             rightViewPosition: .centerHorizontally(rightInset: 20, size: CGSize(value: 40)),
-            containerHeight: .init(singleline: 60)
+            containerHeight: .init(value: 60)
         )
     }
 }

@@ -5,10 +5,15 @@
 
 import Foundation
 
+/// Действия, которые могут произойти с Behavior
 public enum ELBehaviorAction {
+    /// Текст был изменен
     case changed(newValue: String)
+    /// Ввод завершен
     case endEditing
+    /// Нажатие на `return`
     case `return`
+    /// Нажатие на текстфилд, который находится в disabled состоянии
     case tapOnDisabled
 }
 

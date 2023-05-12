@@ -25,5 +25,19 @@ public struct ELDefaultTextFieldInputTraits: ELTextFieldInputTraits {
     public var spellCheckingType: UITextSpellCheckingType = .no
     public var autocapitalizationType: UITextAutocapitalizationType = .none
 
-    public init() {}
+    public init(isSecureTextEntry: Bool = false,
+                keyboardType: UIKeyboardType = .default,
+                contentType: UITextContentType? = nil,
+                returnKeyType: UIReturnKeyType = .done,
+                autocorrectionType: UITextAutocorrectionType = .no,
+                spellCheckingType: UITextSpellCheckingType = .no,
+                autocapitalizationType: UITextAutocapitalizationType = .none) {
+        self.isSecureTextEntry = isSecureTextEntry
+        self.keyboardType = keyboardType
+        self.contentType = contentType
+        self.returnKeyType = returnKeyType
+        self.autocorrectionType = autocorrectionType
+        self.spellCheckingType = spellCheckingType
+        self.autocapitalizationType = autocapitalizationType
+    }
 }

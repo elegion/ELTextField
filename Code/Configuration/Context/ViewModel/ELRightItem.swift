@@ -12,7 +12,11 @@ import UIKit
 public enum ELRightItem {
     /// Поведение при нажатии на айтем
     public enum Behavior {
+        /// Удаление текста
         case delete
+        /// Кастомное событие
+        ///
+        /// - Parameter onTap: Замыкание для обработки события
         case custom(onTap: () -> Void)
     }
     /// Статичное изображение
@@ -25,7 +29,7 @@ public enum ELRightItem {
     case secure(showImage: UIImage?, hideImage: UIImage?, mode: UITextField.ViewMode)
     /// Системная кнопка очистки поля
     case systemClear
-
+    
     var isSystemClear: Bool {
         switch self {
         case .action,

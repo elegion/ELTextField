@@ -6,7 +6,9 @@
 import Foundation
 import UIKit
 
-/// Протокол, в котором описаны методы делегата TextInput'a
+/// Методы делегата TextInput
+///
+/// Является оберткой над UITextFieldDelegate и UITextViewDelegate
 public protocol ELTextInputDelegate: AnyObject {
     func textInputShouldClear(_ textInput: ELTextInput) -> Bool
     func textInputShouldBeginEditing(_ textInput: ELTextInput) -> Bool

@@ -7,5 +7,10 @@ import Foundation
 
 /// Валидатор для проверки корректности введенного текста
 public protocol ELTextFieldValidator {
+    
+    /// Проверяет валидность текста
+    ///
+    /// - Parameter text: Введенный текст
+    /// - Returns: Валиден ли текст по объявленным правилам
     func isValid(text: String?) -> Bool
 }

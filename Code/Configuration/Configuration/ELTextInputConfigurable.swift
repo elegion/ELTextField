@@ -6,11 +6,17 @@
 import Foundation
 import UIKit
 
-/// Протокол, который позволяет конфигурировать представление TextInput
+/// Конфигурация представления TextInput
 public protocol ELTextInputConfigurable: AnyObject {
     var textInputDelegate: ELTextInputDelegate? { get set }
-
+    
+    /// Настраивает Layer для TextInput
+    ///
+    /// - Parameter configuration: Все возможные состояния TextInput
     func configureLayer(_ configuration: ELTextInputLayerConfiguration)
+    
+    /// Настраивает Traits для TextInput
+    /// - Parameter traits: Traits
     func configureTraits(_ traits: ELTextFieldInputTraits)
     func configureViewModel(_ viewModel: ELTextInputViewModel)
     func updateState(_ textFieldState: ELTextFieldState)

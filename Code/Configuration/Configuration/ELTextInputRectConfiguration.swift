@@ -20,9 +20,12 @@ public struct ELContainerHeight {
         self.singleline = singleline
         self.multiline = multiline
     }
-
-    public init(singleline: CGFloat) {
-        self.init(singleline: singleline, multiline: singleline)
+    
+    /// Создает контейнер с одинаковым значением `singleline` и `multiline`
+    ///
+    /// - Parameter value: Высота контейнеров
+    public init(value: CGFloat) {
+        self.init(singleline: value, multiline: value)
     }
 }
 
