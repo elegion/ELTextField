@@ -6,21 +6,7 @@
 import Foundation
 import UIKit
 
-/// Содержит методы делегата для обработки дополнительных событий с полем ввода
-public protocol ELContainerDelegate: AnyObject {
-
-    func startEditing(in behavior: ELTextFieldBehavior)
-    func endEditing(in behavior: ELTextFieldBehavior)
-    func container(_ behavior: ELTextFieldBehavior, changedText text: String)
-    func container(_ behavior: ELTextFieldBehavior, changedState state: ELTextFieldState)
-    func `return`(in behavior: ELTextFieldBehavior)
-    func becameDisabled(in behavior: ELTextFieldBehavior)
-}
-
-public typealias ELDefaultTextFieldGenericContainer<
-    C: ELTextFieldConfigurationProtocol
-> = ELTextFieldGenericContainer<C, ELDefaultTextFieldBehavior>
-
+/// Контейнер для реализации UI-представления поля ввода
 open class ELTextFieldGenericContainer<
     Configuration: ELTextFieldConfigurationProtocol,
     Behavior: ELTextFieldBehavior

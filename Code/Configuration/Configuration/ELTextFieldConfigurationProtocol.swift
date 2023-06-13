@@ -8,7 +8,12 @@ import Foundation
 /// Протокол для представления конфигурации контейнера ввода
 public protocol ELTextFieldConfigurationProtocol {
     
-    /// Layer для состояний
+    /// Возвращает *Layers* для состояний
+    ///
+    /// Вызывается в момент изменения состояния поля ввода
+    ///
+    /// - Parameter state: Состояние, для которого нужно вернуть конфигурацию
+    /// - Returns: *Layer* для запрашиваемой конфигурации
     static func layer(for state: ELTextFieldState) -> ELTextInputLayerConfiguration
     /// Возвращает размер контейнера и позиции для поля ввода
     static func rect() -> ELTextInputRectConfiguration
