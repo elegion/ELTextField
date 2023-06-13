@@ -12,8 +12,10 @@ public protocol ELContainerDelegate: AnyObject {
     
     func startEditing(in behavior: ELTextFieldBehavior)
     func endEditing(in behavior: ELTextFieldBehavior)
-    func container(_ behavior: ELTextFieldBehavior, changedText text: String)
-    func container(_ behavior: ELTextFieldBehavior, changedState state: ELTextFieldState)
+    func container(_ behavior: ELTextFieldBehavior,
+                   changedText text: String)
+    func container(_ behavior: ELTextFieldBehavior,
+                   changedState state: ELTextFieldState)
     func `return`(in behavior: ELTextFieldBehavior)
     func becameDisabled(in behavior: ELTextFieldBehavior)
 }

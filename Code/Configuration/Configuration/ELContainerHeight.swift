@@ -13,7 +13,12 @@ public struct ELContainerHeight {
     let singleline: CGFloat
     /// Высота многострочного контейнера
     let multiline: CGFloat
-
+    
+    /// Создает контейнер с различными значениями высот для однострочного и многострочного поля ввода
+    ///
+    /// - Parameters:
+    ///   - singleline: Высота однострочного контейнера
+    ///   - multiline: Высота многострочного контейнера
     public init(
         singleline: CGFloat,
         multiline: CGFloat

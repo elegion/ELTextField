@@ -12,8 +12,12 @@ open class ELTextFieldGenericContainer<
     Behavior: ELTextFieldBehavior
 >: UIView, ELContainerDelegate {
 
+    #warning("Почему public?")
     public let textInput: ELTextInput & ELTextInputConfigurable
 
+    /// Конструктор с передачей типа поля ввода
+    ///
+    /// - Parameter type: Тип поля ввода. По умолчанию однострочный
     public init(type: ELTextInputType = .singleline) {
         self.textInput = type.isSingleline ? ELTextField<Configuration>() : ELTextView<Configuration>()
         super.init(frame: .zero)
@@ -25,7 +29,9 @@ open class ELTextFieldGenericContainer<
         textInput.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         textInput.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-
+    
+    
+    /// Так как наследуется от UIView
     override public init(frame: CGRect) {
         self.textInput = ELTextField<Configuration>()
         super.init(frame: frame)
@@ -37,12 +43,18 @@ open class ELTextFieldGenericContainer<
         textInput.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         textInput.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-
+    
+    
     @available(*, unavailable)
     public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Метод для настройки поведения
+    ///
+    /// Необходимо использовать всегда для того, чтобы поле ввода было связано с Поведением. Если не осуществить настройку – поле ввода не получит должную настройку, а поведение не будет связано с Контейнером.
+    ///
+    /// - Parameter behavior: Поведение, которое необходимо передать для настройки соответствующего поля ввода
     open func setBehavior(_ behavior: Behavior?) {
         behavior?.configure(textInput: textInput)
         behavior?.containerDelegate = self

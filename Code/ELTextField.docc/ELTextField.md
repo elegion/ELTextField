@@ -15,14 +15,13 @@ ELTextField позволяет абстрагироваться от детал�
 - <doc:Motivation>
 - <doc:BaseConcepts>
 
-### Behaviors
-
+### Поведение
+- ``ELTextFieldBehavior``
 - ``ELDefaultTextFieldBehavior``
 
 ### Containers
 
 - ``ELTextFieldGenericContainer``
-- ``ELDefaultTextFieldGenericContainer``
 
 ### Configurations
 
@@ -38,10 +37,4 @@ ELTextField позволяет абстрагироваться от детал�
 
 ### Валидация
 
-- ``ELTextFieldValidation``
-- ``ELTextFieldValidator``
 - ``ELDefaultTextFieldValidator``
-- ``ELMailTextFieldValidator``
-- ``ELNotEmptyTextFieldValidator``
-- ``ELTextFieldValidationRule``
-

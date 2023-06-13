@@ -17,15 +17,25 @@ public enum ELBehaviorAction {
     case tapOnDisabled
 }
 
+/// Хранит состояние поля ввода
 public protocol ELTextFieldBehavior: ELTextInputDelegate {
+    
+    /// Маска поля ввода
     var mask: ELTextFieldInputMask { get }
+    /// Настройки ввода
     var traits: ELTextFieldInputTraits { get }
+    /// Логика валидации поля ввода
     var validation: ELTextFieldValidation { get }
+    /// Текст плейсхолдера
     var placeholder: String? { get }
+    /// Текущее значение поля ввода
     var value: String { get }
+    /// Флаг, указывающий, является ли поле валидным
     var isValid: Bool { get }
-
+    
+    /// Срабатывает при срабатывании событий поля ввода
     var onAction: ((ELBehaviorAction) -> Void)? { get set }
+    /// Используется для обработки дополнительных событий делегата
     var containerDelegate: ELContainerDelegate? { get set }
 
     func configure(textInput: ELTextInput & ELTextInputConfigurable)
