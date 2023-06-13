@@ -17,8 +17,31 @@ ELTextField позволяет абстрагироваться от детал�
 
 ### Behaviors
 
+- ``ELDefaultTextFieldBehavior``
+
+### Containers
+
+- ``ELTextFieldGenericContainer``
+- ``ELDefaultTextFieldGenericContainer``
+
+### Configurations
+
+- ``ELTextFieldConfigurationProtocol``
+- ``ELTextInputConfigurable``
+- ``ELTextInputLayerConfiguration``
+
 ### Маски ввода
 
 - ``ELTextFieldInputMask``
 - ``ELDefaultTextMask``
 - ``ELDigitTextMask``
+
+### Валидация
+
+- ``ELTextFieldValidation``
+- ``ELTextFieldValidator``
+- ``ELDefaultTextFieldValidator``
+- ``ELMailTextFieldValidator``
+- ``ELNotEmptyTextFieldValidator``
+- ``ELTextFieldValidationRule``
+
