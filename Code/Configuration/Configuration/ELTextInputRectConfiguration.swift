@@ -34,6 +34,9 @@ public enum ELRightViewPosition {
     /// Явные значения позиции
     case absolute(topRight: CGPoint, size: CGSize)
     /// Позиция будет выровнена по горизонтальной оси
+    /// - Parameters:
+    ///   - rightInset: Отступ от правого края
+    ///   - size: Размер View
     case centerHorizontally(rightInset: CGFloat, size: CGSize)
 
     var size: CGSize {

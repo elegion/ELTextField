@@ -6,7 +6,7 @@
 import Foundation
 import UIKit
 
-/// Класс, описывающий поведение поля ввода
+/// Описывает поведение поля ввода по умолчанию
 open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     
     public let mask: ELTextFieldInputMask
@@ -26,21 +26,36 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     open var isValid: Bool {
         validation.validator.isValid(text: viewModel.text)
     }
-
+    
+    private let isEditable: Bool
+    
     public var onAction: ((ELBehaviorAction) -> Void)?
     public weak var containerDelegate: ELContainerDelegate?
     var textInput: (ELTextInput & ELTextInputConfigurable)?
-
+    
+    /// Создает Поведение
+    /// - Parameters:
+    ///   - text: Введенный текст
+    ///   - textMapper: Маппер для текста. Необходим в случае, если введенный текст имеет отличный от системного шрифта
+    ///   - placeholder: Текст плейсхолдера
+    ///   - placeholderMapper: Маппер для текста. Необходим в случае, если текст плейсхолдера имеет отличный от системного шрифт
+    ///   - isEditable: Флаг, указывающий на возможность редактирования текста
+    ///   - rightItem: Правый айтем
+    ///   - mask: Маска ввода
+    ///   - traits: Настройки клавиатуры
+    ///   - validation: Правило валидации поля
     public init(
         text: String? = nil,
         textMapper: ((String?) -> NSAttributedString?)? = nil,
         placeholder: String? = nil,
         placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
+        isEditable: Bool = true,
         rightItem: ELRightItem? = nil,
         mask: ELTextFieldInputMask = ELDefaultTextMask(),
         traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
         validation: ELTextFieldValidation = .default
     ) {
+        self.isEditable = isEditable
         self.mask = mask
         self.traits = traits
         self.validation = validation
@@ -78,6 +93,9 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     }
 
     open func textInputShouldBeginEditing(_: ELTextInput) -> Bool {
+        guard isEditable else {
+            return false
+        }
         switch viewModel.state {
         case .disabled:
             onAction?(.tapOnDisabled)

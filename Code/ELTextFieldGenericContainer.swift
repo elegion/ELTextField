@@ -6,6 +6,7 @@
 import Foundation
 import UIKit
 
+/// Содержит методы делегата для обработки дополнительных событий с полем ввода
 public protocol ELContainerDelegate: AnyObject {
 
     func startEditing(in behavior: ELTextFieldBehavior)
