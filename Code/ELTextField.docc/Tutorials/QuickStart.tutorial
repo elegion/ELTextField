@@ -20,22 +20,21 @@
             @Step {
                 Реализуем метод, возвращающий Layer для поля ввода.
                 
-                Для начала вернем простейшую конфигурацию, которая не будет зависеть от состояния поля ввода.
+                ``ELTextField/ELTextInputLayerConfiguration`` настраивает внешний вид бордера и цветовую палитру Контейнера. Вернем простейшую конфигурацию, которая не будет зависеть от состояния поля ввода.
                 
                 @Code(name: "BaseTextFieldConfiguration.swift", file: 01-quickstart-02.swift)
             }
             
             @Step {
                 Реализуем метод, возвращающий Rect для поля ввода.
-                `ELTextInputRectConfiguration` определяет размер контейнера поля ввода и позицию поля ввода внутри контейнера
                 
-                Укажем конфигурацию по умолчанию и укажем высоту контейнера, равную 60.
+                ``ELTextField/ELTextInputRectConfiguration`` определяет размер контейнера поля ввода и позицию поля ввода внутри контейнера. Укажем конфигурацию по умолчанию и укажем высоту контейнера, равную 60.
                 
                 @Code(name: "BaseTextFieldConfiguration.swift", file: 01-quickstart-03.swift)
             }
             
             @Step {
-                Создадим Контейнер. Укажем, что контейнер наследуется от `ELDefaultTextFieldGenericContainer` и будем использовать Поведение, предоставляемое из бибилиотеки.
+                Создадим Контейнер. Укажем, что контейнер наследуется от ``ELTextField/ELDefaultTextFieldGenericContainer`` и будем использовать Поведение, предоставляемое из бибилиотеки.
                 
                 @Code(name: "BaseTextFieldContainer.swift", file: 01-quickstart-04.swift)
             }
@@ -45,18 +44,25 @@
                 
                 @Code(name: "BaseTextFieldContainer.swift", file: 01-quickstart-05.swift)
             }
-            
-            Все готово для работы!
-            
+        }
+    }
+
+    @Section(title: "Добавление на UI") {
+
+        @ContentAndMedia {
+            Все готово для работы! Можно приступать к работе с компонентом.
+        }
+
+        @Steps {
             @Step {
-                Добавим Контейнер на UI.
-                Укажем, что *container* является *singleline*
+                Добавим Контейнер на ViewController.
+                Укажем, что *container* является *singleline*.
                 
                 @Code(name: "TutorialViewController.swift", file: 01-quickstart-06.swift)
             }
             
             @Step {
-                Установим Поведение для контейнера
+                Установим Поведение для контейнера.
                 
                 @Code(name: "TutorialViewController.swift", file: 01-quickstart-07.swift) {
                     @Image(source: 01-quickstart-01.png, alt: "A screenhot of a created textfield")
@@ -64,7 +70,7 @@
             }
             
             @Step {
-                Изменим *placeholder* для контейнера
+                Изменим *placeholder* для контейнера.
                 
                 Поведение определяет внешний вид контейнера, добавим в конструктор *Hello ELTextField*.
                 @Code(name: "TutorialViewController.swift", file: 01-quickstart-08.swift) {
@@ -72,7 +78,7 @@
                 }
             }
 
-            Вы великолепны!
+            Выполнен минимальный набор требований, необходимый для начала работы с ELTextField
         }
     }
 }
