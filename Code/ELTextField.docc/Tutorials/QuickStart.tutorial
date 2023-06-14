@@ -1,0 +1,78 @@
+@Tutorial(time: 15) {
+    @Intro(title: "Базовые компоненты") {
+        Рассмотрим базовые сущности библиотеки, что такое Behavior и Container
+    }
+    
+    @Section(title: "Простой пример") {
+        @ContentAndMedia {
+            Рассмотрим минимальный набор действий, необходимый для реализации компонента поля ввода
+        }
+        
+        @Steps {
+            
+            @Step {
+                Создадим Конфигурацию. В первую очередь необходимо описать базовое представление поля ввода.
+                Опишем, как поле ввода будет выглядить для простейшего примера.
+                
+                @Code(name: "BaseTextFieldConfiguration.swift", file: 01-quickstart-01.swift)
+            }
+            
+            @Step {
+                Реализуем метод, возвращающий Layer для поля ввода.
+                
+                Для начала вернем простейшую конфигурацию, которая не будет зависеть от состояния поля ввода.
+                
+                @Code(name: "BaseTextFieldConfiguration.swift", file: 01-quickstart-02.swift)
+            }
+            
+            @Step {
+                Реализуем метод, возвращающий Rect для поля ввода.
+                `ELTextInputRectConfiguration` определяет размер контейнера поля ввода и позицию поля ввода внутри контейнера
+                
+                Укажем конфигурацию по умолчанию и укажем высоту контейнера, равную 60.
+                
+                @Code(name: "BaseTextFieldConfiguration.swift", file: 01-quickstart-03.swift)
+            }
+            
+            @Step {
+                Создадим Контейнер. Укажем, что контейнер наследуется от `ELDefaultTextFieldGenericContainer` и будем использовать Поведение, предоставляемое из бибилиотеки.
+                
+                @Code(name: "BaseTextFieldContainer.swift", file: 01-quickstart-04.swift)
+            }
+            
+            @Step {
+                Укажем Конфигурацию, которую создали ранее.
+                
+                @Code(name: "BaseTextFieldContainer.swift", file: 01-quickstart-05.swift)
+            }
+            
+            Все готово для работы!
+            
+            @Step {
+                Добавим Контейнер на UI.
+                Укажем, что *container* является *singleline*
+                
+                @Code(name: "TutorialViewController.swift", file: 01-quickstart-06.swift)
+            }
+            
+            @Step {
+                Установим Поведение для контейнера
+                
+                @Code(name: "TutorialViewController.swift", file: 01-quickstart-07.swift) {
+                    @Image(source: 01-quickstart-01.png, alt: "A screenhot of a created textfield")
+                }
+            }
+            
+            @Step {
+                Изменим *placeholder* для контейнера
+                
+                Поведение определяет внешний вид контейнера, добавим в конструктор *Hello ELTextField*.
+                @Code(name: "TutorialViewController.swift", file: 01-quickstart-08.swift) {
+                    @Image(source: 01-quickstart-02.png, alt: "A screenhot of a created textfield with placeholder")
+                }
+            }
+
+            Вы великолепны!
+        }
+    }
+}
