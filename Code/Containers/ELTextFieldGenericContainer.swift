@@ -21,21 +21,18 @@ open class ELTextFieldGenericContainer<
     public init(type: ELTextInputType = .singleline) {
         self.textInput = type.isSingleline ? ELTextField<Configuration>() : ELTextView<Configuration>()
         super.init(frame: .zero)
-
-        addSubview(textInput)
-        textInput.translatesAutoresizingMaskIntoConstraints = false
-        textInput.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        textInput.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        textInput.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        textInput.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        configure()
     }
     
-    
-    /// Так как наследуется от UIView
     override public init(frame: CGRect) {
         self.textInput = ELTextField<Configuration>()
         super.init(frame: frame)
 
+        configure()
+    }
+        
+    open func configure() {
         addSubview(textInput)
         textInput.translatesAutoresizingMaskIntoConstraints = false
         textInput.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -43,7 +40,6 @@ open class ELTextFieldGenericContainer<
         textInput.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         textInput.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-    
     
     @available(*, unavailable)
     public required init?(coder _: NSCoder) {

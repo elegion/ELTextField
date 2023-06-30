@@ -13,7 +13,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     public let traits: ELTextFieldInputTraits
     public let validation: ELTextFieldValidation
     
-    private var viewModel: ELTextInputViewModel
+    public var viewModel: ELTextInputViewModel
     
     public var placeholder: String? {
         viewModel.placeholder

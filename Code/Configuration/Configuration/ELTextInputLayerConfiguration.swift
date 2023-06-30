@@ -11,6 +11,7 @@ public struct ELTextInputLayerConfiguration {
     public let borderColor: UIColor?
     public let borderWidth: CGFloat?
     public let cornerRadius: CGFloat?
+    /// Tint color для изображений и курсора
     public let tintColor: UIColor?
     public let backgroundColor: UIColor?
     

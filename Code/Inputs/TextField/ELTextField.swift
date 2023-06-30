@@ -126,6 +126,7 @@ extension ELTextField: ELTextInputConfigurable {
         layer.borderWidth = configuration.borderWidth ?? .zero
         layer.cornerRadius = configuration.cornerRadius ?? .zero
         backgroundColor = configuration.backgroundColor ?? .clear
+        tintColor = configuration.tintColor
         rightImageView?.tintColor = configuration.tintColor
     }
 
