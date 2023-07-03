@@ -72,6 +72,10 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
     func textViewShouldBeginEditing(_: UITextView) -> Bool {
         textInputDelegate?.textInputShouldBeginEditing(self) ?? true
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textInputDelegate?.textInputDidBeginEditing(self)
+    }
 
     func textViewDidEndEditing(_: UITextView) {
         textInputDelegate?.textInputdDidEndEditing(self)
@@ -97,6 +101,8 @@ extension ELTextView: ELTextInputConfigurable {
         layer.borderColor = configuration.borderColor?.cgColor
         layer.borderWidth = configuration.borderWidth ?? .zero
         layer.cornerRadius = configuration.cornerRadius ?? .zero
+        backgroundColor = configuration.backgroundColor
+        tintColor = configuration.tintColor
         rightImageView?.tintColor = configuration.tintColor
     }
 
