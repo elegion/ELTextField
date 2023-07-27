@@ -28,6 +28,11 @@ extension ELTextField: ELTextInput {
         get { inputAccessoryView }
         set { inputAccessoryView = newValue }
     }
+    
+    var leftImageView: UIView? {
+        get { leftView }
+        set { leftView = newValue}
+    }
 
     var rightImageView: UIView? {
         get { rightView }

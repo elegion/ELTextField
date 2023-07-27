@@ -102,7 +102,7 @@ extension ELTextView: ELTextInputConfigurable {
         layer.borderWidth = configuration.borderWidth ?? .zero
         layer.cornerRadius = configuration.cornerRadius ?? .zero
         backgroundColor = configuration.backgroundColor
-        tintColor = configuration.tintColor
+        tintColor = configuration.caretColor
         rightImageView?.tintColor = configuration.tintColor
     }
 

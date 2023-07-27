@@ -33,6 +33,10 @@ extension ELTextView: ELTextInput {
         set { inputAccessoryView = newValue }
     }
 
+    var leftImageView: UIView? {
+        get { nil }
+        set { }
+    }
     var rightImageView: UIView? {
         get { nil }
         set {}

@@ -194,6 +194,11 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     open func textInput(_: ELTextInput, canPerformAction _: Selector, withSender _: Any?) -> Bool {
         true
     }
+    
+    open func touchesBegan(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
+    open func touchesMoved(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
+    open func touchesEnded(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
+    open func touchesCancelled(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
 }
 
 private extension Optional where Wrapped == String {

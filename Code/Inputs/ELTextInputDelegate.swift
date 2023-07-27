@@ -25,4 +25,9 @@ public protocol ELTextInputDelegate: AnyObject {
         canPerformAction action: Selector,
         withSender sender: Any?
     ) -> Bool
+    
+    func touchesBegan(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?)
+    func touchesMoved(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?)
+    func touchesEnded(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?)
+    func touchesCancelled(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?)
 }

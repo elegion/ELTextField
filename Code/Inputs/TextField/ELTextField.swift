@@ -40,7 +40,12 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
         guard let insets = rectConfiguration.editingInset else {
             return bounds
         }
-        return bounds.inset(by: insets)
+        var insettedBounds = bounds.inset(by: insets)
+        guard let rightPosition = rectConfiguration.rightViewPosition, rightImageView?.isHidden == false else {
+            return insettedBounds
+        }
+        insettedBounds.size.width = insettedBounds.width - (rightPosition.rightInset + rightPosition.size.width)
+        return insettedBounds
     }
 
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
@@ -117,6 +122,30 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     private func didTapOnRightAction() {
         rightItemAction?()
     }
+    
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+
+        textInputDelegate?.touchesBegan(in: self, touches: touches, with: event)
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+
+        textInputDelegate?.touchesMoved(in: self, touches: touches, with: event)
+    }
+
+    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+
+        textInputDelegate?.touchesEnded(in: self, touches: touches, with: event)
+    }
+
+    override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+
+        textInputDelegate?.touchesCancelled(in: self, touches: touches, with: event)
+    }
 }
 
 extension ELTextField: ELTextInputConfigurable {
@@ -126,8 +155,9 @@ extension ELTextField: ELTextInputConfigurable {
         layer.borderWidth = configuration.borderWidth ?? .zero
         layer.cornerRadius = configuration.cornerRadius ?? .zero
         backgroundColor = configuration.backgroundColor ?? .clear
-        tintColor = configuration.tintColor
+        tintColor = configuration.caretColor
         rightImageView?.tintColor = configuration.tintColor
+        leftImageView?.tintColor = configuration.tintColor
     }
 
     func configureTraits(_ traits: ELTextFieldInputTraits) {

@@ -63,6 +63,13 @@ open class ELTextFieldGenericContainer<
 
         return textInput.becomeFirstResponder()
     }
+    
+    @discardableResult
+    open override func resignFirstResponder() -> Bool {
+        super.resignFirstResponder()
+        
+        return textInput.resignFirstResponder()
+    }
 
     open func startEditing(in behavior: ELTextFieldBehavior) {}
 
