@@ -15,6 +15,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     weak var textInputDelegate: ELTextInputDelegate?
+    weak var customRightViewMode: ELRightViewMode?
 
     private var rightItemAction: (() -> Void)?
 
@@ -90,10 +91,12 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     func textFieldDidBeginEditing(_: UITextField) {
+        setRightItem(with: customRightViewMode?.itemForBeginEditing(textInput: self))
         textInputDelegate?.textInputDidBeginEditing(self)
     }
 
     func textFieldDidEndEditing(_: UITextField) {
+        setRightItem(with: customRightViewMode?.itemForEndEditing(textInput: self))
         textInputDelegate?.textInputdDidEndEditing(self)
     }
 
@@ -178,7 +181,9 @@ extension ELTextField: ELTextInputConfigurable {
         } else {
             placeholder = viewModel.placeholder
         }
+        setLeftItem(with: viewModel.leftView)
         setRightItem(with: viewModel.rightItem)
+        setRightItem(with: customRightViewMode?.initialItem(textInput: self))
 
         updateState(viewModel.state)
     }
@@ -192,10 +197,25 @@ extension ELTextField: ELTextInputConfigurable {
     private func didTapOnDeleteAction() {
         textFieldShouldClear(self)
     }
-
+    
+    private func setViewMode(from mode: ELRightItem.Mode) {
+        switch mode {
+        case let .custom(customViewMode):
+            customRightViewMode = customViewMode
+        case let .system(systemViewMode):
+            rightViewMode = systemViewMode
+        }
+    }
+    
+    private func setLeftItem(with leftView: UIView?) {
+        guard let leftView else {
+            return
+        }
+        self.leftImageView = leftView
+    }
+    
     private func setRightItem(with rightItem: ELRightItem?) {
         guard let rightItem else {
-            rightViewMode = .never
             return
         }
         switch rightItem {
@@ -203,7 +223,7 @@ extension ELTextField: ELTextInputConfigurable {
             let imageView = UIImageView(image: image)
             imageView.contentMode = .center
             rightImageView = imageView
-            rightViewMode = mode
+            setViewMode(from: mode)
         case let .action(image, mode, behavior):
             let button = UIButton(type: .system)
             if #available(iOS 14.0, *) {
@@ -234,10 +254,10 @@ extension ELTextField: ELTextInputConfigurable {
             }
             button.setImage(image, for: .normal)
             rightImageView = button
-            rightViewMode = mode
+            setViewMode(from: mode)
         case let .custom(view, mode):
             rightImageView = view
-            rightViewMode = mode
+            setViewMode(from: mode)
         case let .secure(showImage, hideImage, mode):
             let button = UIButton()
             if #available(iOS 14.0, *) {
@@ -251,7 +271,7 @@ extension ELTextField: ELTextInputConfigurable {
             rightImageView = button
             button.setImage(showImage, for: .normal)
             button.setImage(hideImage, for: .selected)
-            rightViewMode = mode
+            setViewMode(from: mode)
         default:
             break
         }

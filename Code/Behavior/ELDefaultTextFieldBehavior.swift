@@ -34,6 +34,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     var textInput: (ELTextInput & ELTextInputConfigurable)?
     
     /// Создает Поведение
+    ///
     /// - Parameters:
     ///   - text: Введенный текст
     ///   - textMapper: Маппер для текста. Необходим в случае, если введенный текст имеет отличный от системного шрифта
@@ -112,10 +113,12 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     }
     
     open func textInputdDidEndEditing(_: ELTextInput) {
-        updateState(.default)
         onAction?(.endEditing)
         containerDelegate?.endEditing(in: self)
-        triggerValidation(for: .onEndEditing, isEditing: false)
+        let stateChanged = triggerValidation(for: .onEndEditing, isEditing: false)
+        if !stateChanged {
+            updateState(.default)
+        }
     }
 
     /// При вводе текста свайпом происходит рекурсивный вызов методов:
@@ -152,7 +155,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             }
             let newValue = mask.maskedText(from: newText)
             updateText(newValue: newValue)
-            triggerValidation(for: .onChange, isEditing: true)
+            _ = triggerValidation(for: .onChange, isEditing: true)
             if !isTextEmpty {
                 textInput.setCursorPosition(
                     newTextLength: newText.count,
@@ -173,15 +176,16 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         containerDelegate?.container(self, changedText: viewModel.text ?? "")
     }
     
-    private func triggerValidation(for rule: ELTextFieldValidationRule, isEditing: Bool) {
+    private func triggerValidation(for rule: ELTextFieldValidationRule, isEditing: Bool) -> Bool {
         guard validation.rule == rule else {
-            return
+            return false
         }
         if isValid {
             updateState(isEditing ? .editing : .default)
         } else {
             updateState(.error)
         }
+        return true
     }
 
     public func textInputShouldReturn(_ textInput: ELTextInput) -> Bool {
