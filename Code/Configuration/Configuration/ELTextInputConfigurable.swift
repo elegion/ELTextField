@@ -20,4 +20,6 @@ public protocol ELTextInputConfigurable: AnyObject {
     func configureTraits(_ traits: ELTextFieldInputTraits)
     func configureViewModel(_ viewModel: ELTextInputViewModel)
     func updateState(_ textFieldState: ELTextFieldState)
+    
+    func configureRightItem(with container: ELRightViewContainer?)
 }

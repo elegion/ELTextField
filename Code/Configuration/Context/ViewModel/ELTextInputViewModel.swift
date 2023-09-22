@@ -11,7 +11,6 @@ public struct ELTextInputViewModel {
     public var text: String?
     public var placeholder: String?
     public var leftView: UIView?
-    public var rightItem: ELRightItem?
     public var state: ELTextFieldState
     
     /// Маппер для преобразования текста плейсхолдера

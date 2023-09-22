@@ -10,32 +10,7 @@ import UIKit
 
 /// Перечисление для отображения правого айтема
 public enum ELRightItem {
-    /// Поведение при нажатии на айтем
-    public enum Behavior {
-        /// Удаление текста
-        case delete
-        /// Кастомное событие
-        ///
-        /// - Parameter onTap: Замыкание для обработки события
-        case custom(onTap: () -> Void)
-    }
     
-    /// Описание режима отображения правого айтема
-    public enum Mode {
-        /// Режимы отображения, предлагаемые системой
-        case system(viewMode: UITextField.ViewMode)
-        /// Кастомная реализация ViewMode
-        case custom(viewMode: ELRightViewMode)
-        
-        var systemMode: UITextField.ViewMode? {
-            switch self {
-            case let .system(viewMode):
-                return viewMode
-            case .custom:
-                return nil
-            }
-        }
-    }
     /// Статичное изображение
     case image(image: UIImage?, mode: Mode)
     /// Статичное изображение с возможностью обработки нажатия
@@ -56,6 +31,32 @@ public enum ELRightItem {
             return false
         case .systemClear:
             return true
+        }
+    }
+}
+
+public extension ELRightItem {
+    
+    /// Поведение при нажатии на айтем
+    enum Behavior {
+        /// Удаление текста
+        case delete
+        /// Кастомное событие
+        ///
+        /// - Parameter onTap: Замыкание для обработки события
+        case custom(onTap: () -> Void)
+    }
+    
+    /// Описание режима отображения правого айтема
+    enum Mode {
+        /// Режимы отображения, предлагаемые системой
+        case system(viewMode: UITextField.ViewMode)
+        
+        var systemMode: UITextField.ViewMode? {
+            switch self {
+            case let .system(viewMode):
+                return viewMode
+            }
         }
     }
 }

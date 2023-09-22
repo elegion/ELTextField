@@ -28,6 +28,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     }
     
     private let isEditable: Bool
+    private var customRightMode: ELRightViewMode?
     
     public var onAction: ((ELBehaviorAction) -> Void)?
     public weak var containerDelegate: ELContainerDelegate?
@@ -52,6 +53,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
         isEditable: Bool = true,
         rightItem: ELRightItem? = nil,
+        rightMode: ELRightViewMode? = nil,
         mask: ELTextFieldInputMask = ELDefaultTextMask(),
         traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
         validation: ELTextFieldValidation = .default
@@ -60,10 +62,10 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         self.mask = mask
         self.traits = traits
         self.validation = validation
+        customRightMode = rightMode
         self.viewModel = ELTextInputViewModel(
             text: text,
             placeholder: placeholder,
-            rightItem: rightItem,
             state: .default,
             attributedPlaceholderMapper: placeholderMapper,
             attributedTextMapper: textMapper
@@ -75,11 +77,18 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput.input = nil
         textInput.accesory = nil
         textInput.configureTraits(traits)
+        textInput.configureRightItem(with: customRightMode?.initialContainer(textInput: textInput))
         textInput.configureViewModel(viewModel)
     }
 
     public func updateState(_ state: ELTextFieldState) {
         viewModel.state = state
+        textInput?.configureRightItem(
+            with: customRightMode?.textInput(
+                textInput,
+                containerForState: state
+            )
+        )
         textInput?.updateState(viewModel.state)
         containerDelegate?.container(self, changedState: state)
     }
@@ -130,9 +139,6 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
     ) -> Bool {
-        if viewModel.state != .error {
-            updateState(.editing)
-        }
         var shouldReturn = string.isEmpty && textInput.enteredText.isNilOrEmpty && range.location == .zero && range.length == .zero
         if string.count > 1 {
             if string == lastEntry {
@@ -165,6 +171,9 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
                 )
             }
             shouldReturn = false
+        }
+        if viewModel.state != .error {
+            updateState(.editing)
         }
         return shouldReturn
     }

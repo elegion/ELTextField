@@ -132,4 +132,8 @@ extension ELTextView: ELTextInputConfigurable {
             self.configureLayer(Configuration.layer(for: textFieldState))
         }
     }
+    
+    func configureRightItem(with container: ELRightViewContainer?) {
+        #warning("Доделать")
+    }
 }

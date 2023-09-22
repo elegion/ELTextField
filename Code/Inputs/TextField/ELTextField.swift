@@ -15,7 +15,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     weak var textInputDelegate: ELTextInputDelegate?
-    weak var customRightViewMode: ELRightViewMode?
+//    weak var customRightViewMode: ELRightViewMode?
 
     private var rightItemAction: (() -> Void)?
 
@@ -91,12 +91,10 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     func textFieldDidBeginEditing(_: UITextField) {
-        setRightItem(with: customRightViewMode?.itemForBeginEditing(textInput: self))
         textInputDelegate?.textInputDidBeginEditing(self)
     }
 
     func textFieldDidEndEditing(_: UITextField) {
-        setRightItem(with: customRightViewMode?.itemForEndEditing(textInput: self))
         textInputDelegate?.textInputdDidEndEditing(self)
     }
 
@@ -182,12 +180,14 @@ extension ELTextField: ELTextInputConfigurable {
             placeholder = viewModel.placeholder
         }
         setLeftItem(with: viewModel.leftView)
-        setRightItem(with: viewModel.rightItem)
-        setRightItem(with: customRightViewMode?.initialItem(textInput: self))
 
         updateState(viewModel.state)
     }
 
+    func configureRightItem(with container: ELRightViewContainer?) {
+        setRightContainer(container)
+    }
+    
     func updateState(_ textFieldState: ELTextFieldState) {
         UIView.animate(withDuration: CATransaction.animationDuration(), delay: .zero) {
             self.configureLayer(Configuration.layer(for: textFieldState))
@@ -200,11 +200,19 @@ extension ELTextField: ELTextInputConfigurable {
     
     private func setViewMode(from mode: ELRightItem.Mode) {
         switch mode {
-        case let .custom(customViewMode):
-            customRightViewMode = customViewMode
         case let .system(systemViewMode):
             rightViewMode = systemViewMode
         }
+    }
+    
+    private func setRightContainer(_ container: ELRightViewContainer?) {
+        guard let container else {
+            return
+        }
+        rightImageView = container.view
+        rightViewMode = container.rightViewMode
+        clearButtonMode = container.clearButtonMode
+        isSecureTextEntry = container.isSecureTextEntry
     }
     
     private func setLeftItem(with leftView: UIView?) {

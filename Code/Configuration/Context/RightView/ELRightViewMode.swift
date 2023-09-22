@@ -11,7 +11,9 @@ import UIKit
 /// Протокол для создания кастомного поведения правой иконки
 public protocol ELRightViewMode: AnyObject {
     
-    func initialItem(textInput: ELTextInput) -> ELRightItem?
-    func itemForBeginEditing(textInput: ELTextInput) -> ELRightItem?
-    func itemForEndEditing(textInput: ELTextInput) -> ELRightItem?
+    func initialContainer(textInput: ELTextInput) -> ELRightViewContainer
+    func textInput(
+        _ textInput: ELTextInput?,
+        containerForState state: ELTextFieldState
+    ) -> ELRightViewContainer
 }
