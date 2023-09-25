@@ -9,6 +9,7 @@ import UIKit
 public protocol ELTextInput: UIView {
     var attributedTextMapper: ((String?) -> NSAttributedString?)? { get set }
     var enteredText: String? { get set }
+    var isSecureText: Bool { get set }
     var input: UIView? { get set }
     var accesory: UIView? { get set }
     var leftImageView: UIView? { get set }

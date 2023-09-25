@@ -77,8 +77,8 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput.input = nil
         textInput.accesory = nil
         textInput.configureTraits(traits)
-        textInput.configureRightItem(with: customRightMode?.initialContainer(textInput: textInput))
         textInput.configureViewModel(viewModel)
+        textInput.configureRightItem(with: customRightMode?.initialContainer(textInput: textInput))
     }
 
     public func updateState(_ state: ELTextFieldState) {
@@ -182,6 +182,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput?.enteredText = newValue
         viewModel.text = newValue.isNilOrEmpty ? nil : newValue
         onAction?(.changed(newValue: viewModel.text ?? ""))
+        updateState(viewModel.state)
         containerDelegate?.container(self, changedText: viewModel.text ?? "")
     }
     

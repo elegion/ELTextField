@@ -23,6 +23,11 @@ extension ELTextView: ELTextInput {
         }
     }
     
+    var isSecureText: Bool {
+        get { isSecureTextEntry }
+        set { isSecureTextEntry = newValue }
+    }
+    
     var input: UIView? {
         get { inputView }
         set { inputView = newValue }
