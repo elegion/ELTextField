@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ELRightViewMode.swift
 //  
 //
 //  Created by viktor.volkov on 21.09.2023.

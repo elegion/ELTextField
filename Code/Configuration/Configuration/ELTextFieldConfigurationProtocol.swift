@@ -17,4 +17,6 @@ public protocol ELTextFieldConfigurationProtocol {
     static func layer(for state: ELTextFieldState) -> ELTextInputLayerConfiguration
     /// Возвращает размер контейнера и позиции для поля ввода
     static func rect() -> ELTextInputRectConfiguration
+    
+    static func caretRect() -> ELCaretRect
 }

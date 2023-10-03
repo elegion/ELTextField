@@ -93,6 +93,37 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
             replacementString: text
         ) ?? true
     }
+    
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        var rect = super.caretRect(for: position)
+        func yPos(currentRect: CGRect, targetHeight: CGFloat) -> CGFloat {
+            let diff = currentRect.height - targetHeight
+            return currentRect.origin.y + diff / 2
+        }
+        switch Configuration.caretRect() {
+        case .default:
+            return rect
+        case let .height(newHeight):
+            return CGRect(
+                x: rect.origin.x,
+                y: yPos(currentRect: rect, targetHeight: newHeight),
+                width: rect.width,
+                height: newHeight
+            )
+        case let .width(newWidth):
+            rect.size.width = newWidth
+            return rect
+        case let .size(newSize):
+            return CGRect(
+                x: rect.origin.x,
+                y: yPos(currentRect: rect, targetHeight: newSize.height),
+                width: newSize.width,
+                height: newSize.height
+            )
+        case let .dynamic(modifier):
+            return modifier(rect)
+        }
+    }
 }
 
 extension ELTextView: ELTextInputConfigurable {
