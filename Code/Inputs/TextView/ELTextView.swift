@@ -49,12 +49,13 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
             equalTo: topAnchor,
             constant: topConstant
         ).isActive = true
-        textContainerInset = UIEdgeInsets(
+        let insets = UIEdgeInsets(
             top: topConstant,
             left: leadingConstant - 4,
             bottom: textInset.bottom,
             right: textInset.right
         )
+        textContainerInset = insets
     }
 
     @available(*, unavailable)
@@ -147,6 +148,11 @@ extension ELTextView: ELTextInputConfigurable {
         autocapitalizationType = traits.autocapitalizationType
     }
 
+    func configureFont(_ configuration: ELTextInputFontConfiguration?) {
+        font = configuration?.font
+        textColor = configuration?.textColor
+    }
+    
     func configureViewModel(_ viewModel: ELTextInputViewModel) {
         attributedTextMapper = viewModel.attributedTextMapper
         enteredText = viewModel.text

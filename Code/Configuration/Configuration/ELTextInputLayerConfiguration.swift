@@ -33,3 +33,13 @@ public struct ELTextInputLayerConfiguration {
         self.backgroundColor = backgroundColor
     }
 }
+
+public struct ELTextInputFontConfiguration {
+    public let font: UIFont?
+    public let textColor: UIColor?
+    
+    public init(font: UIFont?, textColor: UIColor?) {
+        self.font = font
+        self.textColor = textColor
+    }
+}

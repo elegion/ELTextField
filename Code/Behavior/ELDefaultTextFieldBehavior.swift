@@ -33,6 +33,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     public var onAction: ((ELBehaviorAction) -> Void)?
     public weak var containerDelegate: ELContainerDelegate?
     var textInput: (ELTextInput & ELTextInputConfigurable)?
+    private let fontConfiguration: ELTextInputFontConfiguration?
     
     /// Создает Поведение
     ///
@@ -55,6 +56,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         rightItem: ELRightItem? = nil,
         rightMode: ELRightViewMode? = nil,
         mask: ELTextFieldInputMask = ELDefaultTextMask(),
+        font: ELTextInputFontConfiguration? = nil,
         traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
         validation: ELTextFieldValidation = .default
     ) {
@@ -63,6 +65,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         self.traits = traits
         self.validation = validation
         customRightMode = rightMode
+        self.fontConfiguration = font
         self.viewModel = ELTextInputViewModel(
             text: text,
             placeholder: placeholder,
@@ -77,6 +80,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput.input = nil
         textInput.accesory = nil
         textInput.configureTraits(traits)
+        textInput.configureFont(fontConfiguration)
         textInput.configureViewModel(viewModel)
         textInput.configureRightItem(with: customRightMode?.initialContainer(textInput: textInput))
     }

@@ -17,12 +17,14 @@ public final class ELSecureTextRightView: ELRightViewMode {
     public init(
         showTextImage: UIImage?,
         hideTextImage: UIImage?,
+        tintColor: UIColor? = nil,
         initiallyHidden: Bool = true
     ) {
         self.hideTextImage = hideTextImage
         self.showTextImage = showTextImage
         self.initiallyHidden = initiallyHidden
         toggleButton.setImage(initiallyHidden ? showTextImage : hideTextImage, for: .normal)
+        toggleButton.tintColor = tintColor
     }
     
     public func initialContainer(

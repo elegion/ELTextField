@@ -15,7 +15,6 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     weak var textInputDelegate: ELTextInputDelegate?
-//    weak var customRightViewMode: ELRightViewMode?
 
     private var rightItemAction: (() -> Void)?
 
@@ -30,23 +29,39 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        guard let insets = rectConfiguration.textInset else {
-            return bounds
-        }
-        return bounds.inset(by: insets)
-    }
-
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        guard let insets = rectConfiguration.editingInset else {
+    private func calculateRect(
+        forBounds bounds: CGRect,
+        insets: UIEdgeInsets?,
+        rightPosition: ELRightViewPosition?,
+        rightViewVisible: Bool
+    ) -> CGRect {
+        guard let insets else {
             return bounds
         }
         var insettedBounds = bounds.inset(by: insets)
-        guard let rightPosition = rectConfiguration.rightViewPosition, rightImageView?.isHidden == false else {
+        guard let rightPosition, rightViewVisible else {
             return insettedBounds
         }
         insettedBounds.size.width = insettedBounds.width - (rightPosition.rightInset + rightPosition.size.width)
         return insettedBounds
+    }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        calculateRect(
+            forBounds: bounds,
+            insets: rectConfiguration.textInset,
+            rightPosition: rectConfiguration.rightViewPosition,
+            rightViewVisible: !(rightImageView?.isHidden ?? false)
+        )
+    }
+
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        calculateRect(
+            forBounds: bounds,
+            insets: rectConfiguration.editingInset,
+            rightPosition: rectConfiguration.rightViewPosition, 
+            rightViewVisible: !(rightImageView?.isHidden ?? false)
+        )
     }
 
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
@@ -201,6 +216,11 @@ extension ELTextField: ELTextInputConfigurable {
         spellCheckingType = traits.spellCheckingType
         autocapitalizationType = traits.autocapitalizationType
     }
+    
+    func configureFont(_ configuration: ELTextInputFontConfiguration?) {
+        font = configuration?.font
+        textColor = configuration?.textColor
+    }
 
     func configureViewModel(_ viewModel: ELTextInputViewModel) {
         attributedTextMapper = viewModel.attributedTextMapper
@@ -251,69 +271,5 @@ extension ELTextField: ELTextInputConfigurable {
             return
         }
         self.leftImageView = leftView
-    }
-    
-    private func setRightItem(with rightItem: ELRightItem?) {
-        guard let rightItem else {
-            return
-        }
-        switch rightItem {
-        case let .image(image, mode):
-            let imageView = UIImageView(image: image)
-            imageView.contentMode = .center
-            rightImageView = imageView
-            setViewMode(from: mode)
-        case let .action(image, mode, behavior):
-            let button = UIButton(type: .system)
-            if #available(iOS 14.0, *) {
-                let action: UIAction
-                switch behavior {
-                case .delete:
-                    action = UIAction {
-                        [weak self] _ in
-
-                        self?.didTapOnDeleteAction()
-                    }
-                case let .custom(tapAction):
-                    action = UIAction {
-                        _ in
-
-                        tapAction()
-                    }
-                }
-                button.addAction(action, for: .touchUpInside)
-            } else {
-                switch behavior {
-                case .delete:
-                    button.addTarget(self, action: #selector(didTapOnDelete), for: .touchUpInside)
-                case let .custom(action):
-                    rightItemAction = action
-                    button.addTarget(self, action: #selector(didTapOnRightAction), for: .touchUpInside)
-                }
-            }
-            button.setImage(image, for: .normal)
-            rightImageView = button
-            setViewMode(from: mode)
-        case let .custom(view, mode):
-            rightImageView = view
-            setViewMode(from: mode)
-        case let .secure(showImage, hideImage, mode):
-            let button = UIButton()
-            if #available(iOS 14.0, *) {
-                button.addAction(UIAction {
-                    [weak self, weak button] _ in
-                    
-                    self?.isSecureTextEntry.toggle()
-                    button?.isSelected.toggle()
-                }, for: .touchUpInside)
-            }
-            rightImageView = button
-            button.setImage(showImage, for: .normal)
-            button.setImage(hideImage, for: .selected)
-            setViewMode(from: mode)
-        default:
-            break
-        }
-        clearButtonMode = rightItem.isSystemClear ? .whileEditing : .never
     }
 }

@@ -14,6 +14,7 @@ public protocol ELTextInputConfigurable: AnyObject {
     ///
     /// - Parameter configuration: Все возможные состояния TextInput
     func configureLayer(_ configuration: ELTextInputLayerConfiguration)
+    func configureFont(_ configuration: ELTextInputFontConfiguration?)
     
     /// Настраивает Traits для TextInput
     /// - Parameter traits: Traits
