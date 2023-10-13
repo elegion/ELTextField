@@ -35,3 +35,16 @@ public struct ELRightViewContainer {
         self.isSecureTextEntry = false
     }
 }
+
+public struct ELLeftViewContainer {
+    let view: UIView?
+    let leftViewMode: UITextField.ViewMode
+    
+    init(
+        view: UIView?,
+        leftViewMode: UITextField.ViewMode
+    ) {
+        self.view = view
+        self.leftViewMode = leftViewMode
+    }
+}

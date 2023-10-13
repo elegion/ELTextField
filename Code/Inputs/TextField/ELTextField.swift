@@ -28,30 +28,61 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private var rightViewVisible: Bool {
+        guard let rightImageView else {
+            return false
+        }
+        let rightViewVisible = !rightImageView.isHidden
+        return rightViewVisible && rightViewMode != .never
+    }
+    
+    private var leftViewVisible: Bool {
+        guard let leftImageView else {
+            return false
+        }
+        let leftViewVisible = !leftImageView.isHidden
+        return leftViewVisible && leftViewMode != .never
+    }
 
     private func calculateRect(
         forBounds bounds: CGRect,
         insets: UIEdgeInsets?,
+        leftPosition: ELLeftViewPosition?,
         rightPosition: ELRightViewPosition?,
-        rightViewVisible: Bool
+        rightViewVisible: Bool,
+        leftViewVisible: Bool
     ) -> CGRect {
         guard let insets else {
             return bounds
         }
-        var insettedBounds = bounds.inset(by: insets)
-        guard let rightPosition, rightViewVisible else {
-            return insettedBounds
+        let rightTotalWidth: CGFloat = if let rightPosition, rightViewVisible {
+            rightPosition.rightInset + rightPosition.size.width
+        } else {
+            0
         }
-        insettedBounds.size.width = insettedBounds.width - (rightPosition.rightInset + rightPosition.size.width)
-        return insettedBounds
+        let leftTotalWidth: CGFloat = if let leftPosition, leftViewVisible {
+            leftPosition.leftInset + leftPosition.size.width
+        } else {
+            0
+        }
+        let imagesInsets = UIEdgeInsets(
+            top: .zero,
+            left: leftTotalWidth,
+            bottom: .zero,
+            right: rightTotalWidth
+        )
+        return bounds.inset(by: insets).inset(by: imagesInsets)
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         calculateRect(
             forBounds: bounds,
             insets: rectConfiguration.textInset,
+            leftPosition: rectConfiguration.leftViewPosition,
             rightPosition: rectConfiguration.rightViewPosition,
-            rightViewVisible: !(rightImageView?.isHidden ?? false)
+            rightViewVisible: rightViewVisible,
+            leftViewVisible: leftViewVisible
         )
     }
 
@@ -59,8 +90,31 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
         calculateRect(
             forBounds: bounds,
             insets: rectConfiguration.editingInset,
-            rightPosition: rectConfiguration.rightViewPosition, 
-            rightViewVisible: !(rightImageView?.isHidden ?? false)
+            leftPosition: rectConfiguration.leftViewPosition,
+            rightPosition: rectConfiguration.rightViewPosition,
+            rightViewVisible: rightViewVisible,
+            leftViewVisible: leftViewVisible
+        )
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        guard let leftViewPosition = rectConfiguration.leftViewPosition else {
+            return bounds
+        }
+        let leftViewSize = leftViewPosition.size
+        let xInset = leftViewPosition.leftInset
+        let xPos = rectConfiguration.textInset?.left ?? .zero
+        let yPos: CGFloat
+        switch leftViewPosition {
+        case let .absolute(topLeft, _):
+            yPos = bounds.height - leftViewSize.height - topLeft.y
+        case .centerHorizontally:
+            yPos = bounds.height / 2 - leftViewSize.height / 2
+        }
+        let origin = CGPoint(x: xPos, y: yPos)
+        return CGRect(
+            origin: origin,
+            size: leftViewSize
         )
     }
 
@@ -69,7 +123,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
             return bounds
         }
         let rightViewSize = rightViewPosition.size
-        let xInset = rightViewPosition.rightInset
+        let xInset = rectConfiguration.textInset?.right ?? .zero//rightViewPosition.rightInset
         let xPos = bounds.width - rightViewSize.width - xInset
         let yPos: CGFloat
         switch rightViewPosition {
@@ -239,6 +293,10 @@ extension ELTextField: ELTextInputConfigurable {
         setRightContainer(container)
     }
     
+    func configureLeftItem(with container: ELLeftViewContainer?) {
+        setLeftContainer(container)
+    }
+    
     func updateState(_ textFieldState: ELTextFieldState) {
         UIView.animate(withDuration: CATransaction.animationDuration(), delay: .zero) {
             self.configureLayer(Configuration.layer(for: textFieldState))
@@ -264,6 +322,14 @@ extension ELTextField: ELTextInputConfigurable {
         rightViewMode = container.rightViewMode
         clearButtonMode = container.clearButtonMode
         isSecureTextEntry = container.isSecureTextEntry
+    }
+    
+    private func setLeftContainer(_ container: ELLeftViewContainer?) {
+        guard let container else {
+            return
+        }
+        leftImageView = container.view
+        leftViewMode = container.leftViewMode
     }
     
     private func setLeftItem(with leftView: UIView?) {

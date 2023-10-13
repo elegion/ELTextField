@@ -23,4 +23,5 @@ public protocol ELTextInputConfigurable: AnyObject {
     func updateState(_ textFieldState: ELTextFieldState)
     
     func configureRightItem(with container: ELRightViewContainer?)
+    func configureLeftItem(with container: ELLeftViewContainer?)
 }

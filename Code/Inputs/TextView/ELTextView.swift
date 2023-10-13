@@ -173,4 +173,8 @@ extension ELTextView: ELTextInputConfigurable {
     func configureRightItem(with container: ELRightViewContainer?) {
         #warning("Доделать")
     }
+    
+    func configureLeftItem(with container: ELLeftViewContainer?) {
+        #warning("Доделать")
+    }
 }

@@ -45,6 +45,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     ///   - isEditable: Флаг, указывающий на возможность редактирования текста
     ///   - rightItem: Правый айтем
     ///   - mask: Маска ввода
+    ///   - font: Шрифт
     ///   - traits: Настройки клавиатуры
     ///   - validation: Правило валидации поля
     public init(
@@ -83,6 +84,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput.configureFont(fontConfiguration)
         textInput.configureViewModel(viewModel)
         textInput.configureRightItem(with: customRightMode?.initialContainer(textInput: textInput))
+        textInput.configureLeftItem(with: ELLeftViewContainer(view: UIImageView(image: UIImage(named: "backward.end.alt.fill")), leftViewMode: .never))
     }
 
     public func updateState(_ state: ELTextFieldState) {
