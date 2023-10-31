@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public final class ELSecureTextRightView: ELRightViewMode {
+open class ELSecureTextRightViewMode: ELRightViewMode {
     private let hideTextImage: UIImage?
     private let showTextImage: UIImage?
     private let toggleButton = UIButton(type: .system)
@@ -27,7 +27,7 @@ public final class ELSecureTextRightView: ELRightViewMode {
         toggleButton.tintColor = tintColor
     }
     
-    public func initialContainer(
+    open func initialContainer(
         textInput: ELTextInput
     ) -> ELRightViewContainer {
         toggleButton.addAction(UIAction {
@@ -48,7 +48,7 @@ public final class ELSecureTextRightView: ELRightViewMode {
         )
     }
     
-    public func textInput(
+    open func textInput(
         _ textInput: ELTextInput?,
         containerForState state: ELTextFieldState
     ) -> ELRightViewContainer {
