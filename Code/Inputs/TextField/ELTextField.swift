@@ -16,8 +16,6 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
 
     weak var textInputDelegate: ELTextInputDelegate?
 
-    private var rightItemAction: (() -> Void)?
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -102,7 +100,6 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
             return bounds
         }
         let leftViewSize = leftViewPosition.size
-        let xInset = leftViewPosition.leftInset
         let xPos = rectConfiguration.textInset?.left ?? .zero
         let yPos: CGFloat
         switch leftViewPosition {
@@ -123,7 +120,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
             return bounds
         }
         let rightViewSize = rightViewPosition.size
-        let xInset = rectConfiguration.textInset?.right ?? .zero//rightViewPosition.rightInset
+        let xInset = rectConfiguration.textInset?.right ?? .zero
         let xPos = bounds.width - rightViewSize.width - xInset
         let yPos: CGFloat
         switch rightViewPosition {
@@ -214,16 +211,6 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
         }
     }
     
-    @objc
-    private func didTapOnDelete() {
-        didTapOnDeleteAction()
-    }
-
-    @objc
-    private func didTapOnRightAction() {
-        rightItemAction?()
-    }
-    
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
 
@@ -284,37 +271,11 @@ extension ELTextField: ELTextInputConfigurable {
         } else {
             placeholder = viewModel.placeholder
         }
-        setLeftItem(with: viewModel.leftView)
 
         updateState(viewModel.state)
     }
 
     func configureRightItem(with container: ELRightViewContainer?) {
-        setRightContainer(container)
-    }
-    
-    func configureLeftItem(with container: ELLeftViewContainer?) {
-        setLeftContainer(container)
-    }
-    
-    func updateState(_ textFieldState: ELTextFieldState) {
-        UIView.animate(withDuration: CATransaction.animationDuration(), delay: .zero) {
-            self.configureLayer(Configuration.layer(for: textFieldState))
-        }
-    }
-
-    private func didTapOnDeleteAction() {
-        textFieldShouldClear(self)
-    }
-    
-    private func setViewMode(from mode: ELRightItem.Mode) {
-        switch mode {
-        case let .system(systemViewMode):
-            rightViewMode = systemViewMode
-        }
-    }
-    
-    private func setRightContainer(_ container: ELRightViewContainer?) {
         guard let container else {
             return
         }
@@ -324,7 +285,7 @@ extension ELTextField: ELTextInputConfigurable {
         isSecureTextEntry = container.isSecureTextEntry
     }
     
-    private func setLeftContainer(_ container: ELLeftViewContainer?) {
+    func configureLeftItem(with container: ELLeftViewContainer?) {
         guard let container else {
             return
         }
@@ -332,10 +293,9 @@ extension ELTextField: ELTextInputConfigurable {
         leftViewMode = container.leftViewMode
     }
     
-    private func setLeftItem(with leftView: UIView?) {
-        guard let leftView else {
-            return
+    func updateState(_ textFieldState: ELTextFieldState) {
+        UIView.animate(withDuration: CATransaction.animationDuration(), delay: .zero) {
+            self.configureLayer(Configuration.layer(for: textFieldState))
         }
-        self.leftImageView = leftView
     }
 }

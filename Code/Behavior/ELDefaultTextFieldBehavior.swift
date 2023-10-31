@@ -29,6 +29,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     
     private let isEditable: Bool
     private var customRightMode: ELRightViewMode?
+    private var customLeftMode: ELLeftViewMode?
     
     public var onAction: ((ELBehaviorAction) -> Void)?
     public weak var containerDelegate: ELContainerDelegate?
@@ -43,7 +44,8 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     ///   - placeholder: Текст плейсхолдера
     ///   - placeholderMapper: Маппер для плейсхолдера. Необходим в случае, если текст плейсхолдера имеет отличный от системного шрифт
     ///   - isEditable: Флаг, указывающий на возможность редактирования текста
-    ///   - rightItem: Правый айтем
+    ///   - leftMode: Логика отображения левого айтема
+    ///   - rightMode: Логика отображения правого айтема
     ///   - mask: Маска ввода
     ///   - font: Шрифт
     ///   - traits: Настройки клавиатуры
@@ -54,7 +56,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         placeholder: String? = nil,
         placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
         isEditable: Bool = true,
-        rightItem: ELRightItem? = nil,
+        leftMode: ELLeftViewMode? = nil,
         rightMode: ELRightViewMode? = nil,
         mask: ELTextFieldInputMask = ELDefaultTextMask(),
         font: ELTextInputFontConfiguration? = nil,
@@ -65,7 +67,8 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         self.mask = mask
         self.traits = traits
         self.validation = validation
-        customRightMode = rightMode
+        self.customLeftMode = leftMode
+        self.customRightMode = rightMode
         self.fontConfiguration = font
         self.viewModel = ELTextInputViewModel(
             text: text,
@@ -84,7 +87,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput.configureFont(fontConfiguration)
         textInput.configureViewModel(viewModel)
         textInput.configureRightItem(with: customRightMode?.initialContainer(textInput: textInput))
-        textInput.configureLeftItem(with: ELLeftViewContainer(view: UIImageView(image: UIImage(named: "backward.end.alt.fill")), leftViewMode: .never))
+        textInput.configureLeftItem(with: customLeftMode?.initialContainer(textInput: textInput))
     }
 
     public func updateState(_ state: ELTextFieldState) {
@@ -92,6 +95,12 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput?.configureRightItem(
             with: customRightMode?.textInput(
                 textInput,
+                containerForState: state
+            )
+        )
+        textInput?.configureLeftItem(
+            with: customLeftMode?.textInput(
+                textInput, 
                 containerForState: state
             )
         )

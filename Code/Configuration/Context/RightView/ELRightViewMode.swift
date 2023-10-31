@@ -17,3 +17,13 @@ public protocol ELRightViewMode: AnyObject {
         containerForState state: ELTextFieldState
     ) -> ELRightViewContainer
 }
+
+/// Протокол для создания кастомного поведения левой иконки
+public protocol ELLeftViewMode: AnyObject {
+    
+    func initialContainer(textInput: ELTextInput) -> ELLeftViewContainer
+    func textInput(
+        _ textInput: ELTextInput?,
+        containerForState state: ELTextFieldState
+    ) -> ELLeftViewContainer
+}
