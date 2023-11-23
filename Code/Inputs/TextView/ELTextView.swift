@@ -49,12 +49,13 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
             equalTo: topAnchor,
             constant: topConstant
         ).isActive = true
-        textContainerInset = UIEdgeInsets(
+        let insets = UIEdgeInsets(
             top: topConstant,
             left: leadingConstant - 4,
             bottom: textInset.bottom,
             right: textInset.right
         )
+        textContainerInset = insets
     }
 
     @available(*, unavailable)
@@ -71,6 +72,10 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
 
     func textViewShouldBeginEditing(_: UITextView) -> Bool {
         textInputDelegate?.textInputShouldBeginEditing(self) ?? true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textInputDelegate?.textInputDidBeginEditing(self)
     }
 
     func textViewDidEndEditing(_: UITextView) {
@@ -89,6 +94,37 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
             replacementString: text
         ) ?? true
     }
+    
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        var rect = super.caretRect(for: position)
+        func yPos(currentRect: CGRect, targetHeight: CGFloat) -> CGFloat {
+            let diff = currentRect.height - targetHeight
+            return currentRect.origin.y + diff / 2
+        }
+        switch Configuration.caretRect() {
+        case .default:
+            return rect
+        case let .height(newHeight):
+            return CGRect(
+                x: rect.origin.x,
+                y: yPos(currentRect: rect, targetHeight: newHeight),
+                width: rect.width,
+                height: newHeight
+            )
+        case let .width(newWidth):
+            rect.size.width = newWidth
+            return rect
+        case let .size(newSize):
+            return CGRect(
+                x: rect.origin.x,
+                y: yPos(currentRect: rect, targetHeight: newSize.height),
+                width: newSize.width,
+                height: newSize.height
+            )
+        case let .dynamic(modifier):
+            return modifier(rect)
+        }
+    }
 }
 
 extension ELTextView: ELTextInputConfigurable {
@@ -97,6 +133,8 @@ extension ELTextView: ELTextInputConfigurable {
         layer.borderColor = configuration.borderColor?.cgColor
         layer.borderWidth = configuration.borderWidth ?? .zero
         layer.cornerRadius = configuration.cornerRadius ?? .zero
+        backgroundColor = configuration.backgroundColor
+        tintColor = configuration.caretColor
         rightImageView?.tintColor = configuration.tintColor
     }
 
@@ -110,6 +148,11 @@ extension ELTextView: ELTextInputConfigurable {
         autocapitalizationType = traits.autocapitalizationType
     }
 
+    func configureFont(_ configuration: ELTextInputFontConfiguration?) {
+        font = configuration?.font
+        textColor = configuration?.textColor
+    }
+    
     func configureViewModel(_ viewModel: ELTextInputViewModel) {
         attributedTextMapper = viewModel.attributedTextMapper
         enteredText = viewModel.text
@@ -125,5 +168,13 @@ extension ELTextView: ELTextInputConfigurable {
         UIView.animate(withDuration: CATransaction.animationDuration(), delay: .zero) {
             self.configureLayer(Configuration.layer(for: textFieldState))
         }
+    }
+    
+    func configureRightItem(with container: ELRightViewContainer?) {
+        #warning("Доделать")
+    }
+    
+    func configureLeftItem(with container: ELLeftViewContainer?) {
+        #warning("Доделать")
     }
 }

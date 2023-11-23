@@ -23,6 +23,11 @@ extension ELTextView: ELTextInput {
         }
     }
     
+    var isSecureText: Bool {
+        get { isSecureTextEntry }
+        set { isSecureTextEntry = newValue }
+    }
+    
     var input: UIView? {
         get { inputView }
         set { inputView = newValue }
@@ -33,6 +38,10 @@ extension ELTextView: ELTextInput {
         set { inputAccessoryView = newValue }
     }
 
+    var leftImageView: UIView? {
+        get { nil }
+        set { }
+    }
     var rightImageView: UIView? {
         get { nil }
         set {}

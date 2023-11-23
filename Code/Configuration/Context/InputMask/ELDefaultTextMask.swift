@@ -5,7 +5,9 @@
 
 import Foundation
 
+/// Маска, которая не изменяет введенный текст
 public struct ELDefaultTextMask: ELTextFieldInputMask {
+    
     public func maskedText(from rawText: String?) -> String {
         rawText ?? ""
     }

@@ -6,14 +6,14 @@
 import Foundation
 import UIKit
 
-/// Класс, описывающий поведение поля ввода
+/// Описывает поведение поля ввода по умолчанию
 open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     
     public let mask: ELTextFieldInputMask
     public let traits: ELTextFieldInputTraits
     public let validation: ELTextFieldValidation
     
-    private var viewModel: ELTextInputViewModel
+    public var viewModel: ELTextInputViewModel
     
     public var placeholder: String? {
         viewModel.placeholder
@@ -26,28 +26,53 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     open var isValid: Bool {
         validation.validator.isValid(text: viewModel.text)
     }
-
+    
+    private let isEditable: Bool
+    private var customRightMode: ELRightViewMode?
+    private var customLeftMode: ELLeftViewMode?
+    
     public var onAction: ((ELBehaviorAction) -> Void)?
     public weak var containerDelegate: ELContainerDelegate?
     var textInput: (ELTextInput & ELTextInputConfigurable)?
-
+    private let fontConfiguration: ELTextInputFontConfiguration?
+    
+    /// Создает Поведение
+    ///
+    /// - Parameters:
+    ///   - text: Введенный текст
+    ///   - textMapper: Маппер для текста. Необходим в случае, если введенный текст имеет отличный от системного шрифт
+    ///   - placeholder: Текст плейсхолдера
+    ///   - placeholderMapper: Маппер для плейсхолдера. Необходим в случае, если текст плейсхолдера имеет отличный от системного шрифт
+    ///   - isEditable: Флаг, указывающий на возможность редактирования текста
+    ///   - leftMode: Логика отображения левого айтема
+    ///   - rightMode: Логика отображения правого айтема
+    ///   - mask: Маска ввода
+    ///   - font: Шрифт
+    ///   - traits: Настройки клавиатуры
+    ///   - validation: Правило валидации поля
     public init(
         text: String? = nil,
         textMapper: ((String?) -> NSAttributedString?)? = nil,
         placeholder: String? = nil,
         placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
-        rightItem: ELRightItem? = nil,
+        isEditable: Bool = true,
+        leftMode: ELLeftViewMode? = nil,
+        rightMode: ELRightViewMode? = nil,
         mask: ELTextFieldInputMask = ELDefaultTextMask(),
+        font: ELTextInputFontConfiguration? = nil,
         traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
         validation: ELTextFieldValidation = .default
     ) {
+        self.isEditable = isEditable
         self.mask = mask
         self.traits = traits
         self.validation = validation
+        self.customLeftMode = leftMode
+        self.customRightMode = rightMode
+        self.fontConfiguration = font
         self.viewModel = ELTextInputViewModel(
             text: text,
             placeholder: placeholder,
-            rightItem: rightItem,
             state: .default,
             attributedPlaceholderMapper: placeholderMapper,
             attributedTextMapper: textMapper
@@ -59,11 +84,26 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput.input = nil
         textInput.accesory = nil
         textInput.configureTraits(traits)
+        textInput.configureFont(fontConfiguration)
         textInput.configureViewModel(viewModel)
+        textInput.configureRightItem(with: customRightMode?.initialContainer(textInput: textInput))
+        textInput.configureLeftItem(with: customLeftMode?.initialContainer(textInput: textInput))
     }
 
     public func updateState(_ state: ELTextFieldState) {
         viewModel.state = state
+        textInput?.configureRightItem(
+            with: customRightMode?.textInput(
+                textInput,
+                containerForState: state
+            )
+        )
+        textInput?.configureLeftItem(
+            with: customLeftMode?.textInput(
+                textInput, 
+                containerForState: state
+            )
+        )
         textInput?.updateState(viewModel.state)
         containerDelegate?.container(self, changedState: state)
     }
@@ -78,6 +118,9 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     }
 
     open func textInputShouldBeginEditing(_: ELTextInput) -> Bool {
+        guard isEditable else {
+            return false
+        }
         switch viewModel.state {
         case .disabled:
             onAction?(.tapOnDisabled)
@@ -94,10 +137,12 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     }
     
     open func textInputdDidEndEditing(_: ELTextInput) {
-        updateState(.default)
         onAction?(.endEditing)
         containerDelegate?.endEditing(in: self)
-        triggerValidation(for: .onEndEditing, isEditing: false)
+        let stateChanged = triggerValidation(for: .onEndEditing, isEditing: false)
+        if !stateChanged {
+            updateState(.default)
+        }
     }
 
     /// При вводе текста свайпом происходит рекурсивный вызов методов:
@@ -109,9 +154,6 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
     ) -> Bool {
-        if viewModel.state != .error {
-            updateState(.editing)
-        }
         var shouldReturn = string.isEmpty && textInput.enteredText.isNilOrEmpty && range.location == .zero && range.length == .zero
         if string.count > 1 {
             if string == lastEntry {
@@ -134,7 +176,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             }
             let newValue = mask.maskedText(from: newText)
             updateText(newValue: newValue)
-            triggerValidation(for: .onChange, isEditing: true)
+            _ = triggerValidation(for: .onChange, isEditing: true)
             if !isTextEmpty {
                 textInput.setCursorPosition(
                     newTextLength: newText.count,
@@ -145,6 +187,9 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             }
             shouldReturn = false
         }
+        if viewModel.state != .error {
+            updateState(.editing)
+        }
         return shouldReturn
     }
 
@@ -152,18 +197,20 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput?.enteredText = newValue
         viewModel.text = newValue.isNilOrEmpty ? nil : newValue
         onAction?(.changed(newValue: viewModel.text ?? ""))
+        updateState(viewModel.state)
         containerDelegate?.container(self, changedText: viewModel.text ?? "")
     }
     
-    private func triggerValidation(for rule: ELTextFieldValidationRule, isEditing: Bool) {
+    private func triggerValidation(for rule: ELTextFieldValidationRule, isEditing: Bool) -> Bool {
         guard validation.rule == rule else {
-            return
+            return false
         }
         if isValid {
             updateState(isEditing ? .editing : .default)
         } else {
             updateState(.error)
         }
+        return true
     }
 
     public func textInputShouldReturn(_ textInput: ELTextInput) -> Bool {
@@ -176,6 +223,11 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     open func textInput(_: ELTextInput, canPerformAction _: Selector, withSender _: Any?) -> Bool {
         true
     }
+    
+    open func touchesBegan(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
+    open func touchesMoved(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
+    open func touchesEnded(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
+    open func touchesCancelled(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
 }
 
 private extension Optional where Wrapped == String {

@@ -1,0 +1,18 @@
+@Tutorials(name: "ELTextField") {
+    @Intro(title: "ELTextField") {
+        Набор уроков позволит быстро вкатиться в работу с библиотекой
+        
+<!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+    }
+    
+    @Chapter(name: "Сущности библиотеки") {
+        Посмотрим, с чего начать и как дальше работать
+<!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+        
+        @TutorialReference(tutorial: "doc:QuickStart")
+    }
+
+    @Chapter(name: "Кастомизация") {
+        Как кастомизировать поле ввода
+    }    
+}

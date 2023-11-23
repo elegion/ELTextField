@@ -6,20 +6,7 @@
 import Foundation
 import UIKit
 
-public protocol ELContainerDelegate: AnyObject {
-
-    func startEditing(in behavior: ELTextFieldBehavior)
-    func endEditing(in behavior: ELTextFieldBehavior)
-    func container(_ behavior: ELTextFieldBehavior, changedText text: String)
-    func container(_ behavior: ELTextFieldBehavior, changedState state: ELTextFieldState)
-    func `return`(in behavior: ELTextFieldBehavior)
-    func becameDisabled(in behavior: ELTextFieldBehavior)
-}
-
-public typealias ELDefaultTextFieldGenericContainer<
-    C: ELTextFieldConfigurationProtocol
-> = ELTextFieldGenericContainer<C, ELDefaultTextFieldBehavior>
-
+/// Контейнер для реализации UI-представления поля ввода
 open class ELTextFieldGenericContainer<
     Configuration: ELTextFieldConfigurationProtocol,
     Behavior: ELTextFieldBehavior
@@ -27,22 +14,24 @@ open class ELTextFieldGenericContainer<
 
     public let textInput: ELTextInput & ELTextInputConfigurable
 
-    public init(type: ELTextInputType = .singleline) {
+    /// Конструктор с передачей типа поля ввода
+    ///
+    /// - Parameter type: Тип поля ввода. По умолчанию однострочный
+    public required init(type: ELTextInputType = .singleline) {
         self.textInput = type.isSingleline ? ELTextField<Configuration>() : ELTextView<Configuration>()
         super.init(frame: .zero)
-
-        addSubview(textInput)
-        textInput.translatesAutoresizingMaskIntoConstraints = false
-        textInput.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        textInput.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        textInput.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        textInput.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        configure()
     }
-
+    
     override public init(frame: CGRect) {
         self.textInput = ELTextField<Configuration>()
         super.init(frame: frame)
 
+        configure()
+    }
+        
+    open func configure() {
         addSubview(textInput)
         textInput.translatesAutoresizingMaskIntoConstraints = false
         textInput.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -50,12 +39,18 @@ open class ELTextFieldGenericContainer<
         textInput.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         textInput.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-
+    
     @available(*, unavailable)
     public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Метод для настройки поведения
+    ///
+    /// Необходимо использовать всегда для того, чтобы поле ввода было связано с Поведением. 
+    /// Если не осуществить настройку – поле ввода не получит должную настройку, а поведение не будет связано с Контейнером.
+    ///
+    /// - Parameter behavior: Поведение, которое необходимо передать для настройки соответствующего поля ввода
     open func setBehavior(_ behavior: Behavior?) {
         behavior?.configure(textInput: textInput)
         behavior?.containerDelegate = self
@@ -67,6 +62,13 @@ open class ELTextFieldGenericContainer<
         super.becomeFirstResponder()
 
         return textInput.becomeFirstResponder()
+    }
+    
+    @discardableResult
+    open override func resignFirstResponder() -> Bool {
+        super.resignFirstResponder()
+        
+        return textInput.resignFirstResponder()
     }
 
     open func startEditing(in behavior: ELTextFieldBehavior) {}

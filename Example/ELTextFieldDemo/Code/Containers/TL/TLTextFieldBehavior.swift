@@ -17,6 +17,7 @@ class TLTextFieldBehavior: ELDefaultTextFieldBehavior {
                   textMapper: ((String?) -> NSAttributedString?)? = nil,
                   placeholder: String? = nil,
                   placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
+                  isEditable: Bool = true,
                   rightItem: ELRightItem? = nil,
                   mask: ELTextFieldInputMask = ELDefaultTextMask(),
                   traits: ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),

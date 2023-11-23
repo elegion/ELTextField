@@ -7,7 +7,7 @@ import Foundation
 
 /// Состояние TextField
 public enum ELTextFieldState {
-    /// По умолчанию
+    /// Не в фокусе
     case `default`
     /// Ошибка (например, валидации)
     case error

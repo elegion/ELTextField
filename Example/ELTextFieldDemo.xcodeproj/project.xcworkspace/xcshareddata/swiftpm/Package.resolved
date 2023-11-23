@@ -1,61 +1,59 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "BetterCodable",
-        "repositoryURL": "https://github.com/marksands/BetterCodable",
-        "state": {
-          "branch": null,
-          "revision": "61153170668db7a46a20a87e35e70f80b24d4eb5",
-          "version": "0.4.0"
-        }
-      },
-      {
-        "package": "Swissors",
-        "repositoryURL": "https://github.com/elegion/ios-Swissors",
-        "state": {
-          "branch": null,
-          "revision": "aafbdcaf40f57c2b47e87ac0bad6bf5a6293da2a",
-          "version": "2.5.2"
-        }
-      },
-      {
-        "package": "Rswift",
-        "repositoryURL": "https://github.com/mac-cain13/R.swift.git",
-        "state": {
-          "branch": null,
-          "revision": "589493fe3907251b62f7684c8451330ee08f4426",
-          "version": "7.3.0"
-        }
-      },
-      {
-        "package": "SnapKit",
-        "repositoryURL": "https://github.com/SnapKit/SnapKit",
-        "state": {
-          "branch": null,
-          "revision": "f222cbdf325885926566172f6f5f06af95473158",
-          "version": "5.6.0"
-        }
-      },
-      {
-        "package": "swift-argument-parser",
-        "repositoryURL": "https://github.com/apple/swift-argument-parser",
-        "state": {
-          "branch": null,
-          "revision": "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
-          "version": "1.2.2"
-        }
-      },
-      {
-        "package": "XcodeEdit",
-        "repositoryURL": "https://github.com/tomlokhorst/XcodeEdit",
-        "state": {
-          "branch": null,
-          "revision": "cd466d6e8c5ffd2f2b61165d37b0646f09068e1e",
-          "version": "2.9.0"
-        }
+  "pins" : [
+    {
+      "identity" : "bettercodable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/marksands/BetterCodable",
+      "state" : {
+        "revision" : "61153170668db7a46a20a87e35e70f80b24d4eb5",
+        "version" : "0.4.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "ios-swissors",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegion/ios-Swissors",
+      "state" : {
+        "revision" : "aafbdcaf40f57c2b47e87ac0bad6bf5a6293da2a",
+        "version" : "2.5.2"
+      }
+    },
+    {
+      "identity" : "r.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mac-cain13/R.swift.git",
+      "state" : {
+        "revision" : "589493fe3907251b62f7684c8451330ee08f4426",
+        "version" : "7.3.0"
+      }
+    },
+    {
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit",
+      "state" : {
+        "revision" : "f222cbdf325885926566172f6f5f06af95473158",
+        "version" : "5.6.0"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
+        "version" : "1.2.2"
+      }
+    },
+    {
+      "identity" : "xcodeedit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tomlokhorst/XcodeEdit",
+      "state" : {
+        "revision" : "cd466d6e8c5ffd2f2b61165d37b0646f09068e1e",
+        "version" : "2.9.0"
+      }
+    }
+  ],
+  "version" : 2
 }

@@ -16,8 +16,6 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
 
     weak var textInputDelegate: ELTextInputDelegate?
 
-    private var rightItemAction: (() -> Void)?
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -28,19 +26,92 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private var rightViewVisible: Bool {
+        guard let rightImageView else {
+            return false
+        }
+        let rightViewVisible = !rightImageView.isHidden
+        return rightViewVisible && rightViewMode != .never
+    }
+    
+    private var leftViewVisible: Bool {
+        guard let leftImageView else {
+            return false
+        }
+        let leftViewVisible = !leftImageView.isHidden
+        return leftViewVisible && leftViewMode != .never
+    }
 
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        guard let insets = rectConfiguration.textInset else {
+    private func calculateRect(
+        forBounds bounds: CGRect,
+        insets: UIEdgeInsets?,
+        leftPosition: ELLeftViewPosition?,
+        rightPosition: ELRightViewPosition?,
+        rightViewVisible: Bool,
+        leftViewVisible: Bool
+    ) -> CGRect {
+        guard let insets else {
             return bounds
         }
-        return bounds.inset(by: insets)
+        var rightTotalWidth: CGFloat = .zero
+        if let rightPosition, rightViewVisible {
+            rightTotalWidth = rightPosition.rightInset + rightPosition.size.width
+        }
+        
+        var leftTotalWidth: CGFloat = .zero
+        if let leftPosition, leftViewVisible {
+            leftTotalWidth = leftPosition.leftInset + leftPosition.size.width
+        }
+        let imagesInsets = UIEdgeInsets(
+            top: .zero,
+            left: leftTotalWidth,
+            bottom: .zero,
+            right: rightTotalWidth
+        )
+        return bounds.inset(by: insets).inset(by: imagesInsets)
+    }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        calculateRect(
+            forBounds: bounds,
+            insets: rectConfiguration.textInset,
+            leftPosition: rectConfiguration.leftViewPosition,
+            rightPosition: rectConfiguration.rightViewPosition,
+            rightViewVisible: rightViewVisible,
+            leftViewVisible: leftViewVisible
+        )
     }
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        guard let insets = rectConfiguration.editingInset else {
+        calculateRect(
+            forBounds: bounds,
+            insets: rectConfiguration.editingInset,
+            leftPosition: rectConfiguration.leftViewPosition,
+            rightPosition: rectConfiguration.rightViewPosition,
+            rightViewVisible: rightViewVisible,
+            leftViewVisible: leftViewVisible
+        )
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        guard let leftViewPosition = rectConfiguration.leftViewPosition else {
             return bounds
         }
-        return bounds.inset(by: insets)
+        let leftViewSize = leftViewPosition.size
+        let xPos = rectConfiguration.textInset?.left ?? .zero
+        let yPos: CGFloat
+        switch leftViewPosition {
+        case let .absolute(topLeft, _):
+            yPos = bounds.height - leftViewSize.height - topLeft.y
+        case .centerHorizontally:
+            yPos = bounds.height / 2 - leftViewSize.height / 2
+        }
+        let origin = CGPoint(x: xPos, y: yPos)
+        return CGRect(
+            origin: origin,
+            size: leftViewSize
+        )
     }
 
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
@@ -48,7 +119,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
             return bounds
         }
         let rightViewSize = rightViewPosition.size
-        let xInset = rightViewPosition.rightInset
+        let xInset = rectConfiguration.textInset?.right ?? .zero
         let xPos = bounds.width - rightViewSize.width - xInset
         let yPos: CGFloat
         switch rightViewPosition {
@@ -108,14 +179,59 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
         textInputDelegate?.textInputShouldReturn(self) ?? true
     }
 
-    @objc
-    private func didTapOnDelete() {
-        didTapOnDeleteAction()
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        var rect = super.caretRect(for: position)
+        func yPos(currentRect: CGRect, targetHeight: CGFloat) -> CGFloat {
+            let diff = currentRect.height - targetHeight
+            return currentRect.origin.y + diff / 2
+        }
+        switch Configuration.caretRect() {
+        case .default:
+            return rect
+        case let .height(newHeight):
+            return CGRect(
+                x: rect.origin.x,
+                y: yPos(currentRect: rect, targetHeight: newHeight),
+                width: rect.width,
+                height: newHeight
+            )
+        case let .width(newWidth):
+            rect.size.width = newWidth
+            return rect
+        case let .size(newSize):
+            return CGRect(
+                x: rect.origin.x,
+                y: yPos(currentRect: rect, targetHeight: newSize.height),
+                width: newSize.width,
+                height: newSize.height
+            )
+        case let .dynamic(modifier):
+            return modifier(rect)
+        }
+    }
+    
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+
+        textInputDelegate?.touchesBegan(in: self, touches: touches, with: event)
     }
 
-    @objc
-    private func didTapOnRightAction() {
-        rightItemAction?()
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+
+        textInputDelegate?.touchesMoved(in: self, touches: touches, with: event)
+    }
+
+    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+
+        textInputDelegate?.touchesEnded(in: self, touches: touches, with: event)
+    }
+
+    override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+
+        textInputDelegate?.touchesCancelled(in: self, touches: touches, with: event)
     }
 }
 
@@ -125,7 +241,10 @@ extension ELTextField: ELTextInputConfigurable {
         layer.borderColor = configuration.borderColor?.cgColor
         layer.borderWidth = configuration.borderWidth ?? .zero
         layer.cornerRadius = configuration.cornerRadius ?? .zero
+        backgroundColor = configuration.backgroundColor ?? .clear
+        tintColor = configuration.caretColor
         rightImageView?.tintColor = configuration.tintColor
+        leftImageView?.tintColor = configuration.tintColor
     }
 
     func configureTraits(_ traits: ELTextFieldInputTraits) {
@@ -137,6 +256,11 @@ extension ELTextField: ELTextInputConfigurable {
         spellCheckingType = traits.spellCheckingType
         autocapitalizationType = traits.autocapitalizationType
     }
+    
+    func configureFont(_ configuration: ELTextInputFontConfiguration?) {
+        font = configuration?.font
+        textColor = configuration?.textColor
+    }
 
     func configureViewModel(_ viewModel: ELTextInputViewModel) {
         attributedTextMapper = viewModel.attributedTextMapper
@@ -146,83 +270,31 @@ extension ELTextField: ELTextInputConfigurable {
         } else {
             placeholder = viewModel.placeholder
         }
-        setRightItem(with: viewModel.rightItem)
 
         updateState(viewModel.state)
     }
 
+    func configureRightItem(with container: ELRightViewContainer?) {
+        guard let container else {
+            return
+        }
+        rightImageView = container.view
+        rightViewMode = container.rightViewMode
+        clearButtonMode = container.clearButtonMode
+        isSecureTextEntry = container.isSecureTextEntry
+    }
+    
+    func configureLeftItem(with container: ELLeftViewContainer?) {
+        guard let container else {
+            return
+        }
+        leftImageView = container.view
+        leftViewMode = container.leftViewMode
+    }
+    
     func updateState(_ textFieldState: ELTextFieldState) {
         UIView.animate(withDuration: CATransaction.animationDuration(), delay: .zero) {
             self.configureLayer(Configuration.layer(for: textFieldState))
         }
-    }
-
-    private func didTapOnDeleteAction() {
-        textFieldShouldClear(self)
-    }
-
-    private func setRightItem(with rightItem: ELRightItem?) {
-        guard let rightItem else {
-            rightViewMode = .never
-            return
-        }
-        switch rightItem {
-        case let .image(image, mode):
-            let imageView = UIImageView(image: image)
-            imageView.contentMode = .center
-            rightImageView = imageView
-            rightViewMode = mode
-        case let .action(image, mode, behavior):
-            let button = UIButton(type: .system)
-            if #available(iOS 14.0, *) {
-                let action: UIAction
-                switch behavior {
-                case .delete:
-                    action = UIAction {
-                        [weak self] _ in
-
-                        self?.didTapOnDeleteAction()
-                    }
-                case let .custom(tapAction):
-                    action = UIAction {
-                        _ in
-
-                        tapAction()
-                    }
-                }
-                button.addAction(action, for: .touchUpInside)
-            } else {
-                switch behavior {
-                case .delete:
-                    button.addTarget(self, action: #selector(didTapOnDelete), for: .touchUpInside)
-                case let .custom(action):
-                    rightItemAction = action
-                    button.addTarget(self, action: #selector(didTapOnRightAction), for: .touchUpInside)
-                }
-            }
-            button.setImage(image, for: .normal)
-            rightImageView = button
-            rightViewMode = mode
-        case let .custom(view, mode):
-            rightImageView = view
-            rightViewMode = mode
-        case let .secure(showImage, hideImage, mode):
-            let button = UIButton()
-            if #available(iOS 14.0, *) {
-                button.addAction(UIAction {
-                    [weak self, weak button] _ in
-                    
-                    self?.isSecureTextEntry.toggle()
-                    button?.isSelected.toggle()
-                }, for: .touchUpInside)
-            }
-            rightImageView = button
-            button.setImage(showImage, for: .normal)
-            button.setImage(hideImage, for: .selected)
-            rightViewMode = mode
-        default:
-            break
-        }
-        clearButtonMode = rightItem.isSystemClear ? .whileEditing : .never
     }
 }

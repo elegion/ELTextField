@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Поведение по-умолчанию подразумевает, что поле ввода валидно, если оно не пустое
 public class ELDefaultTextFieldValidator: ELTextFieldValidator {
 
     public func isValid(text: String?) -> Bool {
