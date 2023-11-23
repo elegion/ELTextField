@@ -12,7 +12,6 @@ open class ELTextFieldGenericContainer<
     Behavior: ELTextFieldBehavior
 >: UIView, ELContainerDelegate {
 
-    #warning("Почему public?")
     public let textInput: ELTextInput & ELTextInputConfigurable
 
     /// Конструктор с передачей типа поля ввода
