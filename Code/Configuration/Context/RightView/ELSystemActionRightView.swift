@@ -15,15 +15,16 @@ public final class ELSystemActionRightView: ELRightViewMode {
     
     public init(image: UIImage?, viewMode: UITextField.ViewMode, behavior: ELRightItem.Behavior) {
         let button = UIButton(type: .system)
-        let action = switch behavior {
+        let action: UIAction
+        switch behavior {
         case .delete:
-            UIAction {
+            action = UIAction {
                 _ in
 #warning("Как-то достучаться до поля ввода")
                 print("delete")
             }
         case let.custom(onTap):
-            UIAction { _ in onTap() }
+            action = UIAction { _ in onTap() }
         }
         button.addAction(action, for: .touchUpInside)
         button.setImage(image, for: .normal)

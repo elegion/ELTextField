@@ -54,15 +54,14 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
         guard let insets else {
             return bounds
         }
-        let rightTotalWidth: CGFloat = if let rightPosition, rightViewVisible {
-            rightPosition.rightInset + rightPosition.size.width
-        } else {
-            0
+        var rightTotalWidth: CGFloat = .zero
+        if let rightPosition, rightViewVisible {
+            rightTotalWidth = rightPosition.rightInset + rightPosition.size.width
         }
-        let leftTotalWidth: CGFloat = if let leftPosition, leftViewVisible {
-            leftPosition.leftInset + leftPosition.size.width
-        } else {
-            0
+        
+        var leftTotalWidth: CGFloat = .zero
+        if let leftPosition, leftViewVisible {
+            leftTotalWidth = leftPosition.leftInset + leftPosition.size.width
         }
         let imagesInsets = UIEdgeInsets(
             top: .zero,

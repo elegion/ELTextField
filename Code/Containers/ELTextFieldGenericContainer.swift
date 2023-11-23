@@ -18,7 +18,7 @@ open class ELTextFieldGenericContainer<
     /// Конструктор с передачей типа поля ввода
     ///
     /// - Parameter type: Тип поля ввода. По умолчанию однострочный
-    public init(type: ELTextInputType = .singleline) {
+    public required init(type: ELTextInputType = .singleline) {
         self.textInput = type.isSingleline ? ELTextField<Configuration>() : ELTextView<Configuration>()
         super.init(frame: .zero)
         
