@@ -81,8 +81,8 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
 
     open func configure(textInput: ELTextInput & ELTextInputConfigurable) {
         self.textInput = textInput
-        textInput.input = nil
-        textInput.accesory = nil
+        textInput.inputView = nil
+        textInput.inputAccessoryView = nil
         textInput.configureTraits(traits)
         textInput.configureFont(fontConfiguration)
         textInput.configureViewModel(viewModel)

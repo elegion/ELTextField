@@ -135,7 +135,7 @@ extension ELTextView: ELTextInputConfigurable {
         layer.cornerRadius = configuration.cornerRadius ?? .zero
         backgroundColor = configuration.backgroundColor
         tintColor = configuration.caretColor
-        rightImageView?.tintColor = configuration.tintColor
+        rightView?.tintColor = configuration.tintColor
     }
 
     func configureTraits(_ traits: ELTextFieldInputTraits) {

@@ -23,23 +23,4 @@ extension ELTextField: ELTextInput {
         get { isSecureTextEntry }
         set { isSecureTextEntry = newValue }
     }
-    var input: UIView? {
-        get { inputView }
-        set { inputView = newValue }
-    }
-
-    var accesory: UIView? {
-        get { inputAccessoryView }
-        set { inputAccessoryView = newValue }
-    }
-    
-    var leftImageView: UIView? {
-        get { leftView }
-        set { leftView = newValue}
-    }
-
-    var rightImageView: UIView? {
-        get { rightView }
-        set { rightView = newValue }
-    }
 }

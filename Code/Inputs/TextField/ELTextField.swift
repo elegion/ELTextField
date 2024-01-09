@@ -28,21 +28,21 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
     
     private var rightViewVisible: Bool {
-        guard let rightImageView else {
-            return false
-        }
-        let rightViewVisible = !rightImageView.isHidden
-        return rightViewVisible && rightViewMode != .never
+        defineVisibility(for: rightView, mode: rightViewMode)
     }
     
     private var leftViewVisible: Bool {
-        guard let leftImageView else {
+        defineVisibility(for: leftView, mode: leftViewMode)
+    }
+    
+    private func defineVisibility(for view: UIView?, mode: UITextField.ViewMode) -> Bool {
+        guard let view else {
             return false
         }
-        let leftViewVisible = !leftImageView.isHidden
-        return leftViewVisible && leftViewMode != .never
+        let viewVisible = !view.isHidden
+        return viewVisible && mode != .never
     }
-
+    
     private func calculateRect(
         forBounds bounds: CGRect,
         insets: UIEdgeInsets?,
@@ -243,8 +243,8 @@ extension ELTextField: ELTextInputConfigurable {
         layer.cornerRadius = configuration.cornerRadius ?? .zero
         backgroundColor = configuration.backgroundColor ?? .clear
         tintColor = configuration.caretColor
-        rightImageView?.tintColor = configuration.tintColor
-        leftImageView?.tintColor = configuration.tintColor
+        rightView?.tintColor = configuration.tintColor
+        leftView?.tintColor = configuration.tintColor
     }
 
     func configureTraits(_ traits: ELTextFieldInputTraits) {
@@ -278,7 +278,7 @@ extension ELTextField: ELTextInputConfigurable {
         guard let container else {
             return
         }
-        rightImageView = container.view
+        rightView = container.view
         rightViewMode = container.rightViewMode
         clearButtonMode = container.clearButtonMode
         isSecureTextEntry = container.isSecureTextEntry
@@ -288,7 +288,7 @@ extension ELTextField: ELTextInputConfigurable {
         guard let container else {
             return
         }
-        leftImageView = container.view
+        leftView = container.view
         leftViewMode = container.leftViewMode
     }
     
