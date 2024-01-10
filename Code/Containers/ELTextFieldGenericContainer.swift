@@ -10,7 +10,7 @@ import UIKit
 open class ELTextFieldGenericContainer<
     Configuration: ELTextFieldConfigurationProtocol,
     Behavior: ELTextFieldBehavior
->: UIView, ELContainerDelegate {
+>: UIView, ELContainerDelegate, ELTouchesDelegate {
 
     public let textInput: ELTextInput & ELTextInputConfigurable
 
@@ -55,6 +55,7 @@ open class ELTextFieldGenericContainer<
         behavior?.configure(textInput: textInput)
         behavior?.containerDelegate = self
         textInput.textInputDelegate = behavior
+        textInput.touchesDelegate = self
     }
 
     @discardableResult
@@ -82,4 +83,14 @@ open class ELTextFieldGenericContainer<
     open func `return`(in behavior: ELTextFieldBehavior) {}
 
     open func becameDisabled(in behavior: ELTextFieldBehavior) {}
+    
+    open func pointInside(in textInput: ELTextInput, isInside: Bool) { }
+    
+    open func touchesBegan(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
+    
+    open func touchesMoved(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
+    
+    open func touchesEnded(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
+    
+    open func touchesCancelled(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
 }

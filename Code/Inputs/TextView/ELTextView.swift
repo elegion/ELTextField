@@ -26,6 +26,7 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
     }
 
     public weak var textInputDelegate: ELTextInputDelegate?
+    weak var touchesDelegate: ELTouchesDelegate?
 
     var placeholderHidden: Bool {
         get { placeholderLabel.isHidden }

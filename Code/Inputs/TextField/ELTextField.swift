@@ -15,6 +15,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     weak var textInputDelegate: ELTextInputDelegate?
+    weak var touchesDelegate: ELTouchesDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -213,25 +214,31 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
 
-        textInputDelegate?.touchesBegan(in: self, touches: touches, with: event)
+        touchesDelegate?.touchesBegan(in: self, touches: touches, with: event)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
 
-        textInputDelegate?.touchesMoved(in: self, touches: touches, with: event)
+        touchesDelegate?.touchesMoved(in: self, touches: touches, with: event)
     }
 
     override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
 
-        textInputDelegate?.touchesEnded(in: self, touches: touches, with: event)
+        touchesDelegate?.touchesEnded(in: self, touches: touches, with: event)
     }
 
     override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
 
-        textInputDelegate?.touchesCancelled(in: self, touches: touches, with: event)
+        touchesDelegate?.touchesCancelled(in: self, touches: touches, with: event)
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let isInside = super.point(inside: point, with: event)
+        touchesDelegate?.pointInside(in: self, isInside: isInside)
+        return isInside
     }
 }
 

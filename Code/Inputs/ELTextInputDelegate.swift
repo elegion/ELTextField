@@ -25,7 +25,10 @@ public protocol ELTextInputDelegate: AnyObject {
         canPerformAction action: Selector,
         withSender sender: Any?
     ) -> Bool
-    
+}
+
+public protocol ELTouchesDelegate: AnyObject {
+    func pointInside(in textInput: ELTextInput, isInside: Bool)
     func touchesBegan(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?)
     func touchesMoved(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?)
     func touchesEnded(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?)
