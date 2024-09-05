@@ -27,11 +27,11 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         validation.validator.isValid(text: viewModel.text)
     }
     
-    private let isEditable: Bool
     private var customRightMode: ELRightViewMode?
     private var customLeftMode: ELLeftViewMode?
     
     public var onAction: ((ELBehaviorAction) -> Void)?
+    public let isEditable: Bool
     public weak var containerDelegate: ELContainerDelegate?
     var textInput: (ELTextInput & ELTextInputConfigurable)?
     private let fontConfiguration: ELTextInputFontConfiguration?
