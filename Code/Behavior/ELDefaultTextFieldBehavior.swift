@@ -177,15 +177,13 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             let newValue = mask.maskedText(from: newText)
             updateText(newValue: newValue)
             _ = triggerValidation(for: .onChange, isEditing: true)
-//            if !isTextEmpty {
-                setCursorPosition(
-                    in: textInput,
-                    newText: newText,
-                    maskedNewText: newValue,
-                    replacementString: string,
-                    range: range
-                )
-//            }
+            setCursorPosition(
+                in: textInput,
+                newText: newText,
+                maskedNewText: newValue,
+                replacementString: string,
+                range: range
+            )
             shouldReturn = false
         }
         if viewModel.state != .error {
