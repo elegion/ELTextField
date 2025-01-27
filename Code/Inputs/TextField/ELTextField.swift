@@ -179,6 +179,10 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     func textFieldShouldReturn(_: UITextField) -> Bool {
         textInputDelegate?.textInputShouldReturn(self) ?? true
     }
+    
+    func textFieldDidChangeSelection(_: UITextField) {
+        textInputDelegate?.textFieldDidChangeSelection(self)
+    }
 
     override func caretRect(for position: UITextPosition) -> CGRect {
         var rect = super.caretRect(for: position)

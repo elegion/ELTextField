@@ -149,7 +149,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     /// https://stackoverflow.com/questions/58560843/ios-13-crash-with-swipekeyboard-and-textfieldshouldchangecharactersin
     private var lastEntry: String?
 
-    public func textInput(
+    open func textInput(
         _ textInput: ELTextInput & UITextInput,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
@@ -178,10 +178,11 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             updateText(newValue: newValue)
             _ = triggerValidation(for: .onChange, isEditing: true)
             if !isTextEmpty {
-                textInput.setCursorPosition(
-                    newTextLength: newText.count,
-                    newValueLength: newValue.count,
-                    addedTextLength: string.count,
+                setCursorPosition(
+                    in: textInput,
+                    newText: newText,
+                    maskedNewText: newValue,
+                    replacementString: string,
                     range: range
                 )
             }
@@ -191,6 +192,21 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             updateState(.editing)
         }
         return shouldReturn
+    }
+    
+    open func setCursorPosition(
+        in textInput: ELTextInput & UITextInput,
+        newText: String,
+        maskedNewText: String,
+        replacementString string: String,
+        range: NSRange
+    ) {
+        textInput.setCursorPosition(
+            newTextLength: newText.count,
+            newValueLength: maskedNewText.count,
+            addedTextLength: string.count,
+            range: range
+        )
     }
 
     private func updateText(newValue: String?) {
@@ -219,6 +235,8 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput.resignFirstResponder()
         return true
     }
+    
+    public func textFieldDidChangeSelection(_ textInput: any ELTextInput) {}
 
     open func textInput(_: ELTextInput, canPerformAction _: Selector, withSender _: Any?) -> Bool {
         true
