@@ -90,7 +90,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput.configureLeftItem(with: customLeftMode?.initialContainer(textInput: textInput))
     }
 
-    public func updateState(_ state: ELTextFieldState) {
+    open func updateState(_ state: ELTextFieldState) {
         viewModel.state = state
         textInput?.configureRightItem(
             with: customRightMode?.textInput(
