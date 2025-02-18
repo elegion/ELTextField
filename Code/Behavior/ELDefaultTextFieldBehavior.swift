@@ -33,7 +33,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     public var onAction: ((ELBehaviorAction) -> Void)?
     public let isEditable: Bool
     public weak var containerDelegate: ELContainerDelegate?
-    var textInput: (ELTextInput & ELTextInputConfigurable)?
+    public private(set) var textInput: (ELTextInput & ELTextInputConfigurable)?
     private let fontConfiguration: ELTextInputFontConfiguration?
     
     /// Создает Поведение
@@ -167,7 +167,6 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         }
         lastEntry = string
         if let text = textInput.enteredText, let swiftRange = Range(range, in: text), !shouldReturn {
-            let isTextEmpty = textInput.enteredText?.isEmpty ?? true
             let newText: String
             if (range.location + range.length) == text.count, range.length == 1 {
                 newText = mask.deleteLastItem(inputText: text)
@@ -233,8 +232,6 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput.resignFirstResponder()
         return true
     }
-    
-    public func textFieldDidChangeSelection(_ textInput: any ELTextInput) {}
 
     open func textInput(_: ELTextInput, canPerformAction _: Selector, withSender _: Any?) -> Bool {
         true

@@ -20,7 +20,6 @@ public protocol ELTextInputDelegate: AnyObject {
         replacementString string: String
     ) -> Bool
     func textInputShouldReturn(_ textInput: ELTextInput) -> Bool
-    func textFieldDidChangeSelection(_ textInput: ELTextInput)
     func textInput(
         _ textInput: ELTextInput,
         canPerformAction action: Selector,
