@@ -27,22 +27,12 @@ extension ELTextView: ELTextInput {
         get { isSecureTextEntry }
         set { isSecureTextEntry = newValue }
     }
-    
-    var input: UIView? {
-        get { inputView }
-        set { inputView = newValue }
-    }
 
-    var accesory: UIView? {
-        get { inputAccessoryView }
-        set { inputAccessoryView = newValue }
-    }
-
-    var leftImageView: UIView? {
+    var leftView: UIView? {
         get { nil }
         set { }
     }
-    var rightImageView: UIView? {
+    var rightView: UIView? {
         get { nil }
         set {}
     }

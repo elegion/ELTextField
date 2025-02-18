@@ -27,13 +27,13 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         validation.validator.isValid(text: viewModel.text)
     }
     
-    private let isEditable: Bool
     private var customRightMode: ELRightViewMode?
     private var customLeftMode: ELLeftViewMode?
     
     public var onAction: ((ELBehaviorAction) -> Void)?
+    public let isEditable: Bool
     public weak var containerDelegate: ELContainerDelegate?
-    var textInput: (ELTextInput & ELTextInputConfigurable)?
+    public private(set) var textInput: (ELTextInput & ELTextInputConfigurable)?
     private let fontConfiguration: ELTextInputFontConfiguration?
     
     /// Создает Поведение
@@ -81,8 +81,8 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
 
     open func configure(textInput: ELTextInput & ELTextInputConfigurable) {
         self.textInput = textInput
-        textInput.input = nil
-        textInput.accesory = nil
+        textInput.inputView = nil
+        textInput.inputAccessoryView = nil
         textInput.configureTraits(traits)
         textInput.configureFont(fontConfiguration)
         textInput.configureViewModel(viewModel)
@@ -149,7 +149,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     /// https://stackoverflow.com/questions/58560843/ios-13-crash-with-swipekeyboard-and-textfieldshouldchangecharactersin
     private var lastEntry: String?
 
-    public func textInput(
+    open func textInput(
         _ textInput: ELTextInput & UITextInput,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
@@ -167,7 +167,6 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         }
         lastEntry = string
         if let text = textInput.enteredText, let swiftRange = Range(range, in: text), !shouldReturn {
-            let isTextEmpty = textInput.enteredText?.isEmpty ?? true
             let newText: String
             if (range.location + range.length) == text.count, range.length == 1 {
                 newText = mask.deleteLastItem(inputText: text)
@@ -177,20 +176,34 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             let newValue = mask.maskedText(from: newText)
             updateText(newValue: newValue)
             _ = triggerValidation(for: .onChange, isEditing: true)
-            if !isTextEmpty {
-                textInput.setCursorPosition(
-                    newTextLength: newText.count,
-                    newValueLength: newValue.count,
-                    addedTextLength: string.count,
-                    range: range
-                )
-            }
+            setCursorPosition(
+                in: textInput,
+                newText: newText,
+                maskedNewText: newValue,
+                replacementString: string,
+                range: range
+            )
             shouldReturn = false
         }
         if viewModel.state != .error {
             updateState(.editing)
         }
         return shouldReturn
+    }
+    
+    open func setCursorPosition(
+        in textInput: ELTextInput & UITextInput,
+        newText: String,
+        maskedNewText: String,
+        replacementString string: String,
+        range: NSRange
+    ) {
+        textInput.setCursorPosition(
+            newTextLength: newText.count,
+            newValueLength: maskedNewText.count,
+            addedTextLength: string.count,
+            range: range
+        )
     }
 
     private func updateText(newValue: String?) {
@@ -223,11 +236,6 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     open func textInput(_: ELTextInput, canPerformAction _: Selector, withSender _: Any?) -> Bool {
         true
     }
-    
-    open func touchesBegan(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
-    open func touchesMoved(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
-    open func touchesEnded(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
-    open func touchesCancelled(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?) { }
 }
 
 private extension Optional where Wrapped == String {

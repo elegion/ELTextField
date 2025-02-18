@@ -21,6 +21,11 @@ xcuserdata/
 *.dSYM
 timeline.xctimeline
 playground.xcworkspace
+.index-build
 .build/
+/build
+/.previous-build
 .idea
 .bundle
+.swiftpm
+Package.resolved

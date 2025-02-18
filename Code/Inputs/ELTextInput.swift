@@ -10,8 +10,8 @@ public protocol ELTextInput: UIView {
     var attributedTextMapper: ((String?) -> NSAttributedString?)? { get set }
     var enteredText: String? { get set }
     var isSecureText: Bool { get set }
-    var input: UIView? { get set }
-    var accesory: UIView? { get set }
-    var leftImageView: UIView? { get set }
-    var rightImageView: UIView? { get set }
+    var inputView: UIView? { get set }
+    var inputAccessoryView: UIView? { get set }
+    var leftView: UIView? { get set }
+    var rightView: UIView? { get set }
 }

@@ -9,6 +9,7 @@ import UIKit
 /// Конфигурация представления TextInput
 public protocol ELTextInputConfigurable: AnyObject {
     var textInputDelegate: ELTextInputDelegate? { get set }
+    var touchesDelegate: ELTouchesDelegate? { get set }
     
     /// Настраивает Layer для TextInput
     ///

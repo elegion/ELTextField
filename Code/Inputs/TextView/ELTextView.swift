@@ -26,6 +26,7 @@ class ELTextView<Configuration: ELTextFieldConfigurationProtocol>: UITextView, U
     }
 
     public weak var textInputDelegate: ELTextInputDelegate?
+    weak var touchesDelegate: ELTouchesDelegate?
 
     var placeholderHidden: Bool {
         get { placeholderLabel.isHidden }
@@ -135,7 +136,7 @@ extension ELTextView: ELTextInputConfigurable {
         layer.cornerRadius = configuration.cornerRadius ?? .zero
         backgroundColor = configuration.backgroundColor
         tintColor = configuration.caretColor
-        rightImageView?.tintColor = configuration.tintColor
+        rightView?.tintColor = configuration.tintColor
     }
 
     func configureTraits(_ traits: ELTextFieldInputTraits) {

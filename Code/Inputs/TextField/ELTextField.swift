@@ -15,6 +15,7 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
 
     weak var textInputDelegate: ELTextInputDelegate?
+    weak var touchesDelegate: ELTouchesDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,21 +29,21 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     }
     
     private var rightViewVisible: Bool {
-        guard let rightImageView else {
-            return false
-        }
-        let rightViewVisible = !rightImageView.isHidden
-        return rightViewVisible && rightViewMode != .never
+        defineVisibility(for: rightView, mode: rightViewMode)
     }
     
     private var leftViewVisible: Bool {
-        guard let leftImageView else {
+        defineVisibility(for: leftView, mode: leftViewMode)
+    }
+    
+    private func defineVisibility(for view: UIView?, mode: UITextField.ViewMode) -> Bool {
+        guard let view else {
             return false
         }
-        let leftViewVisible = !leftImageView.isHidden
-        return leftViewVisible && leftViewMode != .never
+        let viewVisible = !view.isHidden
+        return viewVisible && mode != .never
     }
-
+    
     private func calculateRect(
         forBounds bounds: CGRect,
         insets: UIEdgeInsets?,
@@ -213,25 +214,31 @@ class ELTextField<Configuration: ELTextFieldConfigurationProtocol>: UITextField,
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
 
-        textInputDelegate?.touchesBegan(in: self, touches: touches, with: event)
+        touchesDelegate?.touchesBegan(in: self, touches: touches, with: event)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
 
-        textInputDelegate?.touchesMoved(in: self, touches: touches, with: event)
+        touchesDelegate?.touchesMoved(in: self, touches: touches, with: event)
     }
 
     override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
 
-        textInputDelegate?.touchesEnded(in: self, touches: touches, with: event)
+        touchesDelegate?.touchesEnded(in: self, touches: touches, with: event)
     }
 
     override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
 
-        textInputDelegate?.touchesCancelled(in: self, touches: touches, with: event)
+        touchesDelegate?.touchesCancelled(in: self, touches: touches, with: event)
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let isInside = super.point(inside: point, with: event)
+        touchesDelegate?.pointInside(in: self, isInside: isInside)
+        return isInside
     }
 }
 
@@ -243,8 +250,8 @@ extension ELTextField: ELTextInputConfigurable {
         layer.cornerRadius = configuration.cornerRadius ?? .zero
         backgroundColor = configuration.backgroundColor ?? .clear
         tintColor = configuration.caretColor
-        rightImageView?.tintColor = configuration.tintColor
-        leftImageView?.tintColor = configuration.tintColor
+        rightView?.tintColor = configuration.tintColor
+        leftView?.tintColor = configuration.tintColor
     }
 
     func configureTraits(_ traits: ELTextFieldInputTraits) {
@@ -278,7 +285,7 @@ extension ELTextField: ELTextInputConfigurable {
         guard let container else {
             return
         }
-        rightImageView = container.view
+        rightView = container.view
         rightViewMode = container.rightViewMode
         clearButtonMode = container.clearButtonMode
         isSecureTextEntry = container.isSecureTextEntry
@@ -288,7 +295,7 @@ extension ELTextField: ELTextInputConfigurable {
         guard let container else {
             return
         }
-        leftImageView = container.view
+        leftView = container.view
         leftViewMode = container.leftViewMode
     }
     

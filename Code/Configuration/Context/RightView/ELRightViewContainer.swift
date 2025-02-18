@@ -15,24 +15,40 @@ public struct ELRightViewContainer {
     let clearButtonMode: UITextField.ViewMode
     let isSecureTextEntry: Bool
     
+    private init(
+        view: UIView?,
+        rightViewMode: UITextField.ViewMode,
+        clearButtonMode: UITextField.ViewMode,
+        isSecureTextEntry: Bool
+    ) {
+        self.view = view
+        self.rightViewMode = rightViewMode
+        self.clearButtonMode = clearButtonMode
+        self.isSecureTextEntry = isSecureTextEntry
+    }
+    
     public init(
         view: UIView?,
         rightViewMode: UITextField.ViewMode,
         isSecureTextEntry: Bool
     ) {
-        self.view = view
-        self.rightViewMode = rightViewMode
-        self.clearButtonMode = .never
-        self.isSecureTextEntry = isSecureTextEntry
+        self.init(
+            view: view,
+            rightViewMode: rightViewMode,
+            clearButtonMode: .never,
+            isSecureTextEntry: isSecureTextEntry
+        )
     }
     
     public init(
         clearButtonMode: UITextField.ViewMode
     ) {
-        self.view = nil
-        self.rightViewMode = .never
-        self.clearButtonMode = clearButtonMode
-        self.isSecureTextEntry = false
+        self.init(
+            view: nil,
+            rightViewMode: .never,
+            clearButtonMode: clearButtonMode,
+            isSecureTextEntry: false
+        )
     }
 }
 
