@@ -13,16 +13,19 @@ open class ELSecureTextRightViewMode: ELRightViewMode {
     private let showTextImage: UIImage?
     private let toggleButton = UIButton(type: .system)
     private let initiallyHidden: Bool
+    private let onChange: ((UIButton, Bool) -> Void)?
     
     public init(
         showTextImage: UIImage?,
         hideTextImage: UIImage?,
         tintColor: UIColor? = nil,
-        initiallyHidden: Bool = true
+        initiallyHidden: Bool = true,
+        onChange: ((UIButton, Bool) -> Void)? = nil
     ) {
         self.hideTextImage = hideTextImage
         self.showTextImage = showTextImage
         self.initiallyHidden = initiallyHidden
+        self.onChange = onChange
         toggleButton.setImage(initiallyHidden ? showTextImage : hideTextImage, for: .normal)
         toggleButton.tintColor = tintColor
     }
@@ -33,13 +36,17 @@ open class ELSecureTextRightViewMode: ELRightViewMode {
         toggleButton.addAction(UIAction {
             [weak self, weak textInput] _ in
             
+            guard let self else {
+                return
+            }
+            
             textInput?.isSecureText.toggle()
-            self?
-                .toggleButton
+            toggleButton
                 .setImage(
-                    textInput?.isSecureText == true ? self?.showTextImage : self?.hideTextImage,
+                    textInput?.isSecureText == true ? showTextImage : hideTextImage,
                     for: .normal
                 )
+            onChange?(toggleButton, textInput?.isSecureText == true)
         }, for: .touchUpInside)
         return .init(
             view: toggleButton,
