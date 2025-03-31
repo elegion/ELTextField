@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 /// Содержит информацию о rightView
-public struct ELRightViewContainer {
+public struct ELRightViewContainer: Sendable {
     let view: UIView?
     let rightViewMode: UITextField.ViewMode
     let clearButtonMode: UITextField.ViewMode
@@ -52,7 +52,7 @@ public struct ELRightViewContainer {
     }
 }
 
-public struct ELLeftViewContainer {
+public struct ELLeftViewContainer: Sendable {
     let view: UIView?
     let leftViewMode: UITextField.ViewMode
     

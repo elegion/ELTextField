@@ -18,7 +18,7 @@ final class SeparatorView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = R.color.grayCCCCCE()
+        backgroundColor = .grayCCCCCE
     }
 
     @available(*, unavailable)

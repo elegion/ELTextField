@@ -25,7 +25,7 @@ final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PN
     
     private lazy var selectedParameterLabel: RoundInsetLabel = {
         let view = RoundInsetLabel()
-        view.backgroundColor = R.color.yellowFCE66F()
+		view.backgroundColor = .yellowFCE66F
         view.insets = UIEdgeInsets(vertical: 4, horizontal: 12)
         return view
     }()
@@ -85,10 +85,10 @@ final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PN
             .floatingPlaceholder?
             .attribute
             .with(font: .systemFont(ofSize: 17, weight: .regular))
-            .with(foregroundColor: R.color.gray919195())
+            .with(foregroundColor: .gray919195)
             .build()
         selectedParameterLabel.text = behavior?.anyValueGender.text
-        selectedParameterLabel.backgroundColor = R.color.grayF1F1F4()
+        selectedParameterLabel.backgroundColor = .grayF1F1F4
         updatePlaceholder(appearance: currentAppearance)
         updateSelectedParameterAppearance(text: behavior?.value)
     }
@@ -157,10 +157,10 @@ final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PN
         updateSelectedParameterAppearance(text: behavior.value)
         if behavior.value.isEmpty {
             selectedParameterLabel.text = "Любое"
-            selectedParameterLabel.backgroundColor = R.color.grayF1F1F4()
+            selectedParameterLabel.backgroundColor = .grayF1F1F4
         } else {
             selectedParameterLabel.text = behavior.value
-            selectedParameterLabel.backgroundColor = R.color.yellowFCE66F()
+            selectedParameterLabel.backgroundColor = .yellowFCE66F
         }
         UIView.animate(withDuration: CATransaction.animationDuration()) {
             self.currentAppearance = .large
@@ -173,7 +173,7 @@ final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PN
         case .error:
             separatorView.backgroundColor = .red
         default:
-            separatorView.backgroundColor = R.color.grayCCCCCE()
+            separatorView.backgroundColor = .grayCCCCCE
         }
     }
 }

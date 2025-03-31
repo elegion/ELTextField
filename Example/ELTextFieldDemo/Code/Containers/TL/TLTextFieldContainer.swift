@@ -95,7 +95,7 @@ final class TLTextFieldContainer: ELTextFieldGenericContainer<TLTextFieldConfigu
             .floatingPlaceholder?
             .attribute
             .with(font: .systemFont(ofSize: 15, weight: .regular))
-            .with(foregroundColor: R.color.gray919195())
+            .with(foregroundColor: .gray919195)
             .build()
         updatePlaceholder(appearance: currentAppearance)
     }

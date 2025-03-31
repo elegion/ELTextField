@@ -21,7 +21,7 @@ enum PNTextFieldConfiguration: ELTextFieldConfigurationProtocol {
         .init(borderColor: nil,
               borderWidth: .zero,
               cornerRadius: .zero,
-              tintColor: R.color.grayBBBBBF(),
+              tintColor: .grayBBBBBF,
 			  caretColor: .black,
 			  backgroundColor: .clear
 		)

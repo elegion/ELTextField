@@ -9,6 +9,7 @@
 import Foundation
 import ELTextField
 
+@MainActor
 class TLTextFieldBehavior: ELDefaultTextFieldBehavior {
     
     let floatingPlaceholder: String?
@@ -26,8 +27,8 @@ class TLTextFieldBehavior: ELDefaultTextFieldBehavior {
 		traits: any ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
 		validation: ELTextFieldValidation = .default
 	) {
-		let mapper: (String?) -> NSAttributedString? = {
-			$0?.attribute.with(font: .systemFont(ofSize: 15, weight: .regular)).with(foregroundColor: R.color.black1F22229()).build()
+		let mapper: @Sendable (String?) -> NSAttributedString? = {
+			$0?.attribute.with(font: .systemFont(ofSize: 15, weight: .regular)).with(foregroundColor: .black1F22229).build()
 		}
 		self.floatingPlaceholder = placeholder
 		super.init(

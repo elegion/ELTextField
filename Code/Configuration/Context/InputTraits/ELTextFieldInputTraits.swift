@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 
 /// Содержит все поля, необходимые для настройки ввода
-public protocol ELTextFieldInputTraits {
+public protocol ELTextFieldInputTraits: Sendable {
     var isSecureTextEntry: Bool { get set }
     var keyboardType: UIKeyboardType { get set }
     var contentType: UITextContentType? { get set }

@@ -17,7 +17,7 @@ let package = Package(
     targets: [
         .target(
             name: "ELTextField",
-            path: "Code"
+			path: "Code"
         ),
         .testTarget(
             name: "ELTextFieldTests",

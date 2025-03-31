@@ -7,6 +7,7 @@ import Foundation
 import UIKit
 
 /// Описывает поведение поля ввода по умолчанию
+@MainActor
 open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     
     public let mask: ELTextFieldInputMask
@@ -30,7 +31,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     private var customRightMode: ELRightViewMode?
     private var customLeftMode: ELLeftViewMode?
     
-    public var onAction: ((ELBehaviorAction) -> Void)?
+	public var onAction: (@Sendable (ELBehaviorAction) -> Void)?
     public let isEditable: Bool
     public weak var containerDelegate: ELContainerDelegate?
     public private(set) var textInput: (ELTextInput & ELTextInputConfigurable)?
@@ -52,9 +53,9 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     ///   - validation: Правило валидации поля
     public init(
         text: String? = nil,
-        textMapper: ((String?) -> NSAttributedString?)? = nil,
+		textMapper: (@Sendable (String?) -> NSAttributedString?)? = nil,
         placeholder: String? = nil,
-        placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
+		placeholderMapper: (@Sendable (String?) -> NSAttributedString?)? = nil,
         isEditable: Bool = true,
         leftMode: ELLeftViewMode? = nil,
         rightMode: ELRightViewMode? = nil,

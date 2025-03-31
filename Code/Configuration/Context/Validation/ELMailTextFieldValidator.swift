@@ -8,7 +8,7 @@
 import Foundation
 
 /// Валидатор поля e-mail
-public class ELMailTextFieldValidator: ELTextFieldValidator {
+public final class ELMailTextFieldValidator: ELTextFieldValidator {
     
     private enum Constants {
         static let matchRule = "SELF MATCHES %@"

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+@MainActor
 public final class ELSystemActionRightView: ELRightViewMode {
     
     private let view: UIView

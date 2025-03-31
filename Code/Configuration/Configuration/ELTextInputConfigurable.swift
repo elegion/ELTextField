@@ -7,6 +7,7 @@ import Foundation
 import UIKit
 
 /// Конфигурация представления TextInput
+@MainActor
 public protocol ELTextInputConfigurable: AnyObject {
     var textInputDelegate: ELTextInputDelegate? { get set }
     var touchesDelegate: ELTouchesDelegate? { get set }

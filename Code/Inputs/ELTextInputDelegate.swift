@@ -9,6 +9,7 @@ import UIKit
 /// Методы делегата TextInput
 ///
 /// Является оберткой над UITextFieldDelegate и UITextViewDelegate
+@MainActor
 public protocol ELTextInputDelegate: AnyObject {
     func textInputShouldClear(_ textInput: ELTextInput) -> Bool
     func textInputShouldBeginEditing(_ textInput: ELTextInput) -> Bool
@@ -27,6 +28,7 @@ public protocol ELTextInputDelegate: AnyObject {
     ) -> Bool
 }
 
+@MainActor
 public protocol ELTouchesDelegate: AnyObject {
     func pointInside(in textInput: ELTextInput, isInside: Bool)
     func touchesBegan(in textInput: ELTextInput, touches: Set<UITouch>, with event: UIEvent?)

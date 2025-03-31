@@ -21,14 +21,14 @@ enum TLTextFieldConfiguration: ELTextFieldConfigurationProtocol {
         let tintColor: UIColor?
         switch state {
         case .default, .disabled:
-            borderColor = R.color.gray919195()
-            tintColor = R.color.black1F22229()
+			borderColor = .gray919195
+			tintColor = .black1F22229
         case .error:
             borderColor = .red
             tintColor = .red
         case .editing:
             borderColor = .black
-            tintColor = R.color.black1F22229()
+			tintColor = .black1F22229
         }
         return .init(
 			borderColor: borderColor,

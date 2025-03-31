@@ -56,7 +56,7 @@ final class PNTopPlaceholderTextFieldContainer: ELDefaultTextFieldGenericContain
             .placeholder?
             .attribute
             .with(font: .systemFont(ofSize: 12, weight: .regular))
-            .with(foregroundColor: R.color.gray919195()).build()
+            .with(foregroundColor: .gray919195).build()
     }
 
     private func updateFloatingLabelAppearance(isVisible: Bool) {

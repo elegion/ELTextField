@@ -8,6 +8,7 @@
 import Foundation
 
 /// Методы делегата для обработки дополнительных событий с полем ввода
+@MainActor
 public protocol ELContainerDelegate: AnyObject {
     
     func startEditing(in behavior: ELTextFieldBehavior)

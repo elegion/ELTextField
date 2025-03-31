@@ -6,7 +6,7 @@
 import Foundation
 
 /// Состояние TextField
-public enum ELTextFieldState {
+public enum ELTextFieldState: Sendable {
     /// Не в фокусе
     case `default`
     /// Ошибка (например, валидации)

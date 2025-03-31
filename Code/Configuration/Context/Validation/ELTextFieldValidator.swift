@@ -6,7 +6,7 @@
 import Foundation
 
 /// Валидатор для проверки корректности введенного текста
-public protocol ELTextFieldValidator {
+public protocol ELTextFieldValidator: Sendable {
     
     /// Проверяет валидность текста
     ///
