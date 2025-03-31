@@ -10,20 +10,20 @@ import Foundation
 import ELTextField
 
 enum BaseTextFieldConfiguration: ELTextFieldConfigurationProtocol {
-	
-	static func caretRect() -> ELTextField.ELCaretRect {
-		.default
-	}
+    
+    static func caretRect() -> ELTextField.ELCaretRect {
+        .default
+    }
     
     static func layer(for state: ELTextField.ELTextFieldState) -> ELTextField.ELTextInputLayerConfiguration {
         .init(
-			borderColor: .black,
-			borderWidth: 1,
-			cornerRadius: 2,
-			tintColor: .black,
-			caretColor: .black,
-			backgroundColor: .clear
-		)
+            borderColor: .black,
+            borderWidth: 1,
+            cornerRadius: 2,
+            tintColor: .black,
+            caretColor: .black,
+            backgroundColor: .clear
+        )
     }
     
     static func rect() -> ELTextField.ELTextInputRectConfiguration {

@@ -35,10 +35,10 @@ public protocol ELTextFieldBehavior: ELTextInputDelegate {
     var isValid: Bool { get }
     
     /// Срабатывает при срабатывании событий поля ввода
-	var onAction: (@Sendable (ELBehaviorAction) -> Void)? { get set }
+    var onAction: (@Sendable (ELBehaviorAction) -> Void)? { get set }
     /// Используется для обработки дополнительных событий делегата
     var containerDelegate: ELContainerDelegate? { get set }
-
+    
     func configure(textInput: ELTextInput & ELTextInputConfigurable)
     func updateState(_ state: ELTextFieldState)
     func updateText(_ newText: String?)

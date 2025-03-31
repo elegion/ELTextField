@@ -25,7 +25,7 @@ final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PN
     
     private lazy var selectedParameterLabel: RoundInsetLabel = {
         let view = RoundInsetLabel()
-		view.backgroundColor = .yellowFCE66F
+        view.backgroundColor = .yellowFCE66F
         view.insets = UIEdgeInsets(vertical: 4, horizontal: 12)
         return view
     }()
@@ -39,7 +39,7 @@ final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PN
     
     private let separatorView = SeparatorView()
     
-	required init(type: ELTextInputType = .singleline) {
+    required init(type: ELTextInputType = .singleline) {
         super.init(type: type)
         
         addSubview(floatingPlaceholder)

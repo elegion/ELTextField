@@ -16,10 +16,10 @@ public struct ELTextInputViewModel: Sendable {
     /// Маппер для преобразования текста плейсхолдера
     ///
     /// Используется в случае, когда плейсхолдер имеет кастомный шрифт
-	public var attributedPlaceholderMapper: (@Sendable (String?) -> NSAttributedString?)?
+    public var attributedPlaceholderMapper: (@Sendable (String?) -> NSAttributedString?)?
     
     /// Маппер для преобразования введенного текста
     ///
     /// Используется в случае, когда текст имеет кастомный шрифт
-	public var attributedTextMapper: (@Sendable (String?) -> NSAttributedString?)?
+    public var attributedTextMapper: (@Sendable (String?) -> NSAttributedString?)?
 }

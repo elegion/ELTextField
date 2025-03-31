@@ -31,18 +31,18 @@ final class TLTextFieldContainer: ELTextFieldGenericContainer<TLTextFieldConfigu
     
     private var currentAppearance = LabelAppearance.large
     
-	required init(type: ELTextInputType = .singleline) {
+    required init(type: ELTextInputType = .singleline) {
         super.init(type: type)
-
+        
         addSubview(floatingPlaceholderLabel)
         sendSubviewToBack(floatingPlaceholderLabel)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
         addGestureRecognizer(tapGesture)
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         addSubview(floatingPlaceholderLabel)
         sendSubviewToBack(floatingPlaceholderLabel)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
@@ -79,18 +79,18 @@ final class TLTextFieldContainer: ELTextFieldGenericContainer<TLTextFieldConfigu
             size: floatingPlaceholderSize
         )
     }
-
+    
     override func startEditing(in behavior: ELTextFieldBehavior) {
         updateAppearance(.small)
     }
-
+    
     override func endEditing(in behavior: ELTextFieldBehavior) {
         updateAppearance(behavior.value.isEmpty ? .large : .small)
     }
-
+    
     override func setBehavior(_ behavior: TLTextFieldBehavior?) {
         super.setBehavior(behavior)
-
+        
         floatingPlaceholderLabel.attributedText = behavior?
             .floatingPlaceholder?
             .attribute
@@ -99,10 +99,10 @@ final class TLTextFieldContainer: ELTextFieldGenericContainer<TLTextFieldConfigu
             .build()
         updatePlaceholder(appearance: currentAppearance)
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        
         updatePlaceholder(appearance: currentAppearance)
     }
     
@@ -138,10 +138,10 @@ final class MailBehavior: TLTextFieldBehavior {
                    textMapper: mapper,
                    placeholder: "Почта",
                    placeholderMapper: mapper,
-				   rightMode: ELSystemImageRightView(
-					image: UIImage(systemName: "checkmark"),
-					viewMode: .always
-				   ),
+                   rightMode: ELSystemImageRightView(
+                    image: UIImage(systemName: "checkmark"),
+                    viewMode: .always
+                   ),
                    traits: traits,
                    validation: .init(validator: ELMailTextFieldValidator(),
                                      rule: .onEndEditing))

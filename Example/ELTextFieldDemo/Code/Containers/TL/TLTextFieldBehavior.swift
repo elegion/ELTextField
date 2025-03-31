@@ -14,32 +14,32 @@ class TLTextFieldBehavior: ELDefaultTextFieldBehavior {
     
     let floatingPlaceholder: String?
     
-	override init(
-		text: String? = nil,
-		textMapper: ((String?) -> NSAttributedString?)? = nil,
-		placeholder: String? = nil,
-		placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
-		isEditable: Bool = true,
-		leftMode: (any ELLeftViewMode)? = nil,
-		rightMode: (any ELRightViewMode)? = nil,
-		mask: any ELTextFieldInputMask = ELDefaultTextMask(),
-		font: ELTextInputFontConfiguration? = nil,
-		traits: any ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
-		validation: ELTextFieldValidation = .default
-	) {
-		let mapper: @Sendable (String?) -> NSAttributedString? = {
-			$0?.attribute.with(font: .systemFont(ofSize: 15, weight: .regular)).with(foregroundColor: .black1F22229).build()
-		}
-		self.floatingPlaceholder = placeholder
-		super.init(
-			text: text,
-			textMapper: mapper,
-			placeholder: nil,
-			placeholderMapper: nil,
-			rightMode: rightMode,
-			mask: mask,
-			traits: traits,
-			validation: validation
-		)
-	}
+    override init(
+        text: String? = nil,
+        textMapper: ((String?) -> NSAttributedString?)? = nil,
+        placeholder: String? = nil,
+        placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
+        isEditable: Bool = true,
+        leftMode: (any ELLeftViewMode)? = nil,
+        rightMode: (any ELRightViewMode)? = nil,
+        mask: any ELTextFieldInputMask = ELDefaultTextMask(),
+        font: ELTextInputFontConfiguration? = nil,
+        traits: any ELTextFieldInputTraits = ELDefaultTextFieldInputTraits(),
+        validation: ELTextFieldValidation = .default
+    ) {
+        let mapper: @Sendable (String?) -> NSAttributedString? = {
+            $0?.attribute.with(font: .systemFont(ofSize: 15, weight: .regular)).with(foregroundColor: .black1F22229).build()
+        }
+        self.floatingPlaceholder = placeholder
+        super.init(
+            text: text,
+            textMapper: mapper,
+            placeholder: nil,
+            placeholderMapper: nil,
+            rightMode: rightMode,
+            mask: mask,
+            traits: traits,
+            validation: validation
+        )
+    }
 }

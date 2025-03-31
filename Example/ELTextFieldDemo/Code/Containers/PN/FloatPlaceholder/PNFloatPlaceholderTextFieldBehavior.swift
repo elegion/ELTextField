@@ -28,7 +28,7 @@ class PNFloatPlaceholderTextFieldBehavior: ELDefaultTextFieldBehavior {
     
     init(
         text: String? = nil,
-		textMapper: (@Sendable (String?) -> NSAttributedString?)? = nil,
+        textMapper: (@Sendable (String?) -> NSAttributedString?)? = nil,
         placeholder: String? = nil,
         anyValueGender: AnyValueGender,
         placeholderMapper _: ((String?) -> NSAttributedString?)? = nil,
