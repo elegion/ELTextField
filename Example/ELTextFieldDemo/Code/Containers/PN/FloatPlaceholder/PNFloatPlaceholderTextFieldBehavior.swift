@@ -45,7 +45,6 @@ class PNFloatPlaceholderTextFieldBehavior: ELDefaultTextFieldBehavior {
             textMapper: textMapper,
             placeholder: nil,
             placeholderMapper: nil,
-            rightItem: nil,
             mask: mask,
             traits: traits,
             validation: validation

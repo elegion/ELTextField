@@ -39,7 +39,7 @@ final class PNFloatPlaceholderTextFieldContainer: ELTextFieldGenericContainer<PN
     
     private let separatorView = SeparatorView()
     
-    override init(type: ELTextInputType = .singleline) {
+	required init(type: ELTextInputType = .singleline) {
         super.init(type: type)
         
         addSubview(floatingPlaceholder)

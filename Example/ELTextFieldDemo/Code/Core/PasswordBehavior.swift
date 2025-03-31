@@ -15,10 +15,12 @@ class PasswordBehavior: ELDefaultTextFieldBehavior {
     init() {
         var traits = ELDefaultTextFieldInputTraits()
         traits.isSecureTextEntry = true
-        super.init(placeholder: "Пароль",
-                   rightItem: .secure(showImage: UIImage(systemName: "eye.fill"),
-                                      hideImage: UIImage(systemName: "eye.slash.fill"),
-                                      mode: .always),
-                   traits: traits)
+		super.init(
+			placeholder: "Пароль",
+			rightMode: ELSecureTextRightViewMode(
+				showTextImage: UIImage(systemName: "eye.fill"),
+				hideTextImage: UIImage(systemName: "eye.slash.fill")
+			)
+		)
     }
 }

@@ -31,7 +31,7 @@ final class TLTextFieldContainer: ELTextFieldGenericContainer<TLTextFieldConfigu
     
     private var currentAppearance = LabelAppearance.large
     
-    override init(type: ELTextInputType = .singleline) {
+	required init(type: ELTextInputType = .singleline) {
         super.init(type: type)
 
         addSubview(floatingPlaceholderLabel)
@@ -132,14 +132,16 @@ final class MailBehavior: TLTextFieldBehavior {
         let mapper: (String?) -> NSAttributedString? = {
             $0?.attribute.with(font: .systemFont(ofSize: 15, weight: .bold)).build()
         }
-        let rightImage = ELRightItem.image(image: UIImage(systemName: "checkmark"), mode: .always)
         var traits = ELDefaultTextFieldInputTraits()
         traits.keyboardType = .phonePad
         super.init(text: mail,
                    textMapper: mapper,
                    placeholder: "Почта",
                    placeholderMapper: mapper,
-                   rightItem: rightImage,
+				   rightMode: ELSystemImageRightView(
+					image: UIImage(systemName: "checkmark"),
+					viewMode: .always
+				   ),
                    traits: traits,
                    validation: .init(validator: ELMailTextFieldValidator(),
                                      rule: .onEndEditing))

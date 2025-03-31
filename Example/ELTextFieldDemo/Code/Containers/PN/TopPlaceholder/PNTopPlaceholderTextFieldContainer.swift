@@ -15,7 +15,7 @@ final class PNTopPlaceholderTextFieldContainer: ELDefaultTextFieldGenericContain
     private let floatingLabel = UILabel()
     private let separatorView = SeparatorView()
 
-    override public init(type: ELTextInputType = .singleline) {
+	required init(type: ELTextInputType = .singleline) {
         super.init(type: type)
 
         addSubview(floatingLabel)

@@ -25,11 +25,17 @@ class ViewController: UIViewController {
     private let items: [Items] = [
         .topPlaceholder(model: MailBehavior()),
         .topPlaceholder(model: PasswordBehavior()),
-        .sk(model: .init(text: "allo",
-                         placeholder: "Привет",
-                         rightItem: .action(image: UIImage(systemName: "pencil"),
-                                            mode: .always,
-                                            behavior: .delete))),
+        .sk(
+			model: .init(
+				text: "allo",
+				placeholder: "Привет",
+				rightMode: ELSystemActionRightView(
+					image: UIImage(systemName: "pencil"),
+					viewMode: .always,
+					behavior: .delete
+				)
+			)
+		),
         .skMultiline(model: .init(textMapper: {
             $0?.attribute.with(foregroundColor: .black).with(font: .systemFont(ofSize: 24)).build()
         }, placeholder: "allo", placeholderMapper: {
@@ -46,9 +52,11 @@ class ViewController: UIViewController {
                                                                                  outputMask: "$##########"))),
         .tl(model: MailBehavior()),
         .tl(model: .init(placeholder: "Телефончик",
-                         rightItem: .action(image: UIImage(systemName: "xmark.circle"),
-                                            mode: .whileEditing,
-                                            behavior: .delete),
+						 rightMode: ELSystemActionRightView(
+							image: UIImage(systemName: "xmark.circle"),
+							viewMode: .whileEditing,
+							behavior: .delete
+						 ),
                          mask: ELPhoneTextMask(phoneCode: "+7",
                                                inputMask: "$ (###) ### ## ##",
                                                outputMask: "$##########"))),
