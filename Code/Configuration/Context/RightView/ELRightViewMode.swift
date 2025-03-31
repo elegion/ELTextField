@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 /// Протокол для создания кастомного поведения правой иконки
+@MainActor
 public protocol ELRightViewMode: AnyObject {
     
     func initialContainer(textInput: ELTextInput) -> ELRightViewContainer
@@ -19,6 +20,7 @@ public protocol ELRightViewMode: AnyObject {
 }
 
 /// Протокол для создания кастомного поведения левой иконки
+@MainActor
 public protocol ELLeftViewMode: AnyObject {
     
     func initialContainer(textInput: ELTextInput) -> ELLeftViewContainer

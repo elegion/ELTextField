@@ -11,13 +11,13 @@ import Foundation
 import UIKit
 
 final class PNTopPlaceholderTextFieldContainer: ELDefaultTextFieldGenericContainer<PNTextFieldConfiguration> {
-
+    
     private let floatingLabel = UILabel()
     private let separatorView = SeparatorView()
-
-    override public init(type: ELTextInputType = .singleline) {
+    
+    required init(type: ELTextInputType = .singleline) {
         super.init(type: type)
-
+        
         addSubview(floatingLabel)
         addSubview(separatorView)
         floatingLabel.snp.makeConstraints {
@@ -42,29 +42,29 @@ final class PNTopPlaceholderTextFieldContainer: ELDefaultTextFieldGenericContain
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
-
+    
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override public func setBehavior(_ behavior: ELDefaultTextFieldBehavior?) {
         super.setBehavior(behavior)
-
+        
         updateFloatingLabelAppearance(isVisible: !(behavior?.value.isEmpty ?? true))
         floatingLabel.attributedText = behavior?
             .placeholder?
             .attribute
             .with(font: .systemFont(ofSize: 12, weight: .regular))
-            .with(foregroundColor: R.color.gray919195()).build()
+            .with(foregroundColor: .gray919195).build()
     }
-
+    
     private func updateFloatingLabelAppearance(isVisible: Bool) {
         UIView.animate(withDuration: CATransaction.animationDuration()) {
             self.floatingLabel.alpha = isVisible ? 1 : .zero
         }
     }
-
+    
     override func container(_ behavior: ELTextFieldBehavior, changedText text: String) {
         updateFloatingLabelAppearance(isVisible: !text.isEmpty)
     }

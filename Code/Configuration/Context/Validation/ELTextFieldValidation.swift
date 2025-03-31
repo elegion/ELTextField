@@ -8,7 +8,7 @@
 import Foundation
 
 /// Описывает валидацию ввода
-public struct ELTextFieldValidation {
+public struct ELTextFieldValidation: Sendable {
     /// Предоставляет правило валидации
     public let validator: ELTextFieldValidator
     /// Предоставляет правило срабатывания проверки валидности текста

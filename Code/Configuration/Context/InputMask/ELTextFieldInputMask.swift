@@ -6,7 +6,7 @@
 import Foundation
 
 /// Маска для преобразования введенного текста в пользовательское представление и наоборот
-public protocol ELTextFieldInputMask {
+public protocol ELTextFieldInputMask: Sendable {
     
     /// Возвращает текст для отображения пользователю
     ///

@@ -6,7 +6,7 @@
 import Foundation
 
 /// Действия, которые могут произойти с Behavior
-public enum ELBehaviorAction {
+public enum ELBehaviorAction: Sendable {
     /// Текст был изменен
     case changed(newValue: String)
     /// Ввод завершен
@@ -18,6 +18,7 @@ public enum ELBehaviorAction {
 }
 
 /// Хранит состояние поля ввода
+@MainActor
 public protocol ELTextFieldBehavior: ELTextInputDelegate {
     
     /// Маска поля ввода
@@ -34,10 +35,10 @@ public protocol ELTextFieldBehavior: ELTextInputDelegate {
     var isValid: Bool { get }
     
     /// Срабатывает при срабатывании событий поля ввода
-    var onAction: ((ELBehaviorAction) -> Void)? { get set }
+    var onAction: (@Sendable (ELBehaviorAction) -> Void)? { get set }
     /// Используется для обработки дополнительных событий делегата
     var containerDelegate: ELContainerDelegate? { get set }
-
+    
     func configure(textInput: ELTextInput & ELTextInputConfigurable)
     func updateState(_ state: ELTextFieldState)
     func updateText(_ newText: String?)

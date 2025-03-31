@@ -8,7 +8,7 @@
 import Foundation
 
 /// Правило срабатывания валидации поля ввода
-public enum ELTextFieldValidationRule {
+public enum ELTextFieldValidationRule: Sendable {
     /// Каждый раз при изменении текста
     case onChange
     /// При завершении редактирования

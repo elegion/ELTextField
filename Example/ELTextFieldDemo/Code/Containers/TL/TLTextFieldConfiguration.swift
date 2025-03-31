@@ -12,26 +12,37 @@ import UIKit
 
 enum TLTextFieldConfiguration: ELTextFieldConfigurationProtocol {
     
+    static func caretRect() -> ELTextField.ELCaretRect {
+        .default
+    }
+    
     static func layer(for state: ELTextField.ELTextFieldState) -> ELTextField.ELTextInputLayerConfiguration {
         let borderColor: UIColor?
         let tintColor: UIColor?
         switch state {
         case .default, .disabled:
-            borderColor = R.color.gray919195()
-            tintColor = R.color.black1F22229()
+            borderColor = .gray919195
+            tintColor = .black1F22229
         case .error:
             borderColor = .red
             tintColor = .red
         case .editing:
             borderColor = .black
-            tintColor = R.color.black1F22229()
+            tintColor = .black1F22229
         }
-        return .init(borderColor: borderColor, borderWidth: 1, cornerRadius: 8, tintColor: tintColor)
+        return .init(
+            borderColor: borderColor,
+            borderWidth: 1,
+            cornerRadius: 8,
+            tintColor: tintColor,
+            caretColor: .black,
+            backgroundColor: .clear
+        )
     }
     
     static func rect() -> ELTextField.ELTextInputRectConfiguration {
         .init(textInset: UIEdgeInsets(top: 30, bottom: 8, horizontal: 16),
-              rightViewPosition: .centerHorizontally(rightInset: 16, size: CGSize(value: 32)),
+              rightViewPosition: .centerHorizontally(inset: 16, size: CGSize(value: 32)),
               containerHeight: .init(singleline: 60, multiline: 120))
     }
 }

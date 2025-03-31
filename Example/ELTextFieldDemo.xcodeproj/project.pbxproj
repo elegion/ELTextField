@@ -25,7 +25,6 @@
 		55EA5C3129CF006A00464D65 /* ELTextField in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3029CF006A00464D65 /* ELTextField */; };
 		55EA5C3429CF009000464D65 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3329CF009000464D65 /* SnapKit */; };
 		55EA5C3729CF3DCF00464D65 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5C3629CF3DCF00464D65 /* Colors.xcassets */; };
-		55EA5C3A29CF3E5100464D65 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C3929CF3E5100464D65 /* RswiftLibrary */; };
 		55EA5C4429CF401B00464D65 /* Swissors in Frameworks */ = {isa = PBXBuildFile; productRef = 55EA5C4329CF401B00464D65 /* Swissors */; };
 		55F2D65929DD3951007CBDE7 /* TLTextFieldBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F2D65829DD3951007CBDE7 /* TLTextFieldBehavior.swift */; };
 		55FC635229DDBD0C00C8BE05 /* SKTextFieldConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC635129DDBD0C00C8BE05 /* SKTextFieldConfiguration.swift */; };
@@ -71,7 +70,6 @@
 				55EA5C3129CF006A00464D65 /* ELTextField in Frameworks */,
 				55EA5C4429CF401B00464D65 /* Swissors in Frameworks */,
 				55EA5C3429CF009000464D65 /* SnapKit in Frameworks */,
-				55EA5C3A29CF3E5100464D65 /* RswiftLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,17 +86,9 @@
 			path = TL;
 			sourceTree = "<group>";
 		};
-		551DC1C329DA902E002FD40D /* Behaviors */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Behaviors;
-			sourceTree = "<group>";
-		};
 		55614A5F29D0982D00CCFACD /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				551DC1C329DA902E002FD40D /* Behaviors */,
 				55614A6129D0984900CCFACD /* Core */,
 				55EA5C3529CF3DAF00464D65 /* Containers */,
 				55EA5C1629CEF78A00464D65 /* AppDelegate.swift */,
@@ -243,13 +233,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				55EA5C3C29CF3E9000464D65 /* PBXTargetDependency */,
 			);
 			name = ELTextFieldDemo;
 			packageProductDependencies = (
 				55EA5C3029CF006A00464D65 /* ELTextField */,
 				55EA5C3329CF009000464D65 /* SnapKit */,
-				55EA5C3929CF3E5100464D65 /* RswiftLibrary */,
 				55EA5C4329CF401B00464D65 /* Swissors */,
 			);
 			productName = ELTextFieldDemo;
@@ -283,7 +271,6 @@
 			mainGroup = 55EA5C0A29CEF78A00464D65;
 			packageReferences = (
 				55EA5C3229CF009000464D65 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				55EA5C3829CF3E5100464D65 /* XCRemoteSwiftPackageReference "R.swift" */,
 				55EA5C4229CF401B00464D65 /* XCRemoteSwiftPackageReference "ios-Swissors" */,
 			);
 			productRefGroup = 55EA5C1429CEF78A00464D65 /* Products */;
@@ -336,13 +323,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		55EA5C3C29CF3E9000464D65 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 55EA5C3B29CF3E9000464D65 /* RswiftGenerateInternalResources */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		55EA5C2129CEF78A00464D65 /* LaunchScreen.storyboard */ = {
@@ -484,7 +464,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -494,7 +474,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -513,7 +493,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -523,7 +503,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -560,14 +540,6 @@
 				version = 5.6.0;
 			};
 		};
-		55EA5C3829CF3E5100464D65 /* XCRemoteSwiftPackageReference "R.swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mac-cain13/R.swift.git";
-			requirement = {
-				kind = exactVersion;
-				version = 7.3.0;
-			};
-		};
 		55EA5C4229CF401B00464D65 /* XCRemoteSwiftPackageReference "ios-Swissors" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elegion/ios-Swissors";
@@ -587,15 +559,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 55EA5C3229CF009000464D65 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		55EA5C3929CF3E5100464D65 /* RswiftLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 55EA5C3829CF3E5100464D65 /* XCRemoteSwiftPackageReference "R.swift" */;
-			productName = RswiftLibrary;
-		};
-		55EA5C3B29CF3E9000464D65 /* RswiftGenerateInternalResources */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "plugin:RswiftGenerateInternalResources";
 		};
 		55EA5C4329CF401B00464D65 /* Swissors */ = {
 			isa = XCSwiftPackageProductDependency;

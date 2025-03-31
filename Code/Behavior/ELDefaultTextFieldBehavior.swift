@@ -7,6 +7,7 @@ import Foundation
 import UIKit
 
 /// Описывает поведение поля ввода по умолчанию
+@MainActor
 open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     
     public let mask: ELTextFieldInputMask
@@ -30,7 +31,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     private var customRightMode: ELRightViewMode?
     private var customLeftMode: ELLeftViewMode?
     
-    public var onAction: ((ELBehaviorAction) -> Void)?
+    public var onAction: (@Sendable (ELBehaviorAction) -> Void)?
     public let isEditable: Bool
     public weak var containerDelegate: ELContainerDelegate?
     public private(set) var textInput: (ELTextInput & ELTextInputConfigurable)?
@@ -52,9 +53,9 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
     ///   - validation: Правило валидации поля
     public init(
         text: String? = nil,
-        textMapper: ((String?) -> NSAttributedString?)? = nil,
+        textMapper: (@Sendable (String?) -> NSAttributedString?)? = nil,
         placeholder: String? = nil,
-        placeholderMapper: ((String?) -> NSAttributedString?)? = nil,
+        placeholderMapper: (@Sendable (String?) -> NSAttributedString?)? = nil,
         isEditable: Bool = true,
         leftMode: ELLeftViewMode? = nil,
         rightMode: ELRightViewMode? = nil,
@@ -78,7 +79,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             attributedTextMapper: textMapper
         )
     }
-
+    
     open func configure(textInput: ELTextInput & ELTextInputConfigurable) {
         self.textInput = textInput
         textInput.inputView = nil
@@ -89,7 +90,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput.configureRightItem(with: customRightMode?.initialContainer(textInput: textInput))
         textInput.configureLeftItem(with: customLeftMode?.initialContainer(textInput: textInput))
     }
-
+    
     open func updateState(_ state: ELTextFieldState) {
         viewModel.state = state
         textInput?.configureRightItem(
@@ -107,16 +108,16 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         textInput?.updateState(viewModel.state)
         containerDelegate?.container(self, changedState: state)
     }
-
+    
     open func updateText(_ newText: String?) {
         updateText(newValue: newText)
     }
-
+    
     public func textInputShouldClear(_: ELTextInput) -> Bool {
         updateText("")
         return true
     }
-
+    
     open func textInputShouldBeginEditing(_: ELTextInput) -> Bool {
         guard isEditable else {
             return false
@@ -131,7 +132,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             return true
         }
     }
-
+    
     public func textInputDidBeginEditing(_ textInput: ELTextInput) {
         containerDelegate?.startEditing(in: self)
     }
@@ -144,11 +145,11 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             updateState(.default)
         }
     }
-
+    
     /// При вводе текста свайпом происходит рекурсивный вызов методов:
     /// https://stackoverflow.com/questions/58560843/ios-13-crash-with-swipekeyboard-and-textfieldshouldchangecharactersin
     private var lastEntry: String?
-
+    
     open func textInput(
         _ textInput: ELTextInput & UITextInput,
         shouldChangeCharactersIn range: NSRange,
@@ -205,7 +206,7 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
             range: range
         )
     }
-
+    
     private func updateText(newValue: String?) {
         textInput?.enteredText = newValue
         viewModel.text = newValue.isNilOrEmpty ? nil : newValue
@@ -225,14 +226,14 @@ open class ELDefaultTextFieldBehavior: NSObject, ELTextFieldBehavior {
         }
         return true
     }
-
+    
     public func textInputShouldReturn(_ textInput: ELTextInput) -> Bool {
         onAction?(.return)
         containerDelegate?.return(in: self)
         textInput.resignFirstResponder()
         return true
     }
-
+    
     open func textInput(_: ELTextInput, canPerformAction _: Selector, withSender _: Any?) -> Bool {
         true
     }
@@ -266,7 +267,7 @@ private extension UITextInput {
                 offset = range.location
             }
         }
-
+        
         guard let textPosition = position(from: beginningOfDocument, offset: offset) else {
             return
         }

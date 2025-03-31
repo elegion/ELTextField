@@ -19,23 +19,29 @@ class ViewController: UIViewController {
         case skMultiline(model: ELDefaultTextFieldBehavior)
         case search(model: PNFloatPlaceholderTextFieldBehavior)
         case tl(model: TLTextFieldBehavior)
-//        case tlMultiline(model: TLTextFieldBehavior)
+        //        case tlMultiline(model: TLTextFieldBehavior)
     }
     
     private let items: [Items] = [
         .topPlaceholder(model: MailBehavior()),
         .topPlaceholder(model: PasswordBehavior()),
-        .sk(model: .init(text: "allo",
-                         placeholder: "Привет",
-                         rightItem: .action(image: UIImage(systemName: "pencil"),
-                                            mode: .always,
-                                            behavior: .delete))),
+        .sk(
+            model: .init(
+                text: "allo",
+                placeholder: "Привет",
+                rightMode: ELSystemActionRightView(
+                    image: UIImage(systemName: "pencil"),
+                    viewMode: .always,
+                    behavior: .delete
+                )
+            )
+        ),
         .skMultiline(model: .init(textMapper: {
             $0?.attribute.with(foregroundColor: .black).with(font: .systemFont(ofSize: 24)).build()
         }, placeholder: "allo", placeholderMapper: {
             $0?.attribute.with(foregroundColor: .gray).build()
         })),
-//        .sk(model: ),
+        //        .sk(model: ),
         .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Имя", anyValueGender: .female)),
         .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Фамилия", anyValueGender: .female)),
         .search(model: PNFloatPlaceholderTextFieldBehavior(placeholder: "Почта", anyValueGender: .female)),
@@ -46,13 +52,15 @@ class ViewController: UIViewController {
                                                                                  outputMask: "$##########"))),
         .tl(model: MailBehavior()),
         .tl(model: .init(placeholder: "Телефончик",
-                         rightItem: .action(image: UIImage(systemName: "xmark.circle"),
-                                            mode: .whileEditing,
-                                            behavior: .delete),
+                         rightMode: ELSystemActionRightView(
+                            image: UIImage(systemName: "xmark.circle"),
+                            viewMode: .whileEditing,
+                            behavior: .delete
+                         ),
                          mask: ELPhoneTextMask(phoneCode: "+7",
                                                inputMask: "$ (###) ### ## ##",
                                                outputMask: "$##########"))),
-//        .tlMultiline(model: MailBehavior()),
+        //        .tlMultiline(model: MailBehavior()),
     ]
     
     private lazy var tableView: UITableView = {
@@ -105,10 +113,10 @@ class ViewController: UIViewController {
                 let cell = tableView.dequeueCell(of: AbstractTableViewCell<TLTextFieldContainer>.self, for: indexPath)
                 cell.set(model: model)
                 return cell
-//            case let .tlMultiline(model):
-//                let cell = tableView.dequeueCell(of: MultilineTextFieldTableViewCell.self, for: indexPath)
-//                cell.set(model: model)
-//                return cell
+                //            case let .tlMultiline(model):
+                //                let cell = tableView.dequeueCell(of: MultilineTextFieldTableViewCell.self, for: indexPath)
+                //                cell.set(model: model)
+                //                return cell
             }
         }
     }
